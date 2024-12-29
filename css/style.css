@@ -61,6 +61,10 @@ header {
     transform: scale(1.25);
 }
 
+span {
+    color: var(--main-color);
+}
+
 .navbar {
     display: flex;
 }
