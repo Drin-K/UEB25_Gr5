@@ -10,12 +10,22 @@
     font-family: -apple-system, sans-serif;
 }
 
+
 :root {
     --bg-color: #000000;
     --snd--bg-color: #111;
     --text-color: #fff;
     --main-color: #45ffca;
 
+}
+html {
+    font-size: 62.5%;
+    overflow-x: hidden;
+}
+
+body {
+    background: var(--bg-color);
+    color: var(--text-color);
 }
 
 section {
