@@ -251,3 +251,24 @@ span {
     font-size: 1.6rem;
     margin: 2rem 0 2rem;
 }
+
+.heading {
+    text-align: center;
+    font-size: 4.5rem;
+}
+
+.plans {
+    background: var(--second-bg-color);
+}
+
+.plans-content {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    align-items: center;
+    
+    gap: 2.3rem;
+    margin-top: 4.2rem;
+}
+.box {
+    transition: transform 0.5s ease, opacity 0.5s ease; 
+}
