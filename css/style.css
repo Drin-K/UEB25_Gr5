@@ -230,3 +230,24 @@ span {
     width: 50vw;
     border: 2px solid var(--text-color);
 }
+
+.heading {
+    text-align: center;
+    font-size: 4.5rem;
+}
+
+.about-content {
+    padding: 0 3rem;
+    margin-bottom: 4px;
+
+}
+
+.about-content h2 {
+    text-align: left;
+    line-height: 1.2;
+}
+
+.about-content p {
+    font-size: 1.6rem;
+    margin: 2rem 0 2rem;
+}
