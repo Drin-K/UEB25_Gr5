@@ -108,4 +108,10 @@ span {
     box-shadow: 0 0 18px var(--main-color);
 }
 
+.home {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 
