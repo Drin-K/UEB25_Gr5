@@ -329,3 +329,14 @@ span {
     border: 1px solid var(--main-color);
     transform: translateY(-5px) scale(1.03);
 }
+
+.review{
+    background: var(--bg-color);
+}
+.review-box{
+    background-size: cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
