@@ -114,5 +114,12 @@ span {
     align-items: center;
 }
 
+.home-content h3 {
+    font-size: 5rem;
+    font-weight: 700;
+}
 
-
+.home-content span {
+    font-size: 4rem;
+    font-weight: 550;
+}
