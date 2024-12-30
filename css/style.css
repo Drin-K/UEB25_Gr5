@@ -151,4 +151,10 @@ span {
     color: var(--secondary-color);
     opacity: 0.1;
     z-index: -1;
-  }
+}
+
+.home-content p {
+    font-size: 1.6rem;
+    margin-bottom: 2rem;
+    margin-top: 2rem;
+}
