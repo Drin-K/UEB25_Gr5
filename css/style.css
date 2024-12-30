@@ -302,3 +302,14 @@ span {
     font-size: 1.7rem;
     padding-bottom: 1.2rem;
 }
+
+.box a {
+    display: inline-block;
+    font-size: 22px;
+    line-height: 1.2em;
+    font-weight: 700;
+    padding: 7px 0;
+    color: var(--text-color);
+    border-bottom: 2px solid #5d6c83;
+    transition: all 0.5s ease;
+}
