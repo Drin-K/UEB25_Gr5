@@ -217,3 +217,16 @@ span {
     transform: translateY(-5px) scale(1.03);
     cursor: pointer;
 }
+
+.about {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.about-img img {
+    width: 50vw;
+    width: 50vw;
+    border: 2px solid var(--text-color);
+}
