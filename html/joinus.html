@@ -34,10 +34,33 @@
                 <label for="password">Enter your Password</label>
                 <input type="password" id="password" name="password" placeholder="Enter your password">
     
+     
+                <label for="password_2">Confirm your Password</label>
+                <input type="password" id="password_2" name="password" placeholder="Confirm your password" >
     
+                
+                <div id="error-message" style="color: red; margin-bottom: 15px;"></div>
+    
+                
+                <div class="radio-container">
+                    <label for="human-check">Are you human?</label>
+                    <input type="radio" id="human-check" name="human-check" >
+                </div>
                 <button type="submit">Submit</button>
             </form>
         </div>
     </section>
 </body>
 </html>
+<style>
+    .join-form-section {
+        position: relative; 
+        background-image: url('../fotot1/GYMBCG.jpg');
+        background-repeat: no-repeat; 
+        background-attachment: fixed; 
+        background-position: center center;
+        background-size: cover; 
+        padding: 50px; 
+        min-height: 100vh; 
+    }
+    </style>
