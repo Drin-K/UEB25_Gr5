@@ -176,3 +176,15 @@ span {
     color: var(--text-color);
     box-shadow: 0 0 1.6rem var(--main-color);
 }
+
+.services {
+    background: var(--second-bg-color);
+}
+
+.services-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, auto));
+    align-items: center;
+    gap: 2.3rem;
+    margin-top: 4.2rem;
+}
