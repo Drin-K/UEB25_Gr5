@@ -340,3 +340,12 @@ span {
     justify-content: center;
     flex-direction: column;
 }
+
+.review .heading{
+    margin-bottom: 5rem;
+}
+.review-box img{
+    width: 15rem;
+    border-radius: 50%;
+    border: 3px solid var(--main-color);
+}
