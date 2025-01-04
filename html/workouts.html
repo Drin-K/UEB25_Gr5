@@ -99,5 +99,50 @@
             <img class="image-right top-right" src="../fotot1/tricep.jpg" style="top: 100px;right: 55px;width: 300px;">
             <img class="image-right bottom-right" src="../fotot1/tricep2.webp" style="bottom: 49px; right: 545px; width: 385px;">
         </section>
+        <button id="scrollTopBtn">Go to Top</button>
+    <script src="../javascj/javascript.js"></script>
+    <script>
+        $(document).ready(function () {
+            // $(window).scroll(function () {
+            //     if ($(this).scrollTop() > 200) {
+            //         $('#scrollTopBtn').fadeIn();
+            //     } else {
+            //         $('#scrollTopBtn').fadeOut();
+            //     }
+            // });
+
+            $('#scrollTopBtn').click(function () {
+                $('html, body').animate({ scrollTop: 0 }, 300);
+            });
+        });
+    </script>
+    <script>
+        function goToWorkout() {
+            const workout = document.getElementById("workoutInput").value.trim();
+            const section = document.querySelector(`.${workout}`);
+            if (section) {
+                section.scrollIntoView({ behavior: "smooth" });
+            } else {
+                alert("Workout not found! Please select a valid option.");
+            }
+        }
+    </script>
+
+    <div class="mbajtsi">
+        <h2>Calculate Your BMI</h2>
+        <form class="form" id="bmiForm">
+            <label style="font-size: 15px;font-family:Verdana, Geneva, Tahoma, sans-serif;" for="userName">Name:</label>
+            <input style="padding:5px; border-radius: 10px" type="text" id="userName" placeholder="Enter your name" required>
+
+            <label style="font-size: 15px;font-family:Verdana, Geneva, Tahoma, sans-serif;" for="weight">Weight (kg):</label>
+            <input style="padding:5px; border-radius: 10px;" type="number" id="weight" placeholder="Enter your weight" required>
+
+            <label style="font-size: 15px;font-family:Verdana, Geneva, Tahoma, sans-serif;" for="height">Height (m):</label>
+            <input style="padding:5px; border-radius: 10px;" type="number" id="height" placeholder="Enter your height" step="0.01" required>
+
+            <button class="btn1" type="submit" id="calculateBMI">Calculate BMI</button>
+        </form>
+        <div id="bmiResult" style="margin-top: 15px;margin-left: 305px; color: rgba(16, 208, 233, 0.814); font-weight: bold;font-family:Verdana, Geneva, Tahoma, sans-serif;font-size: 2.2rem;"></div>
+    </div>
 </body>
 </html>
