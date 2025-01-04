@@ -524,3 +524,84 @@ span {
         padding: 40px 0;
     }
 }
+@media (max-width:786px) {
+    .home{
+        flex-direction: column;
+    }
+    .home-content h3{
+        font-size: 4.5rem;
+        margin-top: 1.5rem;
+    }
+    .home-content h1{
+        font-size: 5rem;
+        margin-top: 1.5rem;
+    }
+    .home-content{
+        order: 2;
+    }
+    .home-img img{
+        width: 70vw;
+        margin-top: 4rem;
+    }
+    .about{
+        flex-direction: column;
+    }
+    .about-img img{
+        width: 70vw;
+        margin-top: 4rem;
+    }
+    .about-content {
+        text-align: center;
+    }
+    .about-content h2 {
+        text-align: center;
+    }
+    .services h2{
+        margin-bottom: 3rem;
+    }
+}
+
+@media (max-width:617px) {
+    .home-img img{
+        width: 80vw;
+        margin-top: 8rem;
+    }
+    .about-img img{
+        width: 70vw;
+        margin-top: 4rem;
+    }
+}
+@media (max-width:450px) {
+    html{
+        font-size: 50%;
+    }
+}
+
+h3 {
+    font-size: 2rem;
+    color: #333;
+    border-right: 0px solid;
+    white-space: nowrap;
+    overflow: hidden;
+    width: 0; 
+    animation: typing 1s linear forwards, blink 0.5s step-end infinite;
+}
+
+@keyframes typing {
+    from { width: 0; }
+    to { width: 9ch; }
+}
+
+@keyframes blink {
+    50% { border-color: transparent; }
+}
+.adresa{
+    font-size: large;
+    position: absolute;
+    bottom: 4px;
+}
+#linku:hover{
+   color: rgb(50, 200, 80); 
+  text-shadow: 0 0 8px rgba(50, 200, 80, 0.8), 0 0 16px rgba(50, 200, 80, 0.6);
+}
+
