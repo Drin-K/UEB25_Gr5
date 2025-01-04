@@ -10,6 +10,31 @@
     font-family: -apple-system, sans-serif;
 }
 
+.senvichi {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    cursor: pointer;
+    gap: 3px;
+    width: 30px;
+    height: 30px;
+}
+
+.bar {
+
+    background-color: aquamarine;
+    height: 3px;
+    flex-shrink: 0;
+    width: 25px;
+}
+
+@media screen and (max-width: 990px) {
+    .senvichi {
+        display: flex;
+    }
+}
 
 :root {
     --bg-color: #000000;
