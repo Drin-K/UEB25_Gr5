@@ -11,9 +11,8 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin: 20px;
     position: relative;
-    gap: 20px;
+    gap: 70px;
 }
 
 .Back {
@@ -21,9 +20,8 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin: 20px;
     position: relative;
-    gap: 20px;
+    gap: 40px;
 }
 
 .Bicep {
@@ -31,9 +29,8 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin: 20px;
     position: relative;
-    gap: 20px;
+    gap: 40px;
 }
 
 .Tricep {
@@ -41,9 +38,8 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin: 20px;
     position: relative;
-    gap: 20px;
+    gap: 40px;
 }
 
 .Leg {
@@ -51,9 +47,8 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin: 20px;
     position: relative;
-    gap: 20px;
+    gap: 40px;
 }
 
 .Shoulder {
@@ -61,21 +56,19 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin: 20px;
     position: relative;
-    gap: 20px;
+    gap: 40px;
 }
 
 .video-container {
     flex: 1;
     display: flex;
     justify-content: center;
-    margin-left: -85px;
+    margin-left: -65px;
 }
 
 video {
-    width: 70%;
-    max-width: 350px;
+    max-width: 310px;
     border-radius: 20px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
@@ -95,26 +88,34 @@ h1 {
     color: white;
 }
 
-.image-right {
-    align-items: center;
-    width: 400px;
-    height: auto;
-    border-radius: 20px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    transition: transform 0.3s ease;
-}
 
 .image-right:hover {
     transform: scale(1.05);
 }
 
 .top-right {
+    margin-left: 100px;
+    align-items: center;
+    right: 120px;
+    width: 400px;
+    height: auto;
+    border-radius: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease;
     top: 120px;
     right: 70px;
     width: 400px;
 }
 
 .bottom-right {
+    margin-left: 90px;
+    align-items: center;
+    right: 120px;
+    width: 400px;
+    height: auto;
+    border-radius: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease;
     bottom: 10px;
     right: 420px;
 }
@@ -186,6 +187,8 @@ h1 {
 .mbajtsi {
     padding: 100px;
     margin-right: 30px;
+    border: 4px solid rgb(38, 39, 37);
+    border-radius: 50px;
 }
 
 .btn1 {
