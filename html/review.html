@@ -57,5 +57,71 @@
                     beginners to professional athletes to train at. I will definitely be returning on my next trip.
                 </p>
             </div>
+            <div class="review-item">
+            
+                <h2>Jon Jones</h2>
+                <img src="../fotot1/assets/3.jpg" alt="">
+                <div class="rating">
+            
+                    <i class='bx bxs-star' id="star"></i>
+                    <i class='bx bxs-star' id="star"></i>
+                    <i class='bx bxs-star' id="star"></i>
+                    <i class='bx bxs-star' id="star"></i>
+                    <i class='bx bxs-star' id="star"></i>
+                </div>
+                <p id="3"> plenty of weight and hell even has a climbing rope and kettle bells plus the cardio machines. All
+                    equipment is new. it's clean and the staff friendly. Never busy and honestly
+                    I Wish gyms in Australia were to this standard!</p>
+            </div>
+         </div>
+      </div>
+    </section>
+    <script>
+            $("#1").prepend("This gym is amazing. Amazing facility, top equipment and great environment.");
+                $("#2").append(" Shumë pajisje të reja për t'ju lejuar të stërviteni në çdo mënyrë që dëshironi.");
+                $("#3").prepend("This gym was amazing, bit pricey for a single visit but it has a sweet air con,");
+    </script>
+    <script>
+        const reviewItems = document.querySelectorAll('.review-item');
+        const wrapper = document.querySelector('.wrapper');
+
+        let draggedItem = null;
+
+        reviewItems.forEach(item => {
+            item.setAttribute("draggable", "true");
+
+            item.addEventListener("dragstart", (e) => {
+                draggedItem = item;
+                item.classList.add("dragging");
+            });
+
+            item.addEventListener("dragend", () => {
+                draggedItem = null;
+                item.classList.remove("dragging");
+            });
+        });
+
+        wrapper.addEventListener("dragover", (e) => {
+            e.preventDefault();
+            const afterElement = getDragAfterElement(wrapper, e.clientY);
+            if (draggedItem && afterElement) {
+                wrapper.insertBefore(draggedItem, afterElement);
+            }
+        });
+
+        function getDragAfterElement(container, y) {
+            const draggableElements = [...container.querySelectorAll('.review-item:not(.dragging)')];
+            return draggableElements.reduce((closest, child) => {
+                const box = child.getBoundingClientRect();
+                const offset = y - box.top - box.height / 2;
+                if (offset < 0 && offset > closest.offset) {
+                    return { offset: offset, element: child };
+                } else {
+                    return closest;
+                }
+            }, { offset: Number.NEGATIVE_INFINITY }).element;
+        }
+    </script>
+
 </body>
 </html>
