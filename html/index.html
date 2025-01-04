@@ -65,6 +65,33 @@
             $("h3").click(function(){
                 $("p").slideToggle();
             });
+            $(".social a").click(function(event){
+                var link = $(this).attr("href");
+                var confirmation = confirm("Would you like to continue to the site?");
+                if (confirmation) {
+                    alert(link);
+                } else {
+                    event.preventDefault();
+                }
+            });
+            $(".btn").hover(function(){
+                $(this).text("Click me!");
+            });
+            $(".btn").mouseleave(function(){
+                $(this).text("Join Us!");
+            });
+
+            $("abbr").click(function () {
+                $(this).fadeTo(2000, 0.2).fadeTo(2000, 1);
+                alert("HIIT means High-intensity interval training");
+            });
+
+            $(".btn").hover(function(){
+                $(this).animate({height: '35px', width: '175px',});
+            }); 
+            $(".btn").mouseleave(function(){
+                $(this).animate({height: '35px', width: '130px',});
+            });
         });
     </script>
     </body>
