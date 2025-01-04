@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/style.css">
     <title>ILLYRIAN Gym</title>
-   
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script> 
 </head>
 
 <body>
@@ -31,6 +31,7 @@
             <span class="bar"></span>
         </div>
     </header>
+
     <section id="home" class="home">
         <div class="home-content">
             <h1>Build Your</h1>
@@ -58,5 +59,40 @@
             &copy; <i>ILLYRIAN Gym 2024 - All Rights Reserved</i>
         </p>
     </footer>
+
+    <script>
+        $(document).ready(function(){
+            $("h3").click(function(){
+                $("p").slideToggle();
+            });
+            $(".social a").click(function(event){
+                var link = $(this).attr("href");
+                var confirmation = confirm("Would you like to continue to the site?");
+                if (confirmation) {
+                    alert(link);
+                } else {
+                    event.preventDefault();
+                }
+            });
+            $(".btn").hover(function(){
+                $(this).text("Click me!");
+            });
+            $(".btn").mouseleave(function(){
+                $(this).text("Join Us!");
+            });
+
+            $("abbr").click(function () {
+                $(this).fadeTo(2000, 0.2).fadeTo(2000, 1);
+                alert("HIIT means High-intensity interval training");
+            });
+
+            $(".btn").hover(function(){
+                $(this).animate({height: '35px', width: '175px',});
+            }); 
+            $(".btn").mouseleave(function(){
+                $(this).animate({height: '35px', width: '130px',});
+            });
+        });
+    </script>
     </body>
     </html>
