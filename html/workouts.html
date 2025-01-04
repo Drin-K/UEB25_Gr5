@@ -29,5 +29,21 @@
             <span class="bar"></span>
         </div>
         </header>
+        <div style="padding:20px; background-color: #000000; text-align: center;">
+            <div style="padding: 50px; margin-top: 80px;">
+                <input id="workoutInput" list="workouts" placeholder="Choose a workout..." style="padding: 10px; width: 250px; border-radius: 5px; border: 1px solid #333;">
+                <datalist id="workouts">
+                    <option value="Chest"></option>
+                    <option value="Back"></option>
+                    <option value="Leg"></option>
+                    <option value="Shoulder"></option>
+                    <option value="Bicep"></option>
+                    <option value="Tricep"></option>
+                </datalist>
+                <button onclick="goToWorkout()" style="padding: 10px 20px; margin-left: 10px; background-color: aquamarine; border: none; border-radius: 5px; cursor: pointer;">
+                    Go
+                </button>
+            </div>
+        </div>
 </body>
 </html>
