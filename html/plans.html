@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/style.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
     <title>ILLYRIAN Gym</title>
 </head>
 <body>
@@ -78,5 +79,48 @@
             </div>
         </div>
     </section>
+
+    <script>
+        $("#p1").click(function () {
+            $("#p2, #p3").hide();
+    
+            $("#p1").css({
+                transform: "translateX(29vw)",  
+                zIndex: 10                    
+            });
+        });
+    
+        $("#p2").click(function () {
+           
+            $("#p1, #p3").hide();
+    
+           
+            $("#p2").css({
+                transform: "translateX(29vw)", 
+                position: "relative",        
+                zIndex: 5                   
+            });
+        })
+        
+        $("#p3").click(function () {
+                $("#p1, #p2").hide();  
+    
+                $("#p3").css({
+                    position: "relative",           
+                    left: "160%",                   
+                    transform: "translateX(-50%)",  
+                    zIndex: 5                       
+                });
+    
+                
+                setTimeout(function() {
+                    $("#p3").css({
+                        left: "160%",                    
+                        transform: "translateX(-50%)",  
+                    });
+                }, 10); 
+            });
+        
+    </script>
 </body>
 </html>
