@@ -1,6 +1,6 @@
-# UEB24_Gr22
+# UEB25_Gr5
 
-Projekti i grupit 22
+Projekti i grupit 5
 --------------------
 
 Web-site per Fitness-Gym. 
