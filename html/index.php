@@ -36,27 +36,22 @@ function generateMenu($items, $activePage) {
 
 <body>
     <header>
-        <a href="index.html" class="logo">ILLYRIAN <span>Gym</span></a>
+        <a href="index.php" class="logo"></a>
         <div class="bx bx-menu" id="menu-icon"></div>
         <ul class="navbar">
             <?php echo generateMenu($menu_items, basename($_SERVER['PHP_SELF']));?>
       </ul>
         <div class="top-btn">
-            <a href="joinus.html" class="nav-btn">Join Us</a>
+            <a href="joinus.php" class="nav-btn">Join Us</a>
         </div>
-        <div class="senvichi">
-            <span class="bar"></span>
-            <span class="bar"></span>
-            <span class="bar"></span>
-        </div>
+        
     </header>
 
     <section id="home" class="home">
         <div class="home-content">
-            <h1>Build Your</h1>
-            <h1>Dream Physique</h1>
+            <h1></h1>
             <div class="text">
-                <h3> <span class="multiple-text"><b>Welcome</b></span></h3>
+                <h3> <span class="multiple-text"><b></b></span></h3>
             </div>
             <p>“Take care of your body. It’s the only place you have to live.” <br>
                 <abbr title="High-intensity interval training">HIIT</abbr></p>
@@ -75,7 +70,7 @@ function generateMenu($items, $activePage) {
         </div>
 
         <p class="copyright">
-            &copy; <i>ILLYRIAN Gym 2024 - All Rights Reserved</i>
+            &copy; 
         </p>
     </footer>
     <script src="../javascj/javascript.js"></script>
