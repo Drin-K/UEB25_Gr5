@@ -30,7 +30,7 @@ function generateMenu($items, $activePage) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/style.css">
-    <title><?php rcho SITE_NAME?></title>
+    <title><?php echo SITE_NAME?></title>
     <script src="https://code.jquery.com/jquery-3.7.1.js"></script> 
 </head>
 
