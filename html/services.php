@@ -1,3 +1,40 @@
+<?php 
+// Klasa bazë për shërbimet
+class Service {
+    protected string $image;
+    protected string $title;
+    private static int $serviceCount = 0; 
+    public function __construct(string $image, string $title) {
+    $this->image = $image;
+    $this->title = $title;
+    self::$serviceCount++; 
+    }
+    // Destruktori (Opsional - për të treguar kur shërbimi shkatërrohet)
+    public function __destruct() {
+    self::$serviceCount--; 
+    }
+    
+    // GET dhe SET për titullin
+    public function getTitle(): string {
+    return $this->title;
+    }
+    public function setTitle(string $title): void {
+    $this->title = $title;
+    }
+    // GET për numrin total të shërbimeve
+    public static function getServiceCount(): int {
+    return self::$serviceCount;
+    }
+    public function displayService(): string {
+    return "
+    <div class='row'>
+    <img src='{$this->image}' alt='{$this->title}'>
+    <h4>{$this->title}</h4>
+    </div>";
+    }
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
