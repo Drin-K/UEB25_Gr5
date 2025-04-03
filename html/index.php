@@ -60,7 +60,7 @@ class PageContent {
         <div class="home-content">
             <h1><?php echo $page -> title; ?></h1>
             <div class="text">
-                <h3> <span class="multiple-text"><b></b></span></h3>
+                <h3> <span class="multiple-text"><b><?php echo $page -> welcomeMessage; ?></b></span></h3>
             </div>
             <p>“Take care of your body. It’s the only place you have to live.” <br>
                 <abbr title="High-intensity interval training">HIIT</abbr></p>
