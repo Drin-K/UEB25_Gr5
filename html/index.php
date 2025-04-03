@@ -45,7 +45,7 @@ class PageContent {
 
 <body>
     <header>
-        <a href="index.php" class="logo"></a>
+        <a href="index.php" class="logo"><?php echo SITE_NAME;?></a>
         <div class="bx bx-menu" id="menu-icon"></div>
         <ul class="navbar">
             <?php echo generateMenu($menu_items, basename($_SERVER['PHP_SELF']));?>
@@ -58,7 +58,7 @@ class PageContent {
 
     <section id="home" class="home">
         <div class="home-content">
-            <h1></h1>
+            <h1><?php echo $page -> title; ?></h1>
             <div class="text">
                 <h3> <span class="multiple-text"><b></b></span></h3>
             </div>
@@ -79,7 +79,7 @@ class PageContent {
         </div>
 
         <p class="copyright">
-            &copy; 
+            &copy; <?php echo date("Y")." ".SITE_NAME; ?>
         </p>
     </footer>
     <script src="../javascj/javascript.js"></script>
