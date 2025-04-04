@@ -50,8 +50,8 @@ class Service {
             <div class="bx bx-menu" id="menu-icon"></div>
     
             <ul class="navbar">
-                <li><a href="index.html" >Home</a></li>
-                <li><a href="services.html" style="color:aquamarine;  border-bottom: 3px solid var(--main-color);">Services</a></li>
+                <li><a href="index.php" >Home</a></li>
+                <li><a href="services.php" style="color:aquamarine;  border-bottom: 3px solid var(--main-color);">Services</a></li>
                 <li><a href="diet.html">Diet</a></li>
                 <li><a href="about.html">About Us</a></li>
                 <li><a href="plans.html">Pricing</a></li>
@@ -71,46 +71,23 @@ class Service {
             <script src="../javascj/javascript.js"></script>
     </header>
     <section class="services" id="services">
-
-        <h2 class="heading">Our <span>Services</span></h2>
-    
-        <div class="services-content">
-            <div class="row">
-                <img src="../fotot1/jump-roping-total-body-workout-0-1516282424.jpg" alt="">
-    
-                <h4>Physical Fitness</h4>
-            </div>
-
-        <div class="row">
-                <img src="../fotot1/Pro-Boxing-Gallery2.png" alt="">
-    
-                <h4>Boxing</h4>
-        </div>
-
-        <div class="row">
-            <img src="../fotot1/Fitness Strenght.jpg" alt="">
-
-            <h4>Strength Training</h4>
-        </div>
-
-        <div class="row">
-            <img src="../fotot1/calisthenics-feature.jpg" alt="">
-
-            <h4>Calisthenics</h4>
-        </div>
-
-        <div class="row">
-            <img src="../fotot1/c670cb02d9db41a0af7680a6c1fdc55a.jpg" alt="">
-
-            <h4>Weightlifting</h4>
-        </div>
-
-        <div class="row">
-            <img src="../fotot1/woman-running-hard-sweating-37785236.webp" alt="">
-
-            <h4>Running</h4>
-        </div>
-    </div>
-    </section>
+<h2 class="heading">Our <span>Services</span></h2>
+<!-- Shfaq numrin total të shërbimeve -->
+<h5>Total Services Offered: <?php echo
+Service::getServiceCount(); ?></h5>
+<div class="services-content">
+<?php
+// Shfaq shërbimet normale
+foreach ($services as $service) {
+echo $service->displayService();
+}
+// Shfaq shërbimet premium me një ndarje vizuale
+echo "<h2 class='heading'>Premium <span>Services</span></h2>";
+foreach ($premiumServices as $premiumService) {
+echo $premiumService->displayService();
+}
+?>
+</div>
+</section>
 </body>
 </html>
