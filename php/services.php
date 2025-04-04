@@ -1,41 +1,60 @@
-<?php 
+<?php
+// Definimi i konstantave dhe variablave
+define("SITE_NAME", "ILLYRIAN Gym");
+$menu_items = [
+"index.php" => "Home",
+"services.php" => "Services",
+"diet.php" => "Diet",
+"about.php" => "About Us",
+"plans.php" => "Pricing",
+"workouts.php" => "Workouts",
+"review.php" => "Review"
+];
+// Funksion për të gjeneruar menunë
+function generateMenu($items, $activePage) {
+$menuHtml = "";
+foreach ($items as $link => $title) {
+$activeClass = ($link === $activePage) ? 'style="color:aquamarine;
+border-bottom: 3px solid var(--main-color);"' : '';
+$menuHtml .= "<li><a href='$link' $activeClass>$title</a></li>";
+}
+return $menuHtml;
+}
 // Klasa bazë për shërbimet
 class Service {
-    protected string $image;
-    protected string $title;
-    private static int $serviceCount = 0; 
-    public function __construct(string $image, string $title) {
-    $this->image = $image;
-    $this->title = $title;
-    self::$serviceCount++; 
-    }
-    // Destruktori (Opsional - për të treguar kur shërbimi shkatërrohet)
-    public function __destruct() {
-    self::$serviceCount--; 
-    }
-    
-    // GET dhe SET për titullin
-    public function getTitle(): string {
-    return $this->title;
-    }
-    public function setTitle(string $title): void {
-    $this->title = $title;
-    }
-    // GET për numrin total të shërbimeve
-    public static function getServiceCount(): int {
-    return self::$serviceCount;
-    }
-    public function displayService(): string {
-    return "
-    <div class='row'>
-    <img src='{$this->image}' alt='{$this->title}'>
-    <h4>{$this->title}</h4>
-    </div>";
-    }
-    }
-    
-    
-    //Klasa e specializuar për shërbimet premium (trashëgon nga Service)
+protected string $image;
+protected string $title;
+private static int $serviceCount = 0; // Numëron totalin e shërbimeve
+public function __construct(string $image, string $title) {
+$this->image = $image;
+$this->title = $title;
+self::$serviceCount++; // Inkremento numrin e shërbimeve
+}
+// Destruktori (Opsional - për të treguar kur shërbimi shkatërrohet)
+public function __destruct() {
+self::$serviceCount--; // Ul numrin e shërbimeve kur një objekt fshihet
+}
+
+// GET dhe SET për titullin
+public function getTitle(): string {
+return $this->title;
+}
+public function setTitle(string $title): void {
+$this->title = $title;
+}
+// GET për numrin total të shërbimeve
+public static function getServiceCount(): int {
+return self::$serviceCount;
+}
+public function displayService(): string {
+return "
+<div class='row'>
+<img src='{$this->image}' alt='{$this->title}'>
+<h4>{$this->title}</h4>
+</div>";
+}
+}
+// Klasa e specializuar për shërbimet premium (trashëgon nga Service)
 class PremiumService extends Service {
 private string $description;
 public function __construct(string $image, string $title, string
@@ -72,47 +91,31 @@ new Service("../fotot1/calisthenics-feature.jpg", "Calisthenics"),
 $premiumServices = [
 new PremiumService("../fotot1/c670cb02d9db41a0af7680a6c1fdc55a.jpg",
 "Weightlifting", "Personalized training sessions with expert coaches."),
-new PremiumService("../fotot1/woman-running-hard-sweating-37785236.webp"),
-"Running",
-]
+new PremiumService("../fotot1/woman-running-hard-sweating-37785236.webp",
+"Running", "Advanced running techniques and endurance training.")
+];
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/style.css">
-    <title>ILLYRIAN Gym</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="../css/style.css">
+<title><?php echo SITE_NAME; ?></title>
 </head>
 <body>
-    <header>
-            <a href="index.html" class="logo">ILLYRIAN <span>Gym</span></a>
-    
-            <div class="bx bx-menu" id="menu-icon"></div>
-    
-            <ul class="navbar">
-                <li><a href="index.php" >Home</a></li>
-                <li><a href="services.php" style="color:aquamarine;  border-bottom: 3px solid var(--main-color);">Services</a></li>
-                <li><a href="diet.html">Diet</a></li>
-                <li><a href="about.html">About Us</a></li>
-                <li><a href="plans.html">Pricing</a></li>
-                <li><a href="Workouts.html">Workouts</a></li>
-                <li><a href="review.html">Review</a></li>
-            </ul>
-    
-            <div class="top-btn">
-                <a href="joinus.html" class="nav-btn">Join Us</a>
-            </div>
-            
-            <div class="senvichi">
-                <span class="bar"></span>
-                <span class="bar"></span>
-                <span class="bar"></span>
-            </div>
-            <script src="../javascj/javascript.js"></script>
-    </header>
-    <section class="services" id="services">
+<header>
+<a href="index.php" class="logo"><?php echo SITE_NAME; ?></a>
+<div class="bx bx-menu" id="menu-icon"></div>
+<ul class="navbar">
+<?php echo generateMenu($menu_items, basename($_SERVER['PHP_SELF'])); ?>
+</ul>
+
+<div class="top-btn">
+<a href="joinus.php" class="nav-btn">Join Us</a>
+</div>
+</header>
+<section class="services" id="services">
 <h2 class="heading">Our <span>Services</span></h2>
 <!-- Shfaq numrin total të shërbimeve -->
 <h5>Total Services Offered: <?php echo
@@ -131,5 +134,6 @@ echo $premiumService->displayService();
 ?>
 </div>
 </section>
+
 </body>
 </html>
