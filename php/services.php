@@ -33,6 +33,48 @@ class Service {
     </div>";
     }
     }
+    
+    
+    //Klasa e specializuar për shërbimet premium (trashëgon nga Service)
+class PremiumService extends Service {
+private string $description;
+public function __construct(string $image, string $title, string
+$description) {
+parent::__construct($image, $title);
+$this->description = $description;
+}
+// GET dhe SET për përshkrimin
+public function getDescription(): string {
+return $this->description;
+}
+public function setDescription(string $description): void {
+$this->description = $description;
+}
+public function displayService(): string {
+
+return "
+<div class='row premium'>
+<img src='{$this->image}' alt='{$this->title}'>
+<h4>{$this->title} <span style='color: gold;'>(Premium)</span></h4>
+<p>{$this->description}</p>
+</div>";
+}
+}
+// Lista e shërbimeve të zakonshme
+$services = [
+new Service("../fotot1/jump-roping-total-body-workout-0-1516282424.jpg",
+"Physical Fitness"),
+new Service("../fotot1/Pro-Boxing-Gallery2.png", "Boxing"),
+new Service("../fotot1/Fitness Strenght.jpg", "Strength Training"),
+new Service("../fotot1/calisthenics-feature.jpg", "Calisthenics"),
+];
+// Lista e shërbimeve premium
+$premiumServices = [
+new PremiumService("../fotot1/c670cb02d9db41a0af7680a6c1fdc55a.jpg",
+"Weightlifting", "Personalized training sessions with expert coaches."),
+new PremiumService("../fotot1/woman-running-hard-sweating-37785236.webp"),
+"Running",
+]
 ?>
 
 <!DOCTYPE html>
