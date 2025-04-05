@@ -55,8 +55,8 @@ function sortFoods(&$array, $method) {
 // Thirrje e funksionit për çdo metodë sortimi
 sortFoods($lean_protein, 'sort');     // Sortim në mënyrë alfabetike
 sortFoods($carbs, 'rsort');          // Sortim në mënyrë zbritëse
-sortFoods($fats, 'asort');           // Sortim sipas vlerës (ruan çelësat)
-sortFoods($fruits_veggies, 'ksort'); // Sortim sipas çelësave
+sortFoods($fats, 'arsort');           // Sortim sipas vlerës (ruan çelësat)
+sortFoods($fruits_veggies, 'krsort'); // Sortim sipas çelësave
 
 
 ?>
@@ -206,7 +206,7 @@ td {
             <ul>
                  <?php
                         $breakfast = ["4 egg whites", "2 English muffins", "32g Peanut butter", "8 oz fat-free milk"];
-                        sortFoods($breakfast, 'sort'); // Sort alphabetically
+                        sortFoods($breakfast, 'sort');
                         foreach ($breakfast as $food): ?>
                             <li><?php echo $food; ?></li>
                         <?php endforeach; ?>
@@ -216,7 +216,7 @@ td {
                     <ul>
                         <?php
                         $lunch = ["1 can of tuna", "290g brown rice", "11g butter", "100g green beans"];
-                        sortFoods($lunch, 'rsort'); // Sort in reverse order
+                        sortFoods($lunch, 'rsort'); 
                         foreach ($lunch as $food): ?>
                             <li><?php echo $food; ?></li>
                         <?php endforeach; ?>
@@ -226,7 +226,7 @@ td {
                     <ul>
                         <?php
                         $dinner = ["6 oz of calf beef", "12 oz sweet potato", "Large green salad", "20g salad dressing"];
-                        sortFoods($dinner, 'asort'); // Sort by value while keeping keys intact
+                        sortFoods($dinner, 'asort'); 
                         foreach ($dinner as $food): ?>
                             <li><?php echo $food; ?></li>
                         <?php endforeach; ?>
@@ -236,7 +236,7 @@ td {
                     <ul>
                         <?php
                         $snacks = ["1 scoop of protein powder", "150g plain fat-free Greek Yogurt", "75g frozen blueberries", "1 granola bar", "1 oz almonds"];
-                        sortFoods($snacks, 'ksort'); // Sort by key
+                        sortFoods($snacks, 'ksort'); 
                         foreach ($snacks as $food): ?>
                             <li><?php echo $food; ?></li>
                         <?php endforeach; ?>
