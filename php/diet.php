@@ -25,6 +25,34 @@ $lean_protein = ["Chicken", "Turkey", "Salmon", "Eggs", "Tofu", "Greek Yogurt"];
 $carbs = ["Rice", "Potatoes", "Oats", "Beans", "Pasta", "Rice cakes"];
 $fats = ["Avocado", "Peanut butter", "Olive oil", "Cheese", "Dark chocolate"];
 $fruits_veggies = ["Broccoli", "Carrots", "Zucchini", "Apples", "Bananas", "Spinach"];
+
+// Funksionet e sortimit
+function sortFoods(&$array, $method) {
+    switch ($method) {
+        case 'sort':
+            sort($array); // rendit alfabetikisht
+            break;
+        case 'rsort':
+            rsort($array); // rendit në mënyrë zbritëse
+            break;
+        case 'asort':
+            asort($array); // ruan çelësin dhe rendit sipas vlerës
+            break;
+        case 'ksort':
+            ksort($array); // rendit sipas çelësit
+            break;
+        case 'arsort':
+            arsort($array); // ruan çelësin dhe rendit në mënyrë zbritëse sipas vlerës
+            break;
+        case 'krsort':
+            krsort($array); // rendit në mënyrë zbritëse sipas çelësit
+            break;
+        default:
+            echo "Method not supported.";
+            break;
+    }
+}
+
 ?>
 
 
