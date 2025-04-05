@@ -52,6 +52,12 @@ function sortFoods(&$array, $method) {
             break;
     }
 }
+// Thirrje e funksionit për çdo metodë sortimi
+sortFoods($lean_protein, 'sort');     // Sortim në mënyrë alfabetike
+sortFoods($carbs, 'rsort');          // Sortim në mënyrë zbritëse
+sortFoods($fats, 'asort');           // Sortim sipas vlerës (ruan çelësat)
+sortFoods($fruits_veggies, 'ksort'); // Sortim sipas çelësave
+
 
 ?>
 
