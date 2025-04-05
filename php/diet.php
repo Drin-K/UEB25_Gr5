@@ -48,7 +48,7 @@ function sortFoods(&$array, $method) {
             krsort($array); // rendit në mënyrë zbritëse sipas çelësit
             break;
         default:
-            echo "Metoda nuk suportohet.";
+            echo "Method not supported.";
             break;
     }
 }
