@@ -156,109 +156,36 @@ td {
         </tr>
     </thead>
     <tbody>
-        <tr>
-            <td>
-                <ul>
-                    <li>Chicken / turkey breast</li>
-                    <li>Ground turkey</li>
-                    <li>Extra lean ground beef</li>
-                    <li>Salmon</li>
-                    <li>
-                        White fish
-                        <ul style="list-style-type: disc; padding-left: 20px;">
-                            <li style="list-style-type: disc;">Tilapia</li>
-                            <li style="list-style-type: disc;">Cod</li>
-                            <li style="list-style-type: disc;">Tuna</li>
-                        </ul>
-                    </li>
-                    <li>Shrimp</li>
-                    <li>Eggs/Egg Whites</li>
-                    <li>Tofu (Vegan)</li>
-                    <li>Tempeh (Vegan)</li>
-                    <li>Low-fat Greek yogurt</li>
-                </ul>
-            </td>
-            <td>
-                <ul>
-                    <li>
-                        Rice
-                        <ul style="list-style-type: disc; padding-left: 20px;">
-                            <li style="list-style-type: disc;">Brown</li>
-                            <li style="list-style-type: disc;">White</li>
-                        </ul>
-                    </li>
-                    <li>Green peas</li>
-                    <li>Lentils</li>
-                    <li>Whole grain bread</li>
-                    <li>English muffins</li>
-                    <li>Whole grain wraps/tortillas</li>
-                    <li>Oats</li>
-                    <li>Potatoes</li>
-                    <li>
-                        Beans
-                        <ul style="list-style-type: disc; padding-left: 20px;">
-                            <li style="list-style-type: disc;">Black beans</li>
-                            <li style="list-style-type: disc;">Chickpeas</li>
-                        </ul>
-                    </li>
-                    <li >Pasta</li>
-                    <li >Rice cakes</li>
-                </ul>
-            </td>
-            <td>
-                <ul>
-                    <li>Avocado</li>
-                    <li>Peanut butter/almond butter</li>
-                    <li>
-                        Nuts
-                        <ul style="list-style-type: disc; padding-left: 20px;">
-                            <li style="list-style-type: disc;">Almonds</li>
-                            <li style="list-style-type: disc;">Peanuts</li>
-                            <li style="list-style-type: disc;">Cashews</li>
-                        </ul>
-                    </li>
-                    <li>Olive oil</li>
-                    <li>Coconut oil</li>
-                    <li>Dark chocolate</li>
-                    <li>Cheese</li>
-                    <li>Chia seeds / flax seeds</li>
-                    <li>Hummus</li>
-                </ul>
-            </td>
-            <td>
-                <ul>
-                    <li>Broccoli</li>
-                    <li>Cauliflower</li>
-                    <li>Asparagus</li>
-                    <li>
-                        Leafy greens
-                        <ul style="list-style-type: disc; padding-left: 20px;">
-                            <li style="list-style-type: disc;">Mixed greens</li>
-                            <li style="list-style-type: disc;">Lettuce</li>
-                            <li style="list-style-type: disc;">Spinach</li>
-                        </ul>
-                    </li>
-                    <li>Zucchini</li>
-                    <li>Carrots</li>
-                    <li>Bell peppers</li>
-                    <li>Brussel sprouts</li>
-                    <li>Mushrooms</li>
-                    <li>Onions</li>
-                    <li>Apples</li>
-                    <li>Bananas</li>
-                    <li>Oranges</li>
-                    <li>
-                        Berries
-                        <ul style="list-style-type: disc; padding-left: 20px;">
-                            <li style="list-style-type: disc;">Blueberries</li>
-                            <li style="list-style-type: disc;">Raspberries</li>
-                        </ul>
-                    </li>
-                    <li>Pear</li>
-                    <li>Watermelon</li>
-                </ul>
-            </td>
-        </tr>
+    <tr>
+        <td>
+            <ul>
+                <?php foreach ($lean_protein as $food): ?>
+                            <li><?php echo $food; ?></li>
+                        <?php endforeach; ?>
+                    </ul>
+                </td>
+                <td>                    <ul>
+                        <?php foreach ($carbs as $food): ?>
+                            <li><?php echo $food; ?></li>
+                        <?php endforeach; ?>
+                    </ul>
+                </td>
+                <td>
+                    <ul>
+                        <?php foreach ($fats as $food): ?>
+                            <li><?php echo $food; ?></li>
+                        <?php endforeach; ?>
+                    </ul>
+                </td>
+                <td>
+                    <ul>
+                        <?php foreach ($fruits_veggies as $food): ?>
+                            <li><?php echo $food; ?></li>
+                        <?php endforeach; ?>
+                    </ul>
+                </td>
+            </tr>
+
     </tbody>
 </table>
 
