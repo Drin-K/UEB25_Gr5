@@ -201,41 +201,49 @@ td {
         </tr>
     </thead>
     <tbody>
-        <tr>
-            <td>
-                <ul>
-                    <li>4 egg whites</li>
-                    <li>2 English muffins</li>
-                    <li>32g Peanut butter</li>
-                    <li>8 oz fat-free milk</li>
-                </ul>
-            </td>
-            <td>
-                <ul>
-                    <li>1 can of tuna</li>
-                    <li>290g brown rice</li>
-                    <li>11g butter</li>
-                    <li>100g green beans</li>
-                </ul>
-            </td>
-            <td>
-                <ul>
-                    <li>6 oz of calf beef</li>
-                    <li>12 oz sweet potato</li>
-                    <li>Large green salad</li>
-                    <li>20g salad dressing</li>
-                </ul>
-            </td>
-            <td>
-                <ul>
-                    <li>1 scoop of protein powder</li>
-                    <li>150g plain fat-free Greek Yogurt</li>
-                    <li>75g frozen blueberries</li>
-                    <li>1 granola bar</li>
-                    <li>1 oz almonds</li>
-                </ul>
-            </td>
-        </tr>
+    <tr>
+        <td>
+            <ul>
+                 <?php
+                        $breakfast = ["4 egg whites", "2 English muffins", "32g Peanut butter", "8 oz fat-free milk"];
+                        sortFoods($breakfast, 'sort'); // Sort alphabetically
+                        foreach ($breakfast as $food): ?>
+                            <li><?php echo $food; ?></li>
+                        <?php endforeach; ?>
+                    </ul>
+                </td>
+                <td>
+                    <ul>
+                        <?php
+                        $lunch = ["1 can of tuna", "290g brown rice", "11g butter", "100g green beans"];
+                        sortFoods($lunch, 'rsort'); // Sort in reverse order
+                        foreach ($lunch as $food): ?>
+                            <li><?php echo $food; ?></li>
+                        <?php endforeach; ?>
+                    </ul>
+                </td>
+                <td>
+                    <ul>
+                        <?php
+                        $dinner = ["6 oz of calf beef", "12 oz sweet potato", "Large green salad", "20g salad dressing"];
+                        sortFoods($dinner, 'asort'); // Sort by value while keeping keys intact
+                        foreach ($dinner as $food): ?>
+                            <li><?php echo $food; ?></li>
+                        <?php endforeach; ?>
+                    </ul>
+                </td>
+                <td>
+                    <ul>
+                        <?php
+                        $snacks = ["1 scoop of protein powder", "150g plain fat-free Greek Yogurt", "75g frozen blueberries", "1 granola bar", "1 oz almonds"];
+                        sortFoods($snacks, 'ksort'); // Sort by key
+                        foreach ($snacks as $food): ?>
+                            <li><?php echo $food; ?></li>
+                        <?php endforeach; ?>
+                    </ul>
+                </td>
+            </tr>
+
     </tbody>
 </table>
 
