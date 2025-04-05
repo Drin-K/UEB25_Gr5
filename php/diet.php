@@ -20,7 +20,13 @@ function generateMenu($items, $activePage) {
     }
     return $menuHtml;
 }
+//Vargjet numerike
+$lean_protein = ["Chicken", "Turkey", "Salmon", "Eggs", "Tofu", "Greek Yogurt"];
+$carbs = ["Rice", "Potatoes", "Oats", "Beans", "Pasta", "Rice cakes"];
+$fats = ["Avocado", "Peanut butter", "Olive oil", "Cheese", "Dark chocolate"];
+$fruits_veggies = ["Broccoli", "Carrots", "Zucchini", "Apples", "Bananas", "Spinach"];
 ?>
+
 
 
 
