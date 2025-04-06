@@ -175,7 +175,7 @@ echo $review5;
                 </div>
                 <p id="6"> Amazing gym with top-notch equipment, welcoming atmosphere, and super friendly trainers!</p>
 
-                <?php
+                
 
 
 
