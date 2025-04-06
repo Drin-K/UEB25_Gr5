@@ -66,7 +66,7 @@ function generateMenu($items, $activePage) {
             </div>
         </div>
         <div class="mbajtsi">
-    <h2>Calculate Your BMI (PHP Version)</h2>
+    <h2>Calculate Your BMI </h2>
     <form class="form" method="POST" action="">
         <label style="font-size: 15px;font-family:Verdana, Geneva, Tahoma, sans-serif;" for="userName">Name:</label>
         <input style="padding:5px; border-radius: 10px" type="text" name="userName" placeholder="Enter your name" required>

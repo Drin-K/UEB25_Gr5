@@ -1,6 +1,8 @@
 <?php
 // Definimi i konstantave dhe variablave
 const SITE_NAME = "ILLYRIAN Gym";
+const SLASH_NAME = "FruitsVeggies";
+$oneletterword = "1"; //Perdorimi i strlen per te zevendesuar
 //vargu asociativ
 $menu_items = [
     "index.php" => "Home",
@@ -152,7 +154,7 @@ td {
             <th>Lean Protein</th>
             <th>Carbs</th>
             <th>Fats</th>
-            <th>Fruits/Veggies</th>
+            <th><?php echo addcslashes(SLASH_NAME,"V") ?></th>
         </tr>
     </thead>
     <tbody>
@@ -215,7 +217,7 @@ td {
                 <td>
                     <ul>
                         <?php
-                        $lunch = ["1 can of tuna", "290g brown rice", "11g butter", "100g green beans"];
+                        $lunch = [strlen($oneletterword)." can of tuna", "290g brown rice", "11g butter", "100g green beans"];
                         sortFoods($lunch, 'rsort'); 
                         foreach ($lunch as $food): ?>
                             <li><?php echo $food; ?></li>
@@ -235,7 +237,7 @@ td {
                 <td>
                     <ul>
                         <?php
-                        $snacks = ["1 scoop of protein powder", "150g plain fat-free Greek Yogurt", "75g frozen blueberries", "1 granola bar", "1 oz almonds"];
+                        $snacks = [strlen($oneletterword)." scoop of protein powder", "150g plain fat-free Greek Yogurt", "75g frozen blueberries", strlen($oneletterword)." granola bar", strlen($oneletterword)." oz almonds"];
                         sortFoods($snacks, 'ksort'); 
                         foreach ($snacks as $food): ?>
                             <li><?php echo $food; ?></li>
@@ -321,11 +323,11 @@ $diets = [
     ]
 ];
 
-
+$carbohidrates = "Carbohidrates";
 // Përdorimi i array-ve multidimensional për të shfaqur informacionin
 echo "<h1>Maintenance Diet </h1>";
 echo "<table border='1'>";
-echo "<tr><th>Lean Protein</th><th>Carbs</th><th>Fats</th><th>Fruits/Veggies</th></tr>";
+echo "<tr><th>Lean Protein</th><th>".str_replace("Carbohidrates","Carbs",$carbohidrates)."</th><th>Fats</th><th>".addcslashes(SLASH_NAME,"V")."</th></tr>";
 echo "<tr>";
 foreach ($diets['Maintenance Diet'] as $category => $items) {
     echo "<td><ul>";
