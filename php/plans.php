@@ -1,5 +1,5 @@
 <?php
-//vargu asociativ
+// Vargu asociativ
 $menu_items = [
     "index.php" => "Home",
     "services.php" => "Services",
@@ -9,6 +9,7 @@ $menu_items = [
     "workouts.php" => "Workouts",
     "review.php" => "Review"
 ];
+
 // Funksion për të gjeneruar menunë
 function generateMenu($items, $activePage) {
     $menuHtml = "";
@@ -17,9 +18,27 @@ function generateMenu($items, $activePage) {
         $menuHtml .= "<li><a href='$link' $activeClass>$title</a></li>";
     }
     return $menuHtml;
-}?>
+}
 
 
+// Vargu asociativ për planet dhe çmimet
+$plans = [
+    "BASIC" => 30,
+    "PRO" => 50,
+    "PREMIUM" => 70
+];
+
+// Aktivizo var_dump për debugging vetëm kur je në mjedisin e zhvillimit
+$debug_mode = true; // Vendos këtë në true për debugging
+
+if ($debug_mode) {
+    echo "<div style='display:none;'>";
+    echo "<pre>";
+    var_dump($plans); // Var_dump për të parë çmimet e planeve
+    echo "</pre>";
+    echo "</div>";
+}
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -109,10 +128,8 @@ function generateMenu($items, $activePage) {
         });
     
         $("#p2").click(function () {
-           
             $("#p1, #p3").hide();
     
-           
             $("#p2").css({
                 transform: "translateX(29vw)", 
                 position: "relative",        
@@ -121,24 +138,22 @@ function generateMenu($items, $activePage) {
         })
         
         $("#p3").click(function () {
-                $("#p1, #p2").hide();  
+            $("#p1, #p2").hide();  
     
-                $("#p3").css({
-                    position: "relative",           
-                    left: "160%",                   
-                    transform: "translateX(-50%)",  
-                    zIndex: 5                       
-                });
-    
-                
-                setTimeout(function() {
-                    $("#p3").css({
-                        left: "160%",                    
-                        transform: "translateX(-50%)",  
-                    });
-                }, 10); 
+            $("#p3").css({
+                position: "relative",           
+                left: "160%",                   
+                transform: "translateX(-50%)",  
+                zIndex: 5                       
             });
-        
+    
+            setTimeout(function() {
+                $("#p3").css({
+                    left: "160%",                    
+                    transform: "translateX(-50%)",  
+                });
+            }, 10); 
+        });
     </script>
 </body>
 </html>
