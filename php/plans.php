@@ -1,3 +1,28 @@
+<?php
+// Definimi i konstantave dhe variablave
+const SITE_NAME = "ILLYRIAN Gym";
+//vargu asociativ
+$menu_items = [
+    "index.php" => "Home",
+    "services.php" => "Services",
+    "diet.php" => "Diet",
+    "about.php" => "About Us",
+    "plans.php" => "Pricing",
+    "workouts.php" => "Workouts",
+    "review.php" => "Review"
+];
+// Funksion për të gjeneruar menunë
+function generateMenu($items, $activePage) {
+    $menuHtml = "";
+    foreach ($items as $link => $title) {
+        $activeClass = ($link === $activePage) ? 'style="color:aquamarine; border-bottom: 3px solid var(--main-color);"' : '';
+        $menuHtml .= "<li><a href='$link' $activeClass>$title</a></li>";
+    }
+    return $menuHtml;
+}?>
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,13 +39,7 @@
         <div class="bx bx-menu" id="menu-icon"></div>
 
         <ul class="navbar">
-            <li><a href="index.html" >Home</a></li>
-            <li><a href="services.html">Services</a></li>
-            <li><a href="diet.html">Diet</a></li>
-            <li><a href="about.html">About Us</a></li>
-            <li><a href="plans.html"style="color:aquamarine;  border-bottom: 3px solid var(--main-color);">Pricing</a></li>
-            <li><a href="Workouts.html">Workouts</a></li>
-            <li><a href="review.html">Review</a></li>
+        <?php echo generateMenu($menu_items, basename($_SERVER['PHP_SELF']));?>
         </ul>
 
         <div class="top-btn">

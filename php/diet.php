@@ -245,7 +245,147 @@ td {
             </tr>
 
     </tbody>
-</table>
+    </table>
+</div>
+
+</div>
+
+<?php  
+// Definimi i array-ve multidimensional për dietën
+$diets = [
+    "weight_loss" => [
+        "Lean Protein" => [
+            "Chicken / turkey breast",
+            "Ground turkey",
+            "Extra lean ground beef",
+            "Salmon",
+            "Tilapia",
+            "Cod",
+            "Tuna",
+            "Shrimp",
+            "Eggs/Egg Whites",
+            "Tofu (Vegan)",
+            "Tempeh (Vegan)",
+            "Low-fat Greek yogurt"
+        ],
+        "Carbs" => [
+            "Rice" => ["Brown", "White"],
+            "Green peas",
+            "Lentils",
+            "Whole grain bread",
+            "English muffins",
+            "Whole grain wraps/tortillas",
+            "Oats",
+            "Potatoes",
+            "Black beans",
+            "Chickpeas",
+            "Pasta",
+            "Rice cakes"
+        ],
+        "Fats" => [
+            "Avocado",
+            "Peanut butter/almond butter",
+            "Almonds",
+            "Peanuts",
+            "Cashews",
+            "Olive oil",
+            "Coconut oil",
+            "Dark chocolate",
+            "Cheese",
+            "Chia seeds / flax seeds",
+            "Hummus"
+        ],
+        "Fruits_Veggies" => [
+            "Broccoli",
+            "Cauliflower",
+            "Asparagus",
+            "Mixed greens",
+            "Lettuce",
+            "Spinach",
+            "Zucchini",
+            "Carrots",
+            "Bell peppers",
+            "Brussel sprouts",
+            "Mushrooms",
+            "Onions",
+            "Apples",
+            "Bananas",
+            "Oranges",
+            "Blueberries",
+            "Raspberries",
+            "Pear",
+            "Watermelon"
+        ]
+    ],
+    "bulk" => [
+        "Breakfast" => [
+            "4 egg whites",
+            "2 English muffins",
+            "32g Peanut butter",
+            "8 oz fat-free milk"
+        ],
+        "Lunch" => [
+            "1 can of tuna",
+            "290g brown rice",
+            "11g butter",
+            "100g green beans"
+        ],
+        "Dinner" => [
+            "6 oz of calf beef",
+            "12 oz sweet potato",
+            "Large green salad",
+            "20g salad dressing"
+        ],
+        "Snacks" => [
+            "1 scoop of protein powder",
+            "150g plain fat-free Greek Yogurt",
+            "75g frozen blueberries",
+            "1 granola bar",
+            "1 oz almonds"
+        ]
+    ]
+];
 
 
+// Përdorimi i array-ve multidimensional për të shfaqur informacionin
+echo "<h1>Diet for Weight Loss</h1>";
+echo "<table border='1'>";
+echo "<tr><th>Lean Protein</th><th>Carbs</th><th>Fats</th><th>Fruits/Veggies</th></tr>";
+echo "<tr>";
+foreach ($diets['weight_loss'] as $category => $items) {
+    echo "<td><ul>";
+    foreach ($items as $item => $value) {
+        if (is_array($value)) {
+            echo "<li>$item<ul>";
+            foreach ($value as $subitem) {
+                echo "<li>$subitem</li>";
+            }
+            echo "</ul></li>";
+        } else {
+            echo "<li>$value</li>";
+        }
+    }
+    echo "</ul></td>";
+}
+echo "</tr>";
+echo "</table>";
 
+
+echo "<h1>Diet for Bulk</h1>";
+echo "<table border='1'>";
+echo "<tr><th>Breakfast</th><th>Lunch</th><th>Dinner</th><th>Snacks</th></tr>";
+echo "<tr>";
+foreach ($diets['bulk'] as $category => $items) {
+    echo "<td><ul>";
+    foreach ($items as $item) {
+        echo "<li>$item</li>";
+    }
+    echo "</ul></td>";
+}
+echo "</tr>";
+echo "</table>";
+?>
+
+
+</body>
+</html>
