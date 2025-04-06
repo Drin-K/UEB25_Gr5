@@ -104,11 +104,6 @@ class PageContent {
                 $(this).text("Join Us!");
             });
 
-            $("abbr").click(function () {
-                $(this).fadeTo(2000, 0.2).fadeTo(2000, 1);
-                alert("HIIT means High-intensity interval training");
-            });
-
             $(".btn").hover(function(){
                 $(this).animate({height: '35px', width: '175px',});
             }); 

@@ -1,3 +1,24 @@
+<?php
+//vargu asociativ
+$menu_items = [
+    "index.php" => "Home",
+    "services.php" => "Services",
+    "diet.php" => "Diet",
+    "about.php" => "About Us",
+    "plans.php" => "Pricing",
+    "workouts.php" => "Workouts",
+    "review.php" => "Review"
+];
+// Funksion për të gjeneruar menunë
+function generateMenu($items, $activePage) {
+    $menuHtml = "";
+    foreach ($items as $link => $title) {
+        $activeClass = ($link === $activePage) ? 'style="color:aquamarine; border-bottom: 3px solid var(--main-color);"' : '';
+        $menuHtml .= "<li><a href='$link' $activeClass>$title</a></li>";
+    }
+    return $menuHtml;
+}?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -16,17 +37,11 @@
         <div class="bx bx-menu" id="menu-icon"></div>
 
         <ul class="navbar">
-            <li><a href="index.html" >Home</a></li>
-            <li><a href="services.html">Services</a></li>
-            <li><a href="diet.html">Diet</a></li>
-            <li><a href="about.html"  style="color:aquamarine;  border-bottom: 3px solid var(--main-color);">About Us</a></li>
-            <li><a href="plans.html">Pricing</a></li>
-            <li><a href="Workouts.html">Workouts</a></li>
-            <li><a href="review.html">Review</a></li>
+        <?php echo generateMenu($menu_items, basename($_SERVER['PHP_SELF']));?>
         </ul>
 
         <div class="top-btn">
-            <a href="joinus.html" class="nav-btn">Join Us</a>
+            <a href="joinus.php" class="nav-btn">Join Us</a>
         </div>
         <div class="senvichi">
             <span class="bar"></span>
@@ -49,7 +64,7 @@
             <p>Unlock your potential with our expert Personal Trainers.</p>
             <p>Elevate your fitness with practice sessions.</p>
             <p>We provide Supportive management, for your fitness success.</p>
-            <a href="joinus.html" class="btn">Book A Free Class</a><br><br><br><br><br><br>
+            <a href="joinus.php" class="btn">Book A Free Class</a><br><br><br><br><br><br>
             <b><p id= problem style="font-size: 3rem;">Have a problem ?</p></b>
             <p id = 'linku'style="font-size: large;">
                 <a href="mailto:name@email.com" style="color: rgb(20, 145, 57);">Contact Us</a>
@@ -64,11 +79,7 @@
         
     </section>
 
-    <script>
-        $("#problem").dblclick(function(){     
-        $(this).hide();
-    });
-    </script>
+
     </body>
        
     
