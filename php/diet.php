@@ -253,106 +253,81 @@ td {
 <?php  
 // Definimi i array-ve multidimensional për dietën
 $diets = [
-    "weight_loss" => [
+    "Maintenance Diet" => [
         "Lean Protein" => [
-            "Chicken / turkey breast",
-            "Ground turkey",
-            "Extra lean ground beef",
-            "Salmon",
-            "Tilapia",
-            "Cod",
-            "Tuna",
-            "Shrimp",
-            "Eggs/Egg Whites",
-            "Tofu (Vegan)",
-            "Tempeh (Vegan)",
-            "Low-fat Greek yogurt"
+            "Grilled chicken breast",
+            "Turkey slices (low sodium)",
+            "Lean beef steak",
+            "Crab meat",
+            "Boiled eggs / egg whites",
+            "Cottage cheese (low-fat)"
         ],
         "Carbs" => [
-            "Rice" => ["Brown", "White"],
-            "Green peas",
-            "Lentils",
-            "Whole grain bread",
-            "English muffins",
-            "Whole grain wraps/tortillas",
-            "Oats",
-            "Potatoes",
-            "Black beans",
-            "Chickpeas",
-            "Pasta",
-            "Rice cakes"
+            "Rice" => ["Basmati", "Jasmine"],
+            "Sweet corn",
+            "Kidney beans",
+            "Ezekiel bread",
+            "Whole wheat bagels",
+            "Whole grain pasta",
+            "Quinoa"
         ],
         "Fats" => [
-            "Avocado",
-            "Peanut butter/almond butter",
-            "Almonds",
-            "Peanuts",
-            "Cashews",
-            "Olive oil",
-            "Coconut oil",
-            "Dark chocolate",
-            "Cheese",
-            "Chia seeds / flax seeds",
-            "Hummus"
+            "Guacamole",
+            "Sunflower seed butter",
+            "Brazil nuts",
+            "Macadamia nuts",
+            "Avocado oil",
+            "Ghee (clarified butter)",
+            "Nut-based protein bars",
+            "Pumpkin seeds / hemp seeds"
         ],
         "Fruits_Veggies" => [
-            "Broccoli",
-            "Cauliflower",
-            "Asparagus",
-            "Mixed greens",
-            "Lettuce",
-            "Spinach",
-            "Zucchini",
-            "Carrots",
-            "Bell peppers",
-            "Brussel sprouts",
-            "Mushrooms",
-            "Onions",
-            "Apples",
-            "Bananas",
-            "Oranges",
-            "Blueberries",
-            "Raspberries",
-            "Pear",
-            "Watermelon"
+            "Kale",
+            "Green beans",
+            "Red cabbage",
+            "Grapefruit",
+            "Blackberries",
+            "Strawberries",
+            "Kiwi",
+            "Cantaloupe"
         ]
-    ],
-    "bulk" => [
-        "Breakfast" => [
-            "4 egg whites",
-            "2 English muffins",
-            "32g Peanut butter",
-            "8 oz fat-free milk"
         ],
-        "Lunch" => [
-            "1 can of tuna",
-            "290g brown rice",
-            "11g butter",
-            "100g green beans"
+    "Athlete" => [
+        "Carbs" => [
+            "Oats",
+            "Brown rice",
+            "Whole grain bread/pasta",
+            "Sweet potatoes",
+            "Bananas, apples, berries"
         ],
-        "Dinner" => [
-            "6 oz of calf beef",
-            "12 oz sweet potato",
-            "Large green salad",
-            "20g salad dressing"
+        "Protein" => [
+            "Chicken breast",
+            "Turkey",
+            "Eggs",
+            "Tuna, salmon"
         ],
-        "Snacks" => [
-            "1 scoop of protein powder",
-            "150g plain fat-free Greek Yogurt",
-            "75g frozen blueberries",
-            "1 granola bar",
-            "1 oz almonds"
+        "Fats" => [
+            "Avocados",
+            "Nuts (almonds, walnuts)",
+            "Seeds (chia, flaxseed)",
+            "Fatty fish (like salmon)"
+        ],
+        "Hydration" => [
+            "Water (main source)",
+            "Electrolyte drinks (during/after training)",
+            "Coconut water",
+            "Fruits with high water content (watermelon, oranges)"
         ]
     ]
 ];
 
 
 // Përdorimi i array-ve multidimensional për të shfaqur informacionin
-echo "<h1>Diet for Weight Loss</h1>";
+echo "<h1>Maintenance Diet </h1>";
 echo "<table border='1'>";
 echo "<tr><th>Lean Protein</th><th>Carbs</th><th>Fats</th><th>Fruits/Veggies</th></tr>";
 echo "<tr>";
-foreach ($diets['weight_loss'] as $category => $items) {
+foreach ($diets['Maintenance Diet'] as $category => $items) {
     echo "<td><ul>";
     foreach ($items as $item => $value) {
         if (is_array($value)) {
@@ -371,11 +346,11 @@ echo "</tr>";
 echo "</table>";
 
 
-echo "<h1>Diet for Bulk</h1>";
+echo "<h1>Athlete's Diet </h1>";
 echo "<table border='1'>";
-echo "<tr><th>Breakfast</th><th>Lunch</th><th>Dinner</th><th>Snacks</th></tr>";
+echo "<tr><th>Carbs</th><th>Protein</th><th>Fats</th><th>Hydration</th></tr>";
 echo "<tr>";
-foreach ($diets['bulk'] as $category => $items) {
+foreach ($diets['Athlete'] as $category => $items) {
     echo "<td><ul>";
     foreach ($items as $item) {
         echo "<li>$item</li>";
