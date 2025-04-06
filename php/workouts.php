@@ -54,7 +54,6 @@ function generateMenu($items, $activePage) {
             <div style="padding: 50px; margin-top: 80px;">
                 <input id="workoutInput" list="workouts" placeholder="Choose a workout..." style="padding: 10px; width: 250px; border-radius: 5px; border: 1px solid #333;">
                 <datalist id="workouts">
-                    <option value="Chest"></option>
                     <option value="Back"></option>
                     <option value="Leg"></option>
                     <option value="Shoulder"></option>
