@@ -66,6 +66,50 @@ function generateMenu($items, $activePage) {
                 </button>
             </div>
         </div>
+        <div class="mbajtsi">
+    <h2>Calculate Your BMI (PHP Version)</h2>
+    <form class="form" method="POST" action="">
+        <label style="font-size: 15px;font-family:Verdana, Geneva, Tahoma, sans-serif;" for="userName">Name:</label>
+        <input style="padding:5px; border-radius: 10px" type="text" name="userName" placeholder="Enter your name" required>
+
+        <label style="font-size: 15px;font-family:Verdana, Geneva, Tahoma, sans-serif;" for="weight">Weight (kg):</label>
+        <input style="padding:5px; border-radius: 10px;" type="number" name="weight" placeholder="Enter your weight" step="0.01" required>
+
+        <label style="font-size: 15px;font-family:Verdana, Geneva, Tahoma, sans-serif;" for="height">Height (m):</label>
+        <input style="padding:5px; border-radius: 10px;" type="number" name="height" placeholder="Enter your height" step="0.01" required>
+
+        <button class="btn1" type="submit" name="calculateBMI">Calculate BMI</button>
+    </form>
+
+    <div id="bmiResult" style="margin-top: 15px; margin-left: 305px; color: rgba(16, 208, 233, 0.814); font-weight: bold; font-family:Verdana, Geneva, Tahoma, sans-serif; font-size: 2.2rem;">
+    <?php
+if (isset($_POST['calculateBMI'])) {
+    $name = htmlspecialchars($_POST["userName"]);
+    $weight = floatval($_POST["weight"]);
+    $height = floatval($_POST["height"]);
+
+    if ($weight > 0 && $height > 0) {
+        $bmi = round($weight / ($height * $height), 2);
+
+        if ($bmi < 18.5) {
+            $category = "Underweight";
+        } elseif ($bmi < 25) {
+            $category = "Normal weight";
+        } elseif ($bmi < 30) {
+            $category = "Overweight";
+        } else {
+            $category = "Obesity";
+        }
+
+        echo "Hello $name, your BMI is $bmi ($category).";
+    } else {
+        echo "<span style='color:red;'>Please enter valid weight and height.</span>";
+    }
+}
+?>
+
+    </div>
+</div>
         <section class="Back">
             <div class="video-container">
                 <video controls poster="../fotot1/foto-poster.avif" src="../video/video-back.mp4" type="video/mp4"></video>
@@ -141,50 +185,7 @@ function generateMenu($items, $activePage) {
         }
     </script>
 
-<div class="mbajtsi">
-    <h2>Calculate Your BMI (PHP Version)</h2>
-    <form class="form" method="POST" action="">
-        <label style="font-size: 15px;font-family:Verdana, Geneva, Tahoma, sans-serif;" for="userName">Name:</label>
-        <input style="padding:5px; border-radius: 10px" type="text" name="userName" placeholder="Enter your name" required>
 
-        <label style="font-size: 15px;font-family:Verdana, Geneva, Tahoma, sans-serif;" for="weight">Weight (kg):</label>
-        <input style="padding:5px; border-radius: 10px;" type="number" name="weight" placeholder="Enter your weight" step="0.01" required>
-
-        <label style="font-size: 15px;font-family:Verdana, Geneva, Tahoma, sans-serif;" for="height">Height (m):</label>
-        <input style="padding:5px; border-radius: 10px;" type="number" name="height" placeholder="Enter your height" step="0.01" required>
-
-        <button class="btn1" type="submit" name="calculateBMI">Calculate BMI</button>
-    </form>
-
-    <div id="bmiResult" style="margin-top: 15px; margin-left: 305px; color: rgba(16, 208, 233, 0.814); font-weight: bold; font-family:Verdana, Geneva, Tahoma, sans-serif; font-size: 2.2rem;">
-    <?php
-if (isset($_POST['calculateBMI'])) {
-    $name = htmlspecialchars($_POST["userName"]);
-    $weight = floatval($_POST["weight"]);
-    $height = floatval($_POST["height"]);
-
-    if ($weight > 0 && $height > 0) {
-        $bmi = round($weight / ($height * $height), 2);
-
-        if ($bmi < 18.5) {
-            $category = "Underweight";
-        } elseif ($bmi < 25) {
-            $category = "Normal weight";
-        } elseif ($bmi < 30) {
-            $category = "Overweight";
-        } else {
-            $category = "Obesity";
-        }
-
-        echo "Hello $name, your BMI is $bmi ($category).";
-    } else {
-        echo "<span style='color:red;'>Please enter valid weight and height.</span>";
-    }
-}
-?>
-
-    </div>
-</div>
 
 </body>
 </html>
