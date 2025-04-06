@@ -129,13 +129,13 @@ td {
 
 <body>
     <header>
-        <a href="index.php" class="logo"><?php echo SITE_NAME;?></a>
+    <a href="index.php" class="logo">ILLYRIAN <span>Gym</span></a>
         <div class="bx bx-menu" id="menu-icon"></div>
         <ul class="navbar">
             <?php echo generateMenu($menu_items, basename($_SERVER['PHP_SELF']));?>
       </ul>
         <div class="top-btn">
-            <a href="joinus.html" class="nav-btn">Join Us</a>
+            <a href="joinus.php" class="nav-btn">Join Us</a>
         </div>
         <div class="senvichi">
             <span class="bar"></span>

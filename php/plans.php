@@ -1,6 +1,4 @@
 <?php
-// Definimi i konstantave dhe variablave
-const SITE_NAME = "ILLYRIAN Gym";
 //vargu asociativ
 $menu_items = [
     "index.php" => "Home",
@@ -34,7 +32,7 @@ function generateMenu($items, $activePage) {
 </head>
 <body>
     <header>
-        <a href="index.html" class="logo">ILLYRIAN <span>Gym</span></a>
+        <a href="index.php" class="logo">ILLYRIAN <span>Gym</span></a>
 
         <div class="bx bx-menu" id="menu-icon"></div>
 
@@ -43,7 +41,7 @@ function generateMenu($items, $activePage) {
         </ul>
 
         <div class="top-btn">
-            <a href="joinus.html" class="nav-btn">Join Us</a>
+            <a href="joinus.php" class="nav-btn">Join Us</a>
         </div>
         </div>
         <div class="senvichi">
@@ -64,7 +62,7 @@ function generateMenu($items, $activePage) {
                     <li style="list-style-type: none;"><input type="checkbox"> Smart workout plan</li>
                     <li style="list-style-type: none;"><input type="checkbox"> At home workouts</li>
                 </ul>
-                <a href="joinus.html">
+                <a href="joinus.php">
                     Join Now
                     <i class='bx bx-right-arrow-alt'></i>
                 </a>
@@ -77,7 +75,7 @@ function generateMenu($items, $activePage) {
                     <li style="list-style-type: none;"><input type="checkbox"> Smart workout plan</li>
                     <li style="list-style-type: none;"><input type="checkbox"> At home workouts</li>
                 </ul>
-                <a href="joinus.html">
+                <a href="joinus.php">
                     Join Now
                     <i class='bx bx-right-arrow-alt'></i>
                 </a>
@@ -92,7 +90,7 @@ function generateMenu($items, $activePage) {
                     <li style="list-style-type: none;"><input type="checkbox"> At home workouts</li>
                     <li style="list-style-type: none;"><input type="checkbox"> Personal Training</li>
                 </ul>
-                <a href="joinus.html">
+                <a href="joinus.php">
                     Join Now
                     <i class='bx bx-right-arrow-alt'></i>
                 </a>

@@ -45,7 +45,7 @@ class PageContent {
 
 <body>
     <header>
-        <a href="index.php" class="logo"><?php echo SITE_NAME;?></a>
+    <a href="index.php" class="logo">ILLYRIAN <span>Gym</span></a>
         <div class="bx bx-menu" id="menu-icon"></div>
         <ul class="navbar">
             <?php echo generateMenu($menu_items, basename($_SERVER['PHP_SELF']));?>

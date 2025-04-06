@@ -32,7 +32,7 @@ function generateMenu($items, $activePage) {
 
 <body>
     <header>
-        <a href="index.html" class="logo">ILLYRIAN <span>Gym</span></a>
+        <a href="index.php" class="logo">ILLYRIAN <span>Gym</span></a>
 
         <div class="bx bx-menu" id="menu-icon"></div>
 
