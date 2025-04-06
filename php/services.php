@@ -114,6 +114,11 @@ new PremiumService("../fotot1/woman-running-hard-sweating-37785236.webp",
 <div class="top-btn">
 <a href="joinus.php" class="nav-btn">Join Us</a>
 </div>
+<div class="senvichi">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </div>
 </header>
 <section class="services" id="services">
 <h2 class="heading">Our <span>Services</span></h2>

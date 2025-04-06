@@ -53,6 +53,11 @@ class PageContent {
         <div class="top-btn">
             <a href="joinus.php" class="nav-btn">Join Us</a>
         </div>
+        <div class="senvichi">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </div>
         
     </header>
 
