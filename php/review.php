@@ -1,5 +1,5 @@
-<?php
-//vargu asociativ
+<?php 
+// Vargu asociativ
 $menu_items = [
     "index.php" => "Home",
     "services.php" => "Services",
@@ -9,6 +9,7 @@ $menu_items = [
     "workouts.php" => "Workouts",
     "review.php" => "Review"
 ];
+
 // Funksion për të gjeneruar menunë
 function generateMenu($items, $activePage) {
     $menuHtml = "";
@@ -17,7 +18,8 @@ function generateMenu($items, $activePage) {
         $menuHtml .= "<li><a href='$link' $activeClass>$title</a></li>";
     }
     return $menuHtml;
-}?>
+}
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -53,6 +55,7 @@ function generateMenu($items, $activePage) {
 </header>
 
 <script src="../javascj/javascript.js"></script>
+
 <section id="review" class="review">
     <div class="review-box">
         <h2 class="heading" data-aos="zoom-in-down">Client Reviews</h2>
@@ -69,89 +72,117 @@ function generateMenu($items, $activePage) {
                     <i class='bx bxs-star' id="star"></i>
                     <i class='bx bxs-star' id="star"></i>
                 </div>
-                <p id="1"> Good service with friendly staff and super clean and comfortable gym for everyone from
-                    beginners to professional athletes to train at. I will definitely be returning on my next trip.
-                </p>
+                <p id="1">
+                <?php
+                // Përdorimi i str_replace për të zëvendësuar fjalët
+                $review1 = "Good service with friendly staff and super clean and comfortable gym for everyone from beginners to professional athletes to train at.";
+                $review1 = str_replace("Good", "Excellent", $review1); // str_replace()
+                echo $review1;
+                ?> </p>
+
+              
+
             </div>
             <div class="review-item">
                 <h2>Çamërie Peci</h2>
                 <img src="../fotot1/assets/2.jpg" alt="">
-            
+
                 <div class="rating">
                     <i class='bx bxs-star' id="star"></i>
                     <i class='bx bxs-star' id="star"></i>
                     <i class='bx bxs-star' id="star"></i>
                     <i class='bx bxs-star' id="star"></i>
                 </div>
-                <p id="2">Kjo është një palestër e mrekullueshme e pajisur mirë. Me ajër të kondicionuar, dhoma të mira ndërrimi me
-                    tushe.</p>
+                <p id="2">
+                <?php
+                // Përdorimi i substr për të prerë përshkrimin në një gjatësi të caktuar
+                $review2 = "Kjo është një palestër e mrekullueshme e pajisur shumë mirë dhe me të gjitha mundësitë që ofron një ambient modern dhe të rehatshëm për stërvitje. Pajisjet janë të reja dhe të llojllojshme, duke përfshirë makineri për kardio, peshë dhe për trajnime të ndryshme. Përveç kësaj, ka ajër të kondicionuar në të gjithë hapësirën, që siguron një ambient të freskët dhe komod gjatë stërvitjeve. Dhomat e ndërrimit janë shumë të pastra dhe të mirëpajisura, me tualete dhe dushe të cilat janë gjithashtu shumë të rehatshme dhe ofrojnë mundësi për tu ndjerë si në shtëpinë tuaj. Ky është një vend ku çdo anëtar mund të gjejë hapësirën e tij për të stërvitur në mënyrën më të mirë dhe për të shijuar një eksperiencë të plotë të palestrës.";
+                $review2 = substr($review2, 0, 200); // substr() - marrim vetëm 100 karaktere
+                echo $review2;
+                ?></p>
+
+
             </div>
-            
+
             <div class="review-item">
-            
                 <h2>Jon Jones</h2>
                 <img src="../fotot1/assets/3.jpg" alt="">
                 <div class="rating">
-            
                     <i class='bx bxs-star' id="star"></i>
                     <i class='bx bxs-star' id="star"></i>
                     <i class='bx bxs-star' id="star"></i>
                     <i class='bx bxs-star' id="star"></i>
                     <i class='bx bxs-star' id="star"></i>
                 </div>
-                <p id="3"> plenty of weight and hell even has a climbing rope and kettle bells plus the cardio machines. All
-                    equipment is new. it's clean and the staff friendly. Never busy and honestly
-                    I Wish gyms in Australia were to this standard!</p>
+                <p id="3">  <?php
+                // Përdorimi i trim për të hequr hapësirat e tepërta
+                $review3 = "    Plenty of weight and hell even has a climbing rope and kettle bells plus the cardio machines. All     equipment is new. it's clean and the staff friendly. Never busy and honestly I Wish gyms in Australia were to this standard!    ";
+                $review3 = trim($review3); // trim() - heq hapësirat e tepërta në fillim dhe fund
+                echo $review3;
+                ?></p>
+
+               
+
             </div>
-         </div>
-      </div>
-    </section>
-    <script>
-            $("#1").prepend("This gym is amazing. Amazing facility, top equipment and great environment.");
-                $("#2").append(" Shumë pajisje të reja për t'ju lejuar të stërviteni në çdo mënyrë që dëshironi.");
-                $("#3").prepend("This gym was amazing, bit pricey for a single visit but it has a sweet air con,");
-    </script>
-    <script>
-        const reviewItems = document.querySelectorAll('.review-item');
-        const wrapper = document.querySelector('.wrapper');
 
-        let draggedItem = null;
+            <div class="review-item">
+                <h2>Alice Cooper</h2>
+                <img src="../fotot1/assets/4.jpg" alt="">
+                <div class="rating">
+                    <i class='bx bxs-star' id="star"></i>
+                    <i class='bx bxs-star' id="star"></i>
+                    <i class='bx bxs-star' id="star"></i>
+                    <i class='bx bxs-star' id="star"></i>
+                    <i class='bx bxs-star' id="star"></i>
+                </div>
+                <p id="4"> Had a wonderful experience at the gym, very clean, and great facilities!</p>
 
-        reviewItems.forEach(item => {
-            item.setAttribute("draggable", "true");
+               
 
-            item.addEventListener("dragstart", (e) => {
-                draggedItem = item;
-                item.classList.add("dragging");
-            });
+            </div>
 
-            item.addEventListener("dragend", () => {
-                draggedItem = null;
-                item.classList.remove("dragging");
-            });
-        });
+            <div class="review-item">
+                <h2>Mark Smith</h2>
+                <img src="../fotot1/assets/5.jpg" alt="">
+                <div class="rating">
+                    <i class='bx bxs-star' id="star"></i>
+                    <i class='bx bxs-star' id="star"></i>
+                    <i class='bx bxs-star' id="star"></i>
+                    <i class='bx bxs-star' id="star"></i>
+                </div>
+                <p id="5">
+                <?php
+// Përdorimi i explode dhe implode për të krijuar një frazë të thjeshtë me viza
+$review5 = "Great place to work out, friendly staff, and very clean!";
+$words = explode(", ", $review5); // Përdorim explode për të ndarë fjalët me hapësirë pas çdo presje
+$review5 = implode(" | ", $words); // Përdorim implode për të bashkuar fjalët me viza
+echo $review5;
+?>
+                </p>
 
-        wrapper.addEventListener("dragover", (e) => {
-            e.preventDefault();
-            const afterElement = getDragAfterElement(wrapper, e.clientY);
-            if (draggedItem && afterElement) {
-                wrapper.insertBefore(draggedItem, afterElement);
-            }
-        });
+            </div>
 
-        function getDragAfterElement(container, y) {
-            const draggableElements = [...container.querySelectorAll('.review-item:not(.dragging)')];
-            return draggableElements.reduce((closest, child) => {
-                const box = child.getBoundingClientRect();
-                const offset = y - box.top - box.height / 2;
-                if (offset < 0 && offset > closest.offset) {
-                    return { offset: offset, element: child };
-                } else {
-                    return closest;
-                }
-            }, { offset: Number.NEGATIVE_INFINITY }).element;
-        }
-    </script>
+            
+            <div class="review-item">
+                <h2>Jane Doe</h2>
+                <img src="../fotot1/assets/4.jpg" alt="">
+                <div class="rating">
+                    <i class='bx bxs-star' id="star"></i>
+                    <i class='bx bxs-star' id="star"></i>
+                    <i class='bx bxs-star' id="star"></i>
+                    <i class='bx bxs-star' id="star"></i>
+                    <i class='bx bxs-star' id="star"></i>
+                </div>
+                <p id="6"> Amazing gym with top-notch equipment, welcoming atmosphere, and super friendly trainers!</p>
+
+                <?php
+
+
+
+            </div>
+        </div>
+    </div>
+</section>
 
 </body>
 </html>
