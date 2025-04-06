@@ -81,18 +81,18 @@ return "
 }
 // Lista e shërbimeve të zakonshme
 $services = [
-new Service("../fotot1/jump-roping-total-body-workout-0-1516282424.jpg",
-"Physical Fitness"),
-new Service("../fotot1/Pro-Boxing-Gallery2.png", "Boxing"),
-new Service("../fotot1/Fitness Strenght.jpg", "Strength Training"),
+new Service("../fotot1/c670cb02d9db41a0af7680a6c1fdc55a.jpg",
+    "Weightlifting", "Personalized training sessions with expert coaches."),
+new Service("../fotot1/woman-running-hard-sweating-37785236.webp",
+    "Running", "Advanced running techniques and endurance training."),
 new Service("../fotot1/calisthenics-feature.jpg", "Calisthenics"),
 ];
 // Lista e shërbimeve premium
 $premiumServices = [
-new PremiumService("../fotot1/c670cb02d9db41a0af7680a6c1fdc55a.jpg",
-"Weightlifting", "Personalized training sessions with expert coaches."),
-new PremiumService("../fotot1/woman-running-hard-sweating-37785236.webp",
-"Running", "Advanced running techniques and endurance training.")
+new PremiumService("../fotot1/jump-roping-total-body-workout-0-1516282424.jpg",
+"Physical Fitness"),
+new PremiumService("../fotot1/Pro-Boxing-Gallery2.png", "Boxing"),
+new PremiumService("../fotot1/Fitness Strenght.jpg", "Strength Training"),
 ];
 ?>
 <!DOCTYPE html>
