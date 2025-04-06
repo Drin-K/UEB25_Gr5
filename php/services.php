@@ -81,18 +81,16 @@ return "
 }
 // Lista e shërbimeve të zakonshme
 $services = [
-new Service("../fotot1/jump-roping-total-body-workout-0-1516282424.jpg",
-"Physical Fitness"),
-new Service("../fotot1/Pro-Boxing-Gallery2.png", "Boxing"),
-new Service("../fotot1/Fitness Strenght.jpg", "Strength Training"),
+new Service("../fotot1/c670cb02d9db41a0af7680a6c1fdc55a.jpg","Weightlifting"),
+new Service("../fotot1/woman-running-hard-sweating-37785236.webp","Running"),
 new Service("../fotot1/calisthenics-feature.jpg", "Calisthenics"),
 ];
 // Lista e shërbimeve premium
 $premiumServices = [
-new PremiumService("../fotot1/c670cb02d9db41a0af7680a6c1fdc55a.jpg",
-"Weightlifting", "Personalized training sessions with expert coaches."),
-new PremiumService("../fotot1/woman-running-hard-sweating-37785236.webp",
-"Running", "Advanced running techniques and endurance training."),
+    new PremiumService("../fotot1/jump-roping-total-body-workout-0-1516282424.jpg",
+    "Physical Fitness","Tailored fitness programs designed to improve overall health, endurance, and flexibility."),
+    new PremiumService("../fotot1/Pro-Boxing-Gallery2.png", "Boxing","Intense boxing workouts focused on technique, strength, and agility to enhance performance."),
+    new PremiumService("../fotot1/Fitness Strenght.jpg", "Strength Training","Progressive weightlifting and resistance exercises aimed at building muscle and increasing strength."),
 ];
 ?>
 <!DOCTYPE html>
@@ -132,7 +130,9 @@ foreach ($services as $service) {
 echo $service->displayService();
 }
 // Shfaq shërbimet premium me një ndarje vizuale
+echo "<br/>";
 echo "<h2 class='heading'>Premium <span>Services</span></h2>";
+echo "<br/>";
 foreach ($premiumServices as $premiumService) {
 echo $premiumService->displayService();
 }
