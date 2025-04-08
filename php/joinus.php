@@ -7,48 +7,52 @@
     <title>ILLYRIAN Gym</title>
 </head>
 <body>
-    <a href="index.php" class="logo">ILLYRIAN <span>Gym</span></a>
+    <a href="index.html" class="logo">ILLYRIAN <span>Gym</span></a>
     
     <div class="bx bx-menu" id="menu-icon"></div>
     
     <header>
-        <a href="index.php" class="logo">ILLYRIAN <span>Gym</span></a>
+        <a href="index.html" class="logo">ILLYRIAN <span>Gym</span></a>
         <div class="bx bx-menu" id="menu-icon"></div>
     </header>
     <section class="join-form-section">
         <div class="form-container">
             <h2>Join the Gym Community</h2>
-            <form id="joinUsForm">
-    
-                <label for="name">Enter your Name</label>
-                <input type="text" id="name" name="name" placeholder="Enter your name">
-    
-    
-                <label for="surname">Enter your Surname</label>
-                <input type="text" id="surname" name="surname" placeholder="Enter your surname">
-    
-    
-                <label for="email">Enter your Email</label>
-                <input type="email" id="email" name="email" placeholder="Enter your email">
-    
-    
-                <label for="password">Enter your Password</label>
-                <input type="password" id="password" name="password" placeholder="Enter your password">
-    
-     
-                <label for="password_2">Confirm your Password</label>
-                <input type="password" id="password_2" name="password" placeholder="Confirm your password" >
-    
-                
-                <div id="error-message" style="color: red; margin-bottom: 15px;"></div>
-    
-                
-                <div class="radio-container">
-                    <label for="human-check">Are you human?</label>
-                    <input type="radio" id="human-check" name="human-check" >
-                </div>
-                <button type="submit">Submit</button>
-            </form>
+            <form id="joinUsForm" method="POST" action="register.php">
+
+<label for="name">Enter your Name</label>
+<input type="text" id="name" name="name" placeholder="Enter your name">
+
+<label for="surname">Enter your Surname</label>
+<input type="text" id="surname" name="surname" placeholder="Enter your surname">
+
+<label for="email">Enter your Email</label>
+<input type="email" id="email" name="email" placeholder="Enter your email">
+
+<label for="phone">Enter your Phone Number</label>
+<input type="text" id="phone" name="phone" placeholder="+38344123456">
+
+<label for="birthdate">Enter your Birthdate</label>
+<input type="date" id="birthdate" name="birthdate">
+
+<label for="bio">Write something about yourself</label>
+<textarea id="bio" name="bio" placeholder="Write something..."></textarea>
+
+<label for="password">Enter your Password</label>
+<input type="password" id="password" name="password" placeholder="Enter your password">
+
+<label for="password_2">Confirm your Password</label>
+<input type="password" id="password_2" name="password2" placeholder="Confirm your password">
+
+<div id="error-message" style="color: red; margin-bottom: 15px;"></div>
+
+<div class="radio-container">
+    <label for="human-check">Are you human?</label>
+    <input type="radio" id="human-check" name="human-check">
+</div>
+
+<button type="submit">Submit</button>
+</form>
         </div>
     </section>
     <style>
@@ -106,7 +110,20 @@
             width: 90%;
             max-width: 500px;
         }
-        
+        textarea{
+            width: 100%;
+            height: 150px;
+            padding: 10px;
+            font-size: 16px;
+            color: white;
+            background-color: #222;
+            border: 2px solid #ccc;
+            border-color: #27ae60; 
+            border-radius: 8px;
+            box-sizing: border-box;
+            transition: border-color 0.3s ease-in-out;
+  
+        }
         .form-container h2 {
             font-family: -apple-system, sans-serif;
             color: #27ae60; 
@@ -151,102 +168,6 @@
         }
         
         </style>
-                   <script>
-                    document.addEventListener("DOMContentLoaded", function () {
-                        const form = document.getElementById("joinUsForm");
-                        const passwordInput = document.getElementById("password");
-                        const repeatPasswordInput = document.getElementById("password_2");
-                        const errorMessage = document.getElementById("error-message");
-                    
-                        const nameInput = document.getElementById("name");
-                        const surnameInput = document.getElementById("surname");
-                        const emailInput = document.getElementById("email");
-                        const humanCheckInput = document.getElementById("human-check");
-                    
-                        
-                        const users = [];
-                    
-                       
-                        function User(name, surname, registrationDate) {
-                            this.name = name;
-                            this.surname = surname;
-                            this.registrationDate = registrationDate;
-                        }
-                        repeatPasswordInput.addEventListener("input", function () {
-                            if (passwordInput.value !== repeatPasswordInput.value) {
-                                errorMessage.textContent = "Passwords do not match.";
-                                repeatPasswordInput.style.borderColor = "red";
-                            } else {
-                                errorMessage.textContent = "";
-                                repeatPasswordInput.style.borderColor = "green";
-                            }
-                        });
-                    
-                    
-                    
-                    
-                    
-                        
-                        form.addEventListener("submit", function (e) {
-                            e.preventDefault(); 
-                    
-                            try {
-                               
-                                if (!nameInput.value.trim()) {
-                                    throw new Error("Name is required.");
-                                }
-                    
-                                if (!surnameInput.value.trim()) {
-                                    throw new Error("Surname is required.");
-                                }
-                    
-                                if (!passwordInput.value.trim()) {
-                                    throw new Error("Password is required.");
-                                }
-                    
-                                if (!repeatPasswordInput.value.trim()) {
-                                    throw new Error("Repeat Password is required.");
-                                }
-                    
-                                if (passwordInput.value !== repeatPasswordInput.value) {
-                                    errorMessage.textContent = "Passwords do not match.";
-                                    repeatPasswordInput.style.borderColor = "red";
-                                    throw new Error("Passwords do not match.");
-                                }
-                    
-                                
-                                const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-                                if (!emailRegex.test(emailInput.value.trim())) {
-                                    throw new Error("Please enter a valid email address.");
-                                }
-                    
-                                
-                                if (!humanCheckInput.checked) {
-                                    throw new Error("Please confirm that you are human.");
-                                }
-                                const currentDate = new Date();
-                                const formattedDate = currentDate.toLocaleString(); 
-                    
-                                const newUser = new User(nameInput.value.trim(), surnameInput.value.trim(), formattedDate);
-                                users.push(newUser);
-                    
-                                alert(`Thank you for joining, ${newUser.name} ${newUser.surname}!\nRegistered on: ${formattedDate}`);
-                    
-                                form.reset();
-                    
-                               
-                                users.forEach((user, index) => {
-                                    console.log(`User ${index + 1}: ${user.name} ${user.surname}, Registered on: ${user.registrationDate}`);
-                                });
-                    
-                            } catch (error) {
-                               
-                                console.error("Error:", error.message);
-                                alert(error.message);
-                            }
-                        });
-                    });
-                    
-                    </script>
+            
 </body>
 </html>
