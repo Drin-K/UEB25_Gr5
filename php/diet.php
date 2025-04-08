@@ -1,27 +1,9 @@
 <?php
 // Definimi i konstantave dhe variablave
-const SITE_NAME = "ILLYRIAN Gym";
-const SLASH_NAME = "FruitsVeggies";
+include 'headers.php';
+define("SLASH_NAME","FruitsVeggies");
+
 $oneletterword = "1"; //Perdorimi i strlen per te zevendesuar
-//vargu asociativ
-$menu_items = [
-    "index.php" => "Home",
-    "services.php" => "Services",
-    "diet.php" => "Diet",
-    "about.php" => "About Us",
-    "plans.php" => "Pricing",
-    "workouts.php" => "Workouts",
-    "review.php" => "Review"
-];
-// Funksion për të gjeneruar menunë
-function generateMenu($items, $activePage) {
-    $menuHtml = "";
-    foreach ($items as $link => $title) {
-        $activeClass = ($link === $activePage) ? 'style="color:aquamarine; border-bottom: 3px solid var(--main-color);"' : '';
-        $menuHtml .= "<li><a href='$link' $activeClass>$title</a></li>";
-    }
-    return $menuHtml;
-}
 //Vargjet numerike
 $lean_protein = ["Chicken", "Turkey", "Salmon", "Eggs", "Tofu", "Greek Yogurt"];
 $carbs = ["Rice", "Potatoes", "Oats", "Beans", "Pasta", "Rice cakes"];
