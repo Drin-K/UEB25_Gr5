@@ -117,7 +117,9 @@ $premiumServices = [
             <span class="bar"></span>
             <span class="bar"></span>
         </div>
+        
 </header>
+<script src="../javascj/javascript.js"></script>
 <section class="services" id="services">
 <h2 class="heading">Our <span>Services</span></h2>
 <!-- Shfaq numrin total të shërbimeve -->
@@ -137,6 +139,7 @@ foreach ($premiumServices as $premiumService) {
 echo $premiumService->displayService();
 }
 ?>
+
 </div>
 </section>
 
