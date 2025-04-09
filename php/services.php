@@ -1,7 +1,5 @@
 <?php
-<<<<<<< Updated upstream
 include 'headers.php';
-=======
 // Definimi i konstantave dhe variablave
 define("SITE_NAME", "ILLYRIAN Gym");
 $menu_items = [
@@ -22,7 +20,6 @@ $menuHtml .= "<li><a href='$link' $activeClass>$title</a></li>";
 }
 return $menuHtml;
 }
->>>>>>> Stashed changes
 // Klasa bazë për shërbimet
 class Service {
 protected string $image;
@@ -60,8 +57,7 @@ return "
 // Klasa e specializuar për shërbimet premium (trashëgon nga Service)
 class PremiumService extends Service {
 private string $description;
-public function __construct(string $image, string $title, string
-$description) {
+public function __construct(string $image, string $title, string $description) {
 parent::__construct($image, $title);
 $this->description = $description;
 }
