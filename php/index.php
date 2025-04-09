@@ -1,4 +1,17 @@
 <?php include 'headers.php'?>
+<?php
+// Klasa për të ruajtur të dhënat e faqes
+class PageContent {
+    public $title;
+    public $welcomeMessage;
+    public function __construct($title, $message) {
+    $this->title = $title;
+    $this->welcomeMessage = $message;
+    }
+    }
+    $page = new PageContent("Build Your Dream Physique", "Welcome");
+?>
+?>
 
 <!DOCTYPE html>
 <html lang="en">
