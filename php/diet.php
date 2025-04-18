@@ -184,8 +184,13 @@ td {
         <td>
             <ul>
                  <?php
-                        $breakfast = ["4 egg whites", "2 English muffins", "32g Peanut butter", "8 oz fat-free milk"];
-                        sortFoods($breakfast,'sort');
+                        $breakfast = [
+                            "Egg Whites" => "4 egg whites",
+                            "English Muffins" => "2 English muffins",
+                            "Peanut Butter" => "32g Peanut butter",
+                            "Fat-Free Milk" => "8 oz fat-free milk"
+                        ];
+                        sortFoods($breakfast,'asort');
                         foreach ($breakfast as $food): ?>
                             <li><?php echo $food; ?></li>
                         <?php endforeach; ?>
@@ -194,8 +199,14 @@ td {
                 <td>
                     <ul>
                         <?php
-                        $lunch = [strlen($oneletterword)." can of tuna", "290g brown rice", "11g butter", "100g green beans"];
-                        sortFoods($lunch,'rsort');
+                        $lunch = [
+                            "Tuna" => strlen($oneletterword)." can of tuna",
+                            "Brown rice" => "290g brown rice",
+                            "Butter" => "11g butter",
+                            "Green beans" => "100g green beans"
+                        ];
+                        
+                        sortFoods($lunch,'arsort');
                         foreach ($lunch as $food): ?>
                             <li><?php echo $food; ?></li>
                         <?php endforeach; ?>
@@ -204,8 +215,14 @@ td {
                 <td>
                     <ul>
                         <?php
-                        $dinner = ["6 oz of calf beef", "12 oz sweet potato", "Large green salad", "20g salad dressing"];
-                        sortFoods($dinner,'rsort');
+                        $dinner = [
+                            "Calf beef" => "6 oz of calf beef",
+                            "Sweet potato" => "12 oz sweet potato",
+                            "Green salad" => "Large green salad",
+                            "Salad dressing" => "20g salad dressing"
+                        ];
+                        
+                        sortFoods($dinner,'ksort');
                         foreach ($dinner as $food): ?>
                             <li><?php echo $food; ?></li>
                         <?php endforeach; ?>
@@ -214,8 +231,14 @@ td {
                 <td>
                     <ul>
                         <?php
-                        $snacks = [strlen($oneletterword)." scoop of protein powder", "150g plain fat-free Greek Yogurt", "75g frozen blueberries", strlen($oneletterword)." granola bar", strlen($oneletterword)." oz almonds"];
-                        sortFoods($snacks,'sort');
+                       $snacks = [
+                        "Protein powder" => strlen($oneletterword)." scoop of protein powder",
+                        "Greek Yogurt" => "150g plain fat-free Greek Yogurt",
+                        "Frozen blueberries" => "75g frozen blueberries",
+                        "Granola bar" => strlen($oneletterword)." granola bar",
+                        "Almonds" => strlen($oneletterword)." oz almonds"
+                    ];
+                     sortFoods($snacks,'krsort');
                         foreach ($snacks as $food): ?>
                             <li><?php echo $food; ?></li>
                         <?php endforeach; ?>
@@ -309,11 +332,10 @@ echo "<tr>";
 
 foreach ($diets['Maintenance Diet'] as $category => $items) {
     echo "<td><ul>";
-    sortFoods($items, 'arsort');
     foreach ($items as $item => $value) {
         if (is_array($value)) {
             // Përdorimi i funksionit sortFoods për renditjen e elementeve
-            sortFoods($value, 'asort');
+            sortFoods($value, 'rsort');
             echo "<li>$item<ul>";
             foreach ($value as $subitem) {
                 echo "<li>$subitem</li>";
@@ -331,9 +353,10 @@ echo "<h1>Athlete's Diet </h1>";
 echo "<table border='1'>";
 echo "<tr><th>Carbs</th><th>Protein</th><th>Fats</th><th>Hydration</th></tr>";
 echo "<tr>";
+;
 foreach ($diets['Athlete'] as $category => $items) {
+    sortFoods($items,'sort');
     echo "<td><ul>";
-    sortFoods($items,'krsort');
     foreach ($items as $item) {
         echo "<li>$item</li>";
     }
