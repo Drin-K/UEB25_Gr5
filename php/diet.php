@@ -35,7 +35,7 @@ sortFoods($lean_protein,'sort');
 sortFoods($carbs,'sort');      
 sortFoods($fats,'sort');       
 sortFoods($fruits_veggies,'sort');
-$sortMethod = $_GET['calorieSort'] ?? 'krsort'; // default: descending
+$sortMethod = $_POST['calorieSort'] ?? 'krsort'; // default: descending
 
 ?>
 
@@ -165,14 +165,14 @@ td {
 </table>
 
 <h1>Balance food plate for bulk</h1>
-<form method="get" style="margin-bottom: 20px; background-color: #333; padding: 12px; border-radius: 8px; max-width: 300px; margin: 0 auto;">
+<form method="post" style="margin-bottom: 20px; background-color: #333; padding: 12px; border-radius: 8px; max-width: 300px; margin: 0 auto;">
     <label for="calorieSort" style="color: #ffffff; font-weight: bold; font-size: 14px; margin-right: 10px;">Sort by calories:</label>
     <select name="calorieSort" id="calorieSort" style="padding: 6px; font-size: 13px; border-radius: 5px; background-color: #444; color: #fff; border: 1px solid #555;">
-        <option value="krsort" <?php if (isset($_GET['calorieSort']) && $_GET['calorieSort'] == 'krsort') echo 'selected'; ?>>Descending (high to low)</option>
-        <option value="ksort" <?php if (isset($_GET['calorieSort']) && $_GET['calorieSort'] == 'ksort') echo 'selected'; ?>>Ascending (low to high)</option>
+        <option value="krsort" <?php if (isset($_POST['calorieSort']) && $_POST['calorieSort'] == 'krsort') echo 'selected'; ?>>Descending (high to low)</option>
+        <option value="ksort" <?php if (isset($_POST['calorieSort']) && $_POST['calorieSort'] == 'ksort') echo 'selected'; ?>>Ascending (low to high)</option>
     </select>
     <button type="submit" style="padding: 6px 12px; font-size: 13px; background-color: rgb(0, 255, 234); color: white; border: none; border-radius: 5px; cursor: pointer; transition: background-color 0.3s;">
-        Apply
+        Submit
     </button>
 </form>
 
