@@ -46,7 +46,7 @@ $sortMethod = $_GET['calorieSort'] ?? 'krsort'; // default: descending
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/style.css">
-    <title>ILLYRIAN Gym</title>
+    <title><?php echo SITE_NAME?></title>
     <style>
         table {
     width: 100%;
