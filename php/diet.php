@@ -19,14 +19,8 @@ function sortFoods(&$array, $method) {
         case 'rsort':
             rsort($array); // rendit në mënyrë zbritëse
             break;
-        case 'asort':
-            asort($array); // ruan çelësin dhe rendit sipas vlerës
-            break;
         case 'ksort':
             ksort($array); // rendit sipas çelësit
-            break;
-        case 'arsort':
-            arsort($array); // ruan çelësin dhe rendit në mënyrë zbritëse sipas vlerës
             break;
         case 'krsort':
             krsort($array); // rendit në mënyrë zbritëse sipas çelësit
@@ -36,11 +30,13 @@ function sortFoods(&$array, $method) {
             break;
     }
 }
+//nese klienti i supozuar kerkon qe sortimi te behet ne radhe reverse mafton te shtojme 'r' para 'sort' ne anen e djathte
+sortFoods($lean_protein,'sort'); 
+sortFoods($carbs,'sort');      
+sortFoods($fats,'sort');       
+sortFoods($fruits_veggies,'sort');
+$sortMethod = $_GET['calorieSort'] ?? 'krsort'; // default: descending
 
-sortFoods($lean_protein,'sort');//sort($lean_protein);    
-sortFoods($carbs,'rsort');//rsort($carbs);       
-sortFoods($fats,'sort');//sort($fats);       
-sortFoods($fruits_veggies,'rsort');//rsort($fruits_veggies); 
 ?>
 
 <!DOCTYPE html>
@@ -169,6 +165,18 @@ td {
 </table>
 
 <h1>Balance food plate for bulk</h1>
+<form method="get" style="margin-bottom: 20px; background-color: #333; padding: 12px; border-radius: 8px; max-width: 300px; margin: 0 auto;">
+    <label for="calorieSort" style="color: #ffffff; font-weight: bold; font-size: 14px; margin-right: 10px;">Sort by calories:</label>
+    <select name="calorieSort" id="calorieSort" style="padding: 6px; font-size: 13px; border-radius: 5px; background-color: #444; color: #fff; border: 1px solid #555;">
+        <option value="krsort" <?php if (isset($_GET['calorieSort']) && $_GET['calorieSort'] == 'krsort') echo 'selected'; ?>>Descending (high to low)</option>
+        <option value="ksort" <?php if (isset($_GET['calorieSort']) && $_GET['calorieSort'] == 'ksort') echo 'selected'; ?>>Ascending (low to high)</option>
+    </select>
+    <button type="submit" style="padding: 6px 12px; font-size: 13px; background-color: rgb(0, 255, 234); color: white; border: none; border-radius: 5px; cursor: pointer; transition: background-color 0.3s;">
+        Apply
+    </button>
+</form>
+
+
 
 <table>
     <thead>
@@ -182,31 +190,35 @@ td {
     <tbody>
     <tr>
         <td>
-            <ul>
+            <ol>
                  <?php
+                
+                 //renditja sipas kalorive ne rend zbrites
                         $breakfast = [
-                            "Egg Whites" => "4 egg whites",
-                            "English Muffins" => "2 English muffins",
-                            "Peanut Butter" => "32g Peanut butter",
-                            "Fat-Free Milk" => "8 oz fat-free milk"
+                            68  => "4 egg whites",          // ~17 kcal each → 4 × 17 = 68
+                            260 => "2 English muffins",     // ~130 kcal each → 2 × 130 = 260
+                            190 => "32g Peanut butter",     // ~190 kcal
+                            90  => "8 oz fat-free milk"     // ~90 kcal
                         ];
-                        sortFoods($breakfast,'asort');
+                        
+                        sortFoods($breakfast,$sortMethod);
                         foreach ($breakfast as $food): ?>
                             <li><?php echo $food; ?></li>
                         <?php endforeach; ?>
-                    </ul>
+                    </ol>
                 </td>
                 <td>
                     <ul>
                         <?php
+                        //renditja sipas kalorive ne rend zbrites
                         $lunch = [
-                            "Tuna" => strlen($oneletterword)." can of tuna",
-                            "Brown rice" => "290g brown rice",
-                            "Butter" => "11g butter",
-                            "Green beans" => "100g green beans"
+                        200 => strlen($oneletterword)." can of tuna",//200 kcal
+                        290 => "290g brown rice",       // 290 kcal
+                        100 => "11g butter",            // 100 kcal
+                        40  => "100g green beans"       // 40 kcal
                         ];
                         
-                        sortFoods($lunch,'arsort');
+                        sortFoods($lunch,$sortMethod);
                         foreach ($lunch as $food): ?>
                             <li><?php echo $food; ?></li>
                         <?php endforeach; ?>
@@ -215,14 +227,16 @@ td {
                 <td>
                     <ul>
                         <?php
+                          //renditja sipas kalorive ne rend zbrites
                         $dinner = [
-                            "Calf beef" => "6 oz of calf beef",
-                            "Sweet potato" => "12 oz sweet potato",
-                            "Green salad" => "Large green salad",
-                            "Salad dressing" => "20g salad dressing"
+                            350 => "6 oz of calf beef",       // ~350 kcal
+                            280 => "12 oz sweet potato",      // ~280 kcal
+                            100 => "Large green salad",       // ~100 kcal (me përbërës të ndryshëm)
+                            120 => "20g salad dressing"       // ~120 kcal
                         ];
                         
-                        sortFoods($dinner,'ksort');
+                        
+                        sortFoods($dinner,$sortMethod);
                         foreach ($dinner as $food): ?>
                             <li><?php echo $food; ?></li>
                         <?php endforeach; ?>
@@ -231,14 +245,16 @@ td {
                 <td>
                     <ul>
                         <?php
-                       $snacks = [
-                        "Protein powder" => strlen($oneletterword)." scoop of protein powder",
-                        "Greek Yogurt" => "150g plain fat-free Greek Yogurt",
-                        "Frozen blueberries" => "75g frozen blueberries",
-                        "Granola bar" => strlen($oneletterword)." granola bar",
-                        "Almonds" => strlen($oneletterword)." oz almonds"
+                        //renditja sipas kalorive ne rend zbrites
+                      $snacks = [
+                        120 => "1 scoop of protein powder",            // ~120 kcal (zakonisht 1 scoop)
+                        100 => "150g plain fat-free Greek Yogurt",     // ~100 kcal
+                        42  => "75g frozen blueberries",               // ~42 kcal
+                        150 => "1 granola bar",                        // ~150 kcal
+                        170 => "1 oz almonds"                          // ~170 kcal
                     ];
-                     sortFoods($snacks,'krsort');
+                    
+                     sortFoods($snacks,$sortMethod);
                         foreach ($snacks as $food): ?>
                             <li><?php echo $food; ?></li>
                         <?php endforeach; ?>
@@ -330,12 +346,13 @@ echo "<table border='1'>";
 echo "<tr><th>Lean Protein</th><th>".str_replace("Carbohidrates","Carbs",$carbohidrates)."</th><th>Fats</th><th>".addcslashes(SLASH_NAME,"V")."</th></tr>";
 echo "<tr>";
 
+
 foreach ($diets['Maintenance Diet'] as $category => $items) {
     echo "<td><ul>";
     foreach ($items as $item => $value) {
         if (is_array($value)) {
             // Përdorimi i funksionit sortFoods për renditjen e elementeve
-            sortFoods($value, 'rsort');
+            sortFoods($value, 'sort');
             echo "<li>$item<ul>";
             foreach ($value as $subitem) {
                 echo "<li>$subitem</li>";
