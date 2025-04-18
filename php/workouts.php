@@ -60,8 +60,8 @@
     <?php
 if (isset($_POST['calculateBMI'])) {
     $name = htmlspecialchars($_POST["userName"]);
-    $weight = floatval($_POST["weight"]);
-    $height = floatval($_POST["height"]);
+    $weight = (float)$_POST["weight"];   
+    $height = (float)$_POST["height"];
 
     if ($weight > 0 && $height > 0) {
         $bmi = round($weight / ($height * $height), 2);
