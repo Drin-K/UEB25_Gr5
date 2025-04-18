@@ -306,10 +306,9 @@ echo "<h1>Maintenance Diet </h1>";
 echo "<table border='1'>";
 echo "<tr><th>Lean Protein</th><th>".str_replace("Carbohidrates","Carbs",$carbohidrates)."</th><th>Fats</th><th>".addcslashes(SLASH_NAME,"V")."</th></tr>";
 echo "<tr>";
-
+sortFoods($diets['Maintenance Diet'], 'arsort');
 foreach ($diets['Maintenance Diet'] as $category => $items) {
     echo "<td><ul>";
-    sortFoods($items, 'arsort');
     foreach ($items as $item => $value) {
         if (is_array($value)) {
             // Përdorimi i funksionit sortFoods për renditjen e elementeve
@@ -331,9 +330,9 @@ echo "<h1>Athlete's Diet </h1>";
 echo "<table border='1'>";
 echo "<tr><th>Carbs</th><th>Protein</th><th>Fats</th><th>Hydration</th></tr>";
 echo "<tr>";
+sortFoods($diets['Athlete'],'krsort');
 foreach ($diets['Athlete'] as $category => $items) {
     echo "<td><ul>";
-    sortFoods($items,'krsort');
     foreach ($items as $item) {
         echo "<li>$item</li>";
     }
