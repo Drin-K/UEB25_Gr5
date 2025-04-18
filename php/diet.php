@@ -36,17 +36,12 @@ function sortFoods(&$array, $method) {
             break;
     }
 }
-// Thirrje e funksionit për çdo metodë sortimi
-sortFoods($lean_protein, 'sort');     // Sortim në mënyrë alfabetike
-sortFoods($carbs, 'rsort');          // Sortim në mënyrë zbritëse
-sortFoods($fats, 'arsort');           // Sortim sipas vlerës (ruan çelësat)
-sortFoods($fruits_veggies, 'krsort'); // Sortim sipas çelësave
 
-
+sort($lean_protein);    
+rsort($carbs);       
+sort($fats);       
+rsort($fruits_veggies); 
 ?>
-
-
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -190,7 +185,7 @@ td {
             <ul>
                  <?php
                         $breakfast = ["4 egg whites", "2 English muffins", "32g Peanut butter", "8 oz fat-free milk"];
-                        sortFoods($breakfast, 'sort');
+                        sortFoods($breakfast,'sort');
                         foreach ($breakfast as $food): ?>
                             <li><?php echo $food; ?></li>
                         <?php endforeach; ?>
@@ -200,7 +195,7 @@ td {
                     <ul>
                         <?php
                         $lunch = [strlen($oneletterword)." can of tuna", "290g brown rice", "11g butter", "100g green beans"];
-                        sortFoods($lunch, 'rsort'); 
+                        sortFoods($lunch,'r');
                         foreach ($lunch as $food): ?>
                             <li><?php echo $food; ?></li>
                         <?php endforeach; ?>
@@ -210,7 +205,7 @@ td {
                     <ul>
                         <?php
                         $dinner = ["6 oz of calf beef", "12 oz sweet potato", "Large green salad", "20g salad dressing"];
-                        sortFoods($dinner, 'asort'); 
+                        sortFoods($dinner,'rsort');
                         foreach ($dinner as $food): ?>
                             <li><?php echo $food; ?></li>
                         <?php endforeach; ?>
@@ -220,7 +215,7 @@ td {
                     <ul>
                         <?php
                         $snacks = [strlen($oneletterword)." scoop of protein powder", "150g plain fat-free Greek Yogurt", "75g frozen blueberries", strlen($oneletterword)." granola bar", strlen($oneletterword)." oz almonds"];
-                        sortFoods($snacks, 'ksort'); 
+                        sortFoods($snacks,'sort');
                         foreach ($snacks as $food): ?>
                             <li><?php echo $food; ?></li>
                         <?php endforeach; ?>
@@ -311,10 +306,14 @@ echo "<h1>Maintenance Diet </h1>";
 echo "<table border='1'>";
 echo "<tr><th>Lean Protein</th><th>".str_replace("Carbohidrates","Carbs",$carbohidrates)."</th><th>Fats</th><th>".addcslashes(SLASH_NAME,"V")."</th></tr>";
 echo "<tr>";
+
 foreach ($diets['Maintenance Diet'] as $category => $items) {
     echo "<td><ul>";
+    sortFoods($items, 'arsort');
     foreach ($items as $item => $value) {
         if (is_array($value)) {
+            // Përdorimi i funksionit sortFoods për renditjen e elementeve
+            sortFoods($value, 'asort');
             echo "<li>$item<ul>";
             foreach ($value as $subitem) {
                 echo "<li>$subitem</li>";
@@ -328,14 +327,13 @@ foreach ($diets['Maintenance Diet'] as $category => $items) {
 }
 echo "</tr>";
 echo "</table>";
-
-
 echo "<h1>Athlete's Diet </h1>";
 echo "<table border='1'>";
 echo "<tr><th>Carbs</th><th>Protein</th><th>Fats</th><th>Hydration</th></tr>";
 echo "<tr>";
 foreach ($diets['Athlete'] as $category => $items) {
     echo "<td><ul>";
+    sortFoods($items,'krsort');
     foreach ($items as $item) {
         echo "<li>$item</li>";
     }
