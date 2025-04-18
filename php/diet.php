@@ -37,10 +37,10 @@ function sortFoods(&$array, $method) {
     }
 }
 
-sort($lean_protein);    
-rsort($carbs);       
-sort($fats);       
-rsort($fruits_veggies); 
+sortFoods($lean_protein,'sort');//sort($lean_protein);    
+sortFoods($carbs,'rsort');//rsort($carbs);       
+sortFoods($fats,'sort');//sort($fats);       
+sortFoods($fruits_veggies,'rsort');//rsort($fruits_veggies); 
 ?>
 
 <!DOCTYPE html>
@@ -195,7 +195,7 @@ td {
                     <ul>
                         <?php
                         $lunch = [strlen($oneletterword)." can of tuna", "290g brown rice", "11g butter", "100g green beans"];
-                        sortFoods($lunch,'r');
+                        sortFoods($lunch,'rsort');
                         foreach ($lunch as $food): ?>
                             <li><?php echo $food; ?></li>
                         <?php endforeach; ?>
