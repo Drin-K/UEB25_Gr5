@@ -1,4 +1,6 @@
+
 <?php include 'headers.php';?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -19,40 +21,43 @@
     <section class="join-form-section">
         <div class="form-container">
             <h2>Join the Gym Community</h2>
-            <form id="joinUsForm" method="POST" action="register.php">
+           
+ <form method="POST" action="data_check.php">
+<label for="name">Name:</label>
+    <input type="text" id="name" name="name" required><br><br>
+    
+    <label for="surname">Surname:</label>
+    <input type="text" id="surname" name="surname" required><br><br>
 
-<label for="name">Enter your Name</label>
-<input type="text" id="name" name="name" placeholder="Enter your name">
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" required><br><br>
 
-<label for="surname">Enter your Surname</label>
-<input type="text" id="surname" name="surname" placeholder="Enter your surname">
+    <label for="phone">PhoneNumber:</label>
+    <input type="text" id="phone" name="phone" placeholder="+38344123456"><br><br>
 
-<label for="email">Enter your Email</label>
-<input type="email" id="email" name="email" placeholder="Enter your email">
+    <label for="birthdate">Birthdate:</label>
+    <input type="date" id="birthdate" name="birthdate" required><br><br>
 
-<label for="phone">Enter your Phone Number</label>
-<input type="text" id="phone" name="phone" placeholder="+38344123456">
+    <label for="bio">Bio:</label>
+    <textarea id="bio" name="bio" placeholder="Përshkruaj veten..."></textarea><br><br>
 
-<label for="birthdate">Enter your Birthdate</label>
-<input type="date" id="birthdate" name="birthdate">
+    <label for="password">Password:</label>
+    <input type="password" id="password" name="password" required><br><br>
 
-<label for="bio">Write something about yourself</label>
-<textarea id="bio" name="bio" placeholder="Write something..."></textarea>
+    <label for="password_2">Confrim Password:</label>
+    <input type="password" id="password_2" name="password2" required><br><br>
 
-<label for="password">Enter your Password</label>
-<input type="password" id="password" name="password" placeholder="Enter your password">
-
-<label for="password_2">Confirm your Password</label>
-<input type="password" id="password_2" name="password2" placeholder="Confirm your password">
+    <!-- Plani i anëtarësisë -->
+    <label for="membership_plan">Choose a membership plan:</label>
+    <select id="membership_plan" name="membership_plan">
+        <option value="BASIC">BASIC</option>
+        <option value="PRO">PRO</option>
+        <option value="PREMIUM">PREMIUM</option>
+    </select><br><br>
 
 <div id="error-message" style="color: red; margin-bottom: 15px;"></div>
 
-<div class="radio-container">
-    <label for="human-check">Are you human?</label>
-    <input type="radio" id="human-check" name="human-check">
-</div>
-
-<button type="submit">Submit</button>
+<button type="submit" name="apply">Apply</button>
 </form>
         </div>
     </section>

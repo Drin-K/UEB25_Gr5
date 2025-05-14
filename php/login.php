@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Futuristic Login</title>
+  <title>Login</title>
   <style>
     body {
       margin: 0;
       height: 100vh;
-      background: #000; /* e zezë */
+      background: #000;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       display: flex;
       align-items: center;
@@ -17,7 +17,7 @@
     }
 
     .login-container {
-      background: rgba(0, 255, 170, 0.05); /* greenish-blue glass effect */
+      background: rgba(0, 255, 170, 0.05);
       border: 1px solid rgba(0, 255, 170, 0.2);
       box-shadow: 0 0 15px rgba(0, 255, 170, 0.3);
       backdrop-filter: blur(10px);
