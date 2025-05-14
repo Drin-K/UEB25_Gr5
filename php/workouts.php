@@ -55,7 +55,6 @@
 
         <button class="btn1" type="submit" name="calculateBMI">Calculate BMI</button>
     </form>
-
     <div id="bmiResult" style="margin-top: 15px; margin-left: 305px; color: rgba(16, 208, 233, 0.814); font-weight: bold; font-family:Verdana, Geneva, Tahoma, sans-serif; font-size: 2.2rem;">
     <?php
 if (isset($_POST['calculateBMI'])) {
