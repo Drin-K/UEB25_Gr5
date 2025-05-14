@@ -97,7 +97,7 @@
     </h4>
     <form action="login_check.php" method="POST">
       <div>
-        <label for="username">Username</label>
+        <label for="username">Email</label>
         <input type="text" id="username" name="username">
       </div>
       <div>
