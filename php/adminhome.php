@@ -1,57 +1,22 @@
 <?php
-
-error_reporting(0);//sparaqet errore veq mesazhin
- session_start();
-
-$host="localhost";
-
-$user="Albena";
-$password="12345678";
-$db="gymproject";
-
-$data=mysqli_connect($host,$user,$password,$db);
-
-if($data==false){
-  die("connection error1");
+session_start();
+if(!isset($_SESSION['username'])){
+header("location:login.php");
+}elseif($_SESSION['usertype']=='user'){
+header("location:login.php");
 }
-if($_SERVER["REQUEST_METHOD"]=="POST"){
-  $name=$_POST['username'];
-
-  $pass=$_POST['password'];
-
-  $sql="select * from user where username='".$name."' AND password='".$pass."' ";
-  $result=mysqli_query($data,$sql);
-
-  $row=mysqli_fetch_array($result);
-
-  if($row["usertype"]=="user")
-  {
-
-    $_SESSION['username']=$name;
-    $_SESSION['usertype']="user";
-    header("location:userhome.php");
-
-  }
-  elseif($row["usertype"]=="admin")
-  {
-     $_SESSION['username']=$name;
-      $_SESSION['usertype']="admin";
-    header("location:adminhome.php");
-  }else{
-   
-    $message="username or password do not match";
-
-    $_SESSION['loginMessage']=$message;
-    header("location:login.php");
-  }
-
-}
-
-
-
-
-
-
-
 
 ?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard</title>
+</head>
+<body>
+  <h1>Admin home</h1>
+  <a href="logout.php">Logout</a>
+</body>
+</html>
