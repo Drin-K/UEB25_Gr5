@@ -32,7 +32,7 @@ class PageContent {
             <?php echo generateMenu($menu_items, basename($_SERVER['PHP_SELF']));?>
       </ul>
         <div class="top-btn">
-            <a href="joinus.php" class="nav-btn">Join Us</a>
+            <a href="login.php" class="nav-btn">Join Us</a>
         </div>
         <div class="senvichi">
             <span class="bar"></span>
@@ -50,7 +50,7 @@ class PageContent {
             </div>
             <p>“Take care of your body. It’s the only place you have to live.” <br>
                 <abbr title="High-intensity interval training">HIIT</abbr></p>
-            <a href="joinus.php" class="btn">Join Us</a>
+            <a href="login.php" class="btn">Join Us</a>
         </div>
 
         <div class="home-img">

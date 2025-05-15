@@ -1,0 +1,181 @@
+:root {
+        --neon-green: #45ffca;
+        --neon-blue: #33ccff;
+        --neon-purple: #aa66ff;
+        --dark-bg: #000000;
+        --darker-bg: #111;
+        --sidebar-width: 280px;
+        --header-height: 80px;
+    }
+
+    .sidebar {
+        position: fixed;
+        top: var(--header-height);
+        left: 0;
+        height: calc(100vh - var(--header-height));
+        width: var(--sidebar-width);
+        background: rgba(0, 0, 0, 0.95);
+        backdrop-filter: blur(10px);
+        padding: 30px 20px;
+        box-sizing: border-box;
+        color: var(--neon-green);
+        font-family: 'Rajdhani', sans-serif;
+        font-weight: 600;
+        border-right: 1px solid rgba(69, 255, 202, 0.1);
+        box-shadow: 
+            0 0 30px rgba(69, 255, 202, 0.1),
+            3px 0 15px rgba(69, 255, 202, 0.05) inset;
+        display: flex;
+        flex-direction: column;
+        z-index: 900;
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        overflow-y: auto;
+    }
+
+    .sidebar:hover {
+        box-shadow: 
+            0 0 40px rgba(69, 255, 202, 0.2),
+            3px 0 20px rgba(69, 255, 202, 0.1) inset;
+    }
+
+    .sidebar h3 {
+        margin: 0 0 30px 0;
+        padding-bottom: 15px;
+        font-family: 'Orbitron', sans-serif;
+        font-weight: 700;
+        font-size: 1.8rem;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: var(--neon-green);
+        text-shadow: 0 0 10px var(--neon-green);
+        position: relative;
+        text-align: center;
+    }
+
+    .sidebar h3::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 60px;
+        height: 2px;
+        background: linear-gradient(90deg, var(--neon-green), var(--neon-blue));
+        box-shadow: 0 0 5px var(--neon-green);
+    }
+
+    .sidebar ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        flex-grow: 1;
+    }
+
+    .sidebar ul li {
+        margin-bottom: 15px;
+        position: relative;
+    }
+
+    .sidebar ul li a {
+        display: flex;
+        align-items: center;
+        padding: 14px 20px;
+        border-radius: 8px;
+        font-size: 1.1rem;
+        color: rgba(255, 255, 255, 0.8);
+        text-decoration: none;
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+        background: rgba(20, 30, 35, 0.5);
+        border: 1px solid rgba(69, 255, 202, 0.1);
+    }
+
+    .sidebar ul li a::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(69, 255, 202, 0.1), transparent);
+        transition: all 0.6s ease;
+    }
+
+    .sidebar ul li a:hover {
+        color: var(--neon-green);
+        background: rgba(20, 30, 35, 0.8);
+        border-color: rgba(69, 255, 202, 0.3);
+        box-shadow: 0 0 15px rgba(69, 255, 202, 0.2);
+        transform: translateX(5px);
+    }
+
+    .sidebar ul li a:hover::before {
+        left: 100%;
+    }
+
+    .sidebar ul li a i {
+        margin-right: 12px;
+        font-size: 1.2rem;
+        color: var(--neon-green);
+    }
+
+    /* Active menu item */
+    .sidebar ul li a.active {
+        background: linear-gradient(90deg, rgba(69, 255, 202, 0.2), transparent);
+        color: var(--neon-green);
+        border-left: 3px solid var(--neon-green);
+        box-shadow: 0 0 20px rgba(69, 255, 202, 0.3);
+    }
+
+    /* Neon pulse effect for important items */
+    .sidebar ul li.important a {
+        animation: neon-pulse 3s infinite alternate;
+    }
+
+    @keyframes neon-pulse {
+        from {
+            box-shadow: 0 0 5px rgba(69, 255, 202, 0.3);
+        }
+        to {
+            box-shadow: 0 0 15px rgba(69, 255, 202, 0.6);
+        }
+    }
+
+    /* Scrollbar styling */
+    .sidebar::-webkit-scrollbar {
+        width: 6px;
+    }
+    .sidebar::-webkit-scrollbar-track {
+        background: rgba(10, 10, 10, 0.5);
+    }
+    .sidebar::-webkit-scrollbar-thumb {
+        background: var(--neon-green);
+        border-radius: 3px;
+    }
+
+    /* Responsive design */
+    @media (max-width: 992px) {
+        .sidebar {
+            width: 240px;
+            padding: 25px 15px;
+        }
+        .sidebar h3 {
+            font-size: 1.5rem;
+        }
+        .sidebar ul li a {
+            padding: 12px 15px;
+            font-size: 1rem;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .sidebar {
+            transform: translateX(-100%);
+            width: 280px;
+            z-index: 1000;
+        }
+        .sidebar.active {
+            transform: translateX(0);
+        }
+    }

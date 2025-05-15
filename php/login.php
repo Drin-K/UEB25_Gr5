@@ -1,113 +1,77 @@
+<?php
+require_once("db.php");
+session_start();
+
+$error = "";
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $email = trim($_POST["email"]);
+    $password = $_POST["password"];
+
+    if (empty($email) || empty($password)) {
+        $error = "Ju lutem plotësoni të gjitha fushat.";
+    } else {
+        $stmt = $conn->prepare("SELECT id, name, password, role FROM users WHERE email = ?");
+        $stmt->bind_param("s", $email);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        if ($result->num_rows == 1) {
+            $user = $result->fetch_assoc();
+
+            if (password_verify($password, $user['password'])) {
+                $_SESSION['user_id'] = $user['id'];
+                $_SESSION['name'] = $user['name'];
+                $_SESSION['role'] = $user['role'];
+
+                header("Location: dashboard.php");
+                exit();
+            } else {
+                $error = "Email ose fjalëkalim i pasaktë.";
+            }
+        } else {
+            $error = "Email ose fjalëkalim i pasaktë.";
+        }
+        $stmt->close();
+    }
+}
+?>
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="sq">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Login</title>
-  <style>
-    body {
-      margin: 0;
-      height: 100vh;
-      background: #000;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-    }
-
-    .login-container {
-      background: rgba(0, 255, 170, 0.05);
-      border: 1px solid rgba(0, 255, 170, 0.2);
-      box-shadow: 0 0 15px rgba(0, 255, 170, 0.3);
-      backdrop-filter: blur(10px);
-      border-radius: 15px;
-      padding: 40px;
-      width: 300px;
-      text-align: center;
-      animation: floatIn 1.2s ease-out;
-    }
-
-    h1 {
-      color: #00ffaa;
-      margin-bottom: 30px;
-      text-shadow: 0 0 10px #00ffaa;
-    }
-
-    label {
-      display: block;
-      margin-bottom: 5px;
-      color: #00ffaa;
-      text-align: left;
-      font-weight: bold;
-    }
-
-    input[type="text"],
-    input[type="password"] {
-      width: 100%;
-      padding: 10px;
-      margin-bottom: 20px;
-      border: none;
-      border-radius: 8px;
-      background: rgba(255, 255, 255, 0.05);
-      color: #00ffaa;
-      outline: none;
-      box-shadow: inset 0 0 5px #00ffaa;
-    }
-
-    input[type="submit"] {
-      width: 100%;
-      padding: 10px;
-      background: #00ffaa;
-      color: #000;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      font-weight: bold;
-      transition: background 0.3s;
-    }
-
-    input[type="submit"]:hover {
-      background: #00e6b8;
-      box-shadow: 0 0 10px #00ffaa, 0 0 20px #00ffaa;
-    }
-
-    @keyframes floatIn {
-      from {
-        opacity: 0;
-        transform: translateY(50px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-  </style>
+    <meta charset="UTF-8" />
+    <title>Login - ILLYRIAN Fitness</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Rajdhani:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+        <link rel="stylesheet" href="../css/login.css">
 </head>
 <body>
-  <div class="login-container">
-    <h1>Login Form</h1>
-    <h4 style="color:#00ffaa;">
-      <?php
-      error_reporting(0);
-      session_start();
-      session_destroy();
-      echo $_SESSION['loginMessage'];
-      ?>
-    </h4>
-    <form action="login_check.php" method="POST">
-      <div>
-        <label for="username">Email</label>
-        <input type="text" id="username" name="username">
-      </div>
-      <div>
-        <label for="password">Password</label>
-        <input type="password" id="password" name="password">
-      </div>
-      <div>
-        <input type="submit" value="Login">
-      </div>
-    </form>
-  </div>
+    <div class="login-container animate__animated animate__fadeIn">
+        <h2 class="animate__animated animate__fadeInDown">ILLYRIAN FITNESS</h2>
+        
+        <?php if ($error): ?>
+            <p class="error animate__animated animate__shakeX"><?= htmlspecialchars($error) ?></p>
+        <?php endif; ?>
+        
+        <form action="login.php" method="post" novalidate>
+            <div class="input-group">
+                <input type="email" name="email" id="email" placeholder=" " value="<?= isset($email) ? htmlspecialchars($email) : '' ?>" required>
+                <label for="email"><i class="fas fa-envelope"></i> EMAIL</label>
+            </div>
+            
+            <div class="input-group">
+                <input type="password" name="password" id="password" placeholder=" " required>
+                <label for="password"><i class="fas fa-lock"></i> FJALËKALIMI</label>
+            </div>
+            
+            <button type="submit" class="btn">KYÇU</button>
+        </form>
+        
+        <div class="signup-link">
+            Nuk ke llogari? <a href="signup.php">REGJISTROHU KËTU</a>
+        </div>
+    </div>
 </body>
 </html>
