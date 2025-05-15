@@ -39,7 +39,7 @@ if ($debug_mode) {
         </ul>
 
         <div class="top-btn">
-            <a href="joinus.php" class="nav-btn">Join Us</a>
+            <a href="login.php" class="nav-btn">Join Us</a>
         </div>
         </div>
         <div class="senvichi">
@@ -60,7 +60,7 @@ if ($debug_mode) {
                     <li style="list-style-type: none;"><input type="checkbox"> Smart workout plan</li>
                     <li style="list-style-type: none;"><input type="checkbox"> At home workouts</li>
                 </ul>
-                <a href="joinus.php">
+                <a href="login.php">
                     Join Now
                     <i class='bx bx-right-arrow-alt'></i>
                 </a>
@@ -73,7 +73,7 @@ if ($debug_mode) {
                     <li style="list-style-type: none;"><input type="checkbox"> Smart workout plan</li>
                     <li style="list-style-type: none;"><input type="checkbox"> At home workouts</li>
                 </ul>
-                <a href="joinus.php">
+                <a href="login.php">
                     Join Now
                     <i class='bx bx-right-arrow-alt'></i>
                 </a>
@@ -88,7 +88,7 @@ if ($debug_mode) {
                     <li style="list-style-type: none;"><input type="checkbox"> At home workouts</li>
                     <li style="list-style-type: none;"><input type="checkbox"> Personal Training</li>
                 </ul>
-                <a href="joinus.php">
+                <a href="login.php">
                     Join Now
                     <i class='bx bx-right-arrow-alt'></i>
                 </a>
