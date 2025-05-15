@@ -1,0 +1,120 @@
+:root {
+            --neon-green: #45ffca;
+            --secondary: #00b8ff;
+            --dark: #121212;
+            --darker: #0a0a0a;
+            --light: #f0f0f0;
+            --gray: #333333;
+        }
+        
+        body {
+            background-color: var(--dark);
+            color: var(--light);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .membership-container {
+            margin-top:50px;
+            margin-left: 250px;
+            padding: 30px;
+            background-color: var(--darker);
+            min-height: 100vh;
+        }
+        
+        h2 {
+            color: var(--neon-green);
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            border-bottom: 2px solid var(--neon-green);
+            padding-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .current-membership {
+            background: linear-gradient(135deg, var(--gray), var(--darker));
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            border-left: 3px solid var(--neon-green);
+        }
+        
+        .current-membership p {
+            margin: 8px 0;
+            font-size: 1rem;
+        }
+        
+        .current-membership strong {
+            color: var(--secondary);
+            font-weight: 600;
+        }
+        
+        .no-membership {
+            color: #ff5555;
+            font-style: italic;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+            background-color: var(--gray);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #444;
+        }
+        
+        th {
+            background-color: var(--neon-green);
+            color: var(--darker);
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-size: 0.9rem;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #252525;
+        }
+        
+        tr:hover {
+            background-color: #383838;
+            transition: background-color 0.3s ease;
+        }
+        
+        .status-active {
+            color: var(--neon-green);
+            font-weight: bold;
+        }
+        
+        .status-expired {
+            color: #ff5555;
+        }
+        
+        .status-pending {
+            color: #ffcc00;
+        }
+        
+        @media (max-width: 768px) {
+            .membership-container {
+                margin-left: 0;
+                padding: 15px;
+            }
+            
+            .current-membership {
+                padding: 15px;
+            }
+            
+            th, td {
+                padding: 10px;
+                font-size: 0.85rem;
+            }
+        }

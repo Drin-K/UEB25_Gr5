@@ -20,7 +20,7 @@ $role = $_SESSION['role'] ?? 'klient';
         <?php else: ?>
             <li><a href="dashboard.php"><i class="fas fa-home"></i> Dashboard</a></li>
             <li><a href="view_schedule.php"><i class="fas fa-calendar-alt"></i> Orari</a></li>
-            <li><a href="my_reservations.php"><i class="fas fa-bookmark"></i> Rezervimet</a></li>
+            <li><a href="anetaresimet.php"><i class="fas fa-bookmark"></i> Anëtarësimi</a></li>
             <li><a href="workouts.php"><i class="fas fa-dumbbell"></i> Stërvitjet</a></li>
             <li><a href="nutrition.php"><i class="fas fa-utensils"></i> Ushqimi</a></li>
             <li><a href="profile.php"><i class="fas fa-user"></i> Profili</a></li>
