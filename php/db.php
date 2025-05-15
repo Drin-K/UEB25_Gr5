@@ -2,8 +2,8 @@
 
 
 $host = "localhost";
-$user = "Albena";
-$password = "12345678";
+$user = "root";
+$password = "";
 $database = "fitness_manager_db";
 
 $conn = new mysqli($host, $user, $password, $database);
