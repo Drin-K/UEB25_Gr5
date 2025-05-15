@@ -49,7 +49,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </head>
 <body>
     <div class="login-container animate__animated animate__fadeIn">
-        <h2 class="animate__animated animate__fadeInDown">ILLYRIAN FITNESS</h2>
+        <h2 class="animate__animated animate__fadeInDown">ILLYRIAN GYM</h2>
         
         <?php if ($error): ?>
             <p class="error animate__animated animate__shakeX"><?= htmlspecialchars($error) ?></p>
