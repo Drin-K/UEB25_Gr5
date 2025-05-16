@@ -40,48 +40,103 @@ $result_history = $stmt->get_result();
     <link rel="stylesheet" href="../css/anetaresimet.css">
 </head>
 <body>
-    <div class="membership-container">
-        <h2>Anëtarësimi aktual</h2>
-        <?php if ($active_membership): ?>
-            <div class="current-membership">
-                <p><strong>Emri:</strong> <?= htmlspecialchars($active_membership['name']) ?></p>
-                <p><strong>Çmimi:</strong> €<?= htmlspecialchars($active_membership['price']) ?></p>
-                <p><strong>Fillon më:</strong> <?= htmlspecialchars($active_membership['start_date']) ?></p>
-                <p><strong>Skadon më:</strong> <?= htmlspecialchars($active_membership['end_date']) ?></p>
-                <p><strong>Statusi:</strong> <span class="status-active"><?= htmlspecialchars($active_membership['status']) ?></span></p>
-            </div>
-        <?php else: ?>
-            <div class="current-membership">
-                <p class="no-membership">Nuk keni asnjë anëtarësim aktiv.</p>
-            </div>
-        <?php endif; ?>
+   <div class="membership-container">
+    <h2>Anëtarësimi aktual</h2>
+    <div id="current-membership">Loading...</div>
+      
+    <h2>Historiku i anëtarësimeve</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Emri</th>
+                <th>Çmimi</th>
+                <th>Fillimi</th>
+                <th>Skadimi</th>
+                <th>Statusi</th>
+            </tr>
+        </thead>
+        <tbody id="history-body">
+            <tr><td colspan="5">Duke u ngarkuar...</td></tr>
+        </tbody>
+    </table>
+<br>
+  <h2>Thënie motivuese</h2>
+<div id="motivation" style="color:white;">
+</div>
+</div>
 
-        <h2>Historiku i anëtarësimeve</h2>
-        <table>
-            <thead>
-                <tr>
-                    <th>Emri</th>
-                    <th>Çmimi</th>
-                    <th>Fillimi</th>
-                    <th>Skadimi</th>
-                    <th>Statusi</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php while ($row = $result_history->fetch_assoc()): ?>
-                    <tr>
-                        <td><?= htmlspecialchars($row['name']) ?></td>
-                        <td>€<?= htmlspecialchars($row['price']) ?></td>
-                        <td><?= htmlspecialchars($row['start_date']) ?></td>
-                        <td><?= htmlspecialchars($row['end_date']) ?></td>
-                        <td class="status-<?= strtolower(htmlspecialchars($row['status'])) ?>">
-                            <?= htmlspecialchars($row['status']) ?>
-                        </td>
-                    </tr>
-                <?php endwhile; ?>
-            </tbody>
-        </table>
-    </div>
+
+<script>// Anëtarësimi aktual
+fetch('get_membership.php')
+  .then(res => {
+    if (!res.ok) throw new Error('Gabim rrjeti në anëtarësim aktual');
+    return res.json();
+  })
+  .then(data => {
+    const div = document.getElementById('current-membership');
+    if (data) {
+      div.innerHTML = `
+        <p><strong>Emri:</strong> ${data.name}</p>
+        <p><strong>Çmimi:</strong> €${data.price}</p>
+        <p><strong>Fillon më:</strong> ${data.start_date}</p>
+        <p><strong>Skadon më:</strong> ${data.end_date}</p>
+        <p><strong>Statusi:</strong> <span class="status-active">${data.status}</span></p>
+      `;
+    } else {
+      div.innerHTML = '<p class="no-membership">Nuk keni asnjë anëtarësim aktiv.</p>';
+    }
+  })
+  .catch(err => {
+    document.getElementById('current-membership').textContent = 'Gabim gjatë ngarkimit të anëtarësimit.';
+    console.error(err);
+  });
+
+// Historiku
+fetch('get_history.php')
+  .then(res => {
+    if (!res.ok) throw new Error('Gabim rrjeti në historikun e anëtarësimeve');
+    return res.json();
+  })
+  .then(data => {
+    const tbody = document.getElementById('history-body');
+    tbody.innerHTML = '';
+    data.forEach(row => {
+      const tr = document.createElement('tr');
+      tr.innerHTML = `
+        <td>${row.name}</td>
+        <td>€${row.price}</td>
+        <td>${row.start_date}</td>
+        <td>${row.end_date}</td>
+        <td class="status-${row.status.toLowerCase()}">${row.status}</td>
+      `;
+      tbody.appendChild(tr);
+    });
+  })
+  .catch(err => {
+    const tbody = document.getElementById('history-body');
+    tbody.innerHTML = '<tr><td colspan="5">Gabim gjatë ngarkimit të historikut.</td></tr>';
+    console.error(err);
+  });
+
+// Motivim
+fetch('api_motivation.php')
+  .then(res => {
+    if (!res.ok) throw new Error('Gabim rrjeti në motivim');
+    return res.json();
+  })
+  .then(data => {
+    document.getElementById('motivation').innerHTML = `
+      <blockquote>"${data.quote}" — ${data.author}</blockquote>
+    `;
+  })
+  .catch(err => {
+    document.getElementById('motivation').textContent = 'Gabim gjatë ngarkimit të motivimit.';
+    console.error(err);
+  });
+
+
+</script>
+
 </body>
 </html>
 <?php

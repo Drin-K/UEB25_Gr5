@@ -6,6 +6,9 @@ $role = $_SESSION['role'] ?? 'klient';
 <html>
 <head>
     <link rel="stylesheet" href="../css/sidebar.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+
 </head>
 <body>
 <div class="sidebar">
@@ -28,7 +31,7 @@ $role = $_SESSION['role'] ?? 'klient';
     </ul>
 </div>
 
-<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+
 
 <script src="../javascj/sidebar.js"></script>
   </body></html>
