@@ -1,0 +1,262 @@
+/* Main Container */
+body{
+    padding-left: 300px;
+}
+.content {
+    padding: 40px 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Alerts */
+.alert {
+    padding: 12px 15px;
+    border-radius: 6px;
+    margin-bottom: 20px;
+    font-weight: 500;
+    text-align: center;
+    width: 100%;
+    max-width: 600px;
+}
+
+.alert-success {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+/* Create Plan Form */
+.create-plan-form {
+    background-color: #1e1e1e;
+    border: 1px solid #2eff7e;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 30px;
+    color: #fff;
+    box-shadow: 0 0 15px rgba(46, 255, 126, 0.2);
+    width: 100%;
+    max-width: 600px;
+}
+
+.create-plan-form h3 {
+    color: #2eff7e;
+    margin-top: 0;
+    margin-bottom: 15px;
+    text-align: center;
+    text-shadow: 0 0 8px rgba(46, 255, 126, 0.5);
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 12px;
+    background-color: #000;
+    border: 1px solid #2eff7e;
+    color: #fff;
+    border-radius: 6px;
+    font-size: 14px;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: #00ff6a;
+    box-shadow: 0 0 8px rgba(0, 255, 106, 0.4);
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+/* Plan Container */
+.plan-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-top: 20px;
+    justify-content: center;
+    width: 100%;
+}
+
+.no-plans {
+    color: #aaa;
+    text-align: center;
+    width: 100%;
+    padding: 40px 0;
+}
+
+/* Plan Cards */
+.plan-card {
+    background-color: #1e1e1e;
+    border: 1px solid #2eff7e;
+    border-radius: 10px;
+    padding: 20px;
+    color: #fff;
+    box-shadow: 0 0 15px rgba(46, 255, 126, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+    width: 300px;
+}
+
+.plan-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 20px rgba(46, 255, 126, 0.3);
+}
+
+.suggested-plan {
+    border: 2px solid #ffd700;
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.4);
+}
+
+.active-plan {
+    border: 2px solid #3e7dff;
+    box-shadow: 0 0 20px rgba(62, 125, 255, 0.4);
+}
+
+.plan-title {
+    font-size: 20px;
+    font-weight: bold;
+    color: #2eff7e;
+    background-color: #000;
+    border: 1px solid #2eff7e;
+    padding: 10px;
+    width: 100%;
+    margin-bottom: 10px;
+    border-radius: 6px;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+.plan-card small {
+    display: block;
+    margin-bottom: 10px;
+    color: #aaa;
+    text-align: center;
+}
+
+.desc-form textarea {
+    width: 100%;
+    padding: 10px;
+    background-color: #000;
+    border: 1px solid #2eff7e;
+    color: #fff;
+    border-radius: 6px;
+    resize: vertical;
+    font-size: 14px;
+    margin-bottom: 15px;
+    min-height: 100px;
+    box-sizing: border-box;
+}
+
+/* Form Actions */
+.form-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.btn {
+    border: none;
+    padding: 10px 15px;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+    flex: 1;
+    transition: all 0.3s ease;
+    text-align: center;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+}
+
+.update-btn {
+    background-color: #2eff7e;
+    color: #000;
+}
+
+.update-btn:hover {
+    background-color: #24cc66;
+}
+
+.select-btn {
+    background-color: #ffa73e;
+    color: #000;
+}
+
+.select-btn:hover {
+    background-color: #e69535;
+}
+
+.delete-btn {
+    background-color: #ff3e3e;
+    color: #fff;
+}
+
+.delete-btn:hover {
+    background-color: #cc3232;
+}
+
+.create-btn {
+    background-color: #3e7dff;
+    color: #fff;
+    width: 100%;
+    padding: 12px;
+}
+
+.create-btn:hover {
+    background-color: #2a5fc7;
+}
+
+/* Badges */
+.plan-badge {
+    position: absolute;
+    top: 10px;
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.suggested-badge {
+    background-color: #ffd700;
+    color: #000;
+    left: 10px;
+}
+
+.active-badge {
+    background-color: #3e7dff;
+    color: #fff;
+    right: 10px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .plan-container {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .plan-card {
+        width: 100%;
+        max-width: 400px;
+    }
+    
+    .form-actions {
+        flex-direction: column;
+    }
+    
+    .btn {
+        width: 100%;
+    }
+}
