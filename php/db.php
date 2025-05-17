@@ -2,7 +2,7 @@
 
 
 $host = "localhost";
-$user = "Albena";
+$user = "=Albena";
 $password = "12345678";
 $database = "fitness_manager_db";
 
