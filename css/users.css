@@ -1,0 +1,152 @@
+.user-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.user-table th, .user-table td {
+    padding: 10px;
+    border: 1px solid #ccc;
+    text-align: center;
+}
+
+.role-select, .delete-btn {
+    padding: 5px;
+    font-size: 14px;
+}
+
+.update-status {
+    margin-left: 10px;
+    font-weight: bold;
+}
+
+.add-user-form {
+    margin-bottom: 30px;
+    padding: 15px;
+    border: 1px solid #ddd;
+    background: #f9f9f9;
+    border-radius: 5px;
+    max-width: 600px;
+}
+
+.add-user-form h3 {
+    margin-bottom: 10px;
+}
+
+.add-user-form input,
+.add-user-form select {
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 8px;
+    font-size: 14px;
+}
+
+.add-user-form button {
+    padding: 8px 16px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.add-user-form button:hover {
+    background-color: #0056b3;
+}
+
+.alert {
+    padding: 10px;
+    background-color: #e1f3e1;
+    border: 1px solid #b5ddb5;
+    color: #2d7a2d;
+    margin-bottom: 15px;
+    border-radius: 4px;
+}
+
+.add-user-form {
+    background-color: #111;
+    border: 1px solid #2eff7e;
+    border-radius: 10px;
+    padding: 25px;
+    margin: 30px auto;
+    width: 100%;
+    max-width: 600px;
+    color: #fff;
+    box-shadow: 0 0 15px rgba(46, 255, 126, 0.3);
+    font-family: 'Segoe UI', sans-serif;
+}
+
+.add-user-form h3 {
+    color: #2eff7e;
+    font-size: 20px;
+    margin-bottom: 20px;
+    text-align: center;
+    text-shadow: 0 0 8px #2eff7e;
+}
+
+.add-user-form input,
+.add-user-form select {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border-radius: 6px;
+    border: 1px solid #2eff7e;
+    background-color: #000;
+    color: #fff;
+    font-size: 15px;
+}
+
+.add-user-form input:focus,
+.add-user-form select:focus {
+    outline: none;
+    border-color: #33ff99;
+    box-shadow: 0 0 6px #33ff99;
+}
+.add-user-form button {
+    width: 100%;
+    padding: 12px;
+    background-color: #2eff7e;
+    color: #000;
+    border: none;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-size: 16px;
+}
+
+.add-user-form button:hover {
+    background-color: #24cc66;
+}
+/* Butoni Fshi */
+.delete-btn {
+    background-color: #ff4d4d;
+    color: #fff;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.delete-btn:hover {
+    background-color: #e60000;
+    transform: scale(1.05);
+}
+
+/* Dropdown i rolit */
+.role-select {
+    background-color: #000;
+    color: #2eff7e;
+    border: 1px solid #2eff7e;
+    padding: 6px 10px;
+    border-radius: 5px;
+    font-size: 14px;
+    transition: box-shadow 0.3s ease;
+}
+
+.role-select:focus {
+    outline: none;
+    box-shadow: 0 0 6px #33ff99;
+}
+
