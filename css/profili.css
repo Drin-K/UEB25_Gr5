@@ -1,0 +1,105 @@
+
+        :root {
+            --neon-green: #22ff88;
+            --neon-blue: #33ccff;
+            --dark-bg: #0a0a0a;
+            --darker-bg: #050505;
+            --sidebar-width: 280px;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+            background: var(--dark-bg);
+            color: white;
+            display: flex;
+            min-height: 100vh;
+        }
+
+        .sidebar {
+            width: var(--sidebar-width);
+            background: var(--darker-bg);
+            padding: 20px;
+            border-right: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .menu {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .menu li {
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .menu li a {
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+        }
+
+        .menu li a:hover {
+            color: var(--neon-blue);
+        }
+
+        .content {
+            flex: 1;
+            padding: 40px;
+            background: var(--darker-bg);
+        }
+
+        .profile-container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        h2 {
+            color: var(--neon-green);
+            margin-bottom: 30px;
+            font-size: 2rem;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--neon-blue);
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            background: rgba(0,0,0,0.3);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 4px;
+            color: white;
+            font-size: 1rem;
+        }
+
+        .readonly-field {
+            background: rgba(0,0,0,0.1);
+            color: rgba(255,255,255,0.6);
+        }
+
+        .btn {
+            background: var(--neon-green);
+            color: black;
+            border: none;
+            padding: 12px 20px;
+            font-weight: bold;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+
+        .success-message {
+            color: var(--neon-green);
+            margin-bottom: 20px;
+        }
