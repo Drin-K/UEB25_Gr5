@@ -19,7 +19,7 @@ $role = $_SESSION['role'] ?? 'admin';
             <li><a href="manage_memberships.php"><i class="fas fa-id-card"></i> Menaxho Memberships</a></li>
             <li><a href="subscription.php"><i class="fas fa-receipt"></i> Menaxho Subscriptions</a></li>
             <li><a href="reports.php"><i class="fas fa-chart-line"></i> Raporte</a></li>
-            <li><a href="system_settings.php"><i class="fas fa-cog"></i> Cilësimet</a></li>
+            <li><a href="adminUshtrimet.php"><i class="fas fa-cog"></i> Ushtrimet</a></li>
         <?php else: ?>
             <li><a href="dashboard.php"><i class="fas fa-home"></i> Dashboard</a></li>
             <li><a href="pagesat.php"><i class="fas fa-calendar-alt"></i> Pagesat</a></li>
