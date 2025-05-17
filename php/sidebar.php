@@ -22,7 +22,7 @@ $role = $_SESSION['role'] ?? 'admin';
             <li><a href="system_settings.php"><i class="fas fa-cog"></i> Cilësimet</a></li>
         <?php else: ?>
             <li><a href="dashboard.php"><i class="fas fa-home"></i> Dashboard</a></li>
-            <li><a href="view_schedule.php"><i class="fas fa-calendar-alt"></i> Orari</a></li>
+            <li><a href="pagesat.php"><i class="fas fa-calendar-alt"></i> Pagesat</a></li>
             <li><a href="anetaresimet.php"><i class="fas fa-bookmark"></i> Anëtarësimi</a></li>
             <li><a href="workouts.php"><i class="fas fa-dumbbell"></i> Stërvitjet</a></li>
             <li><a href="nutrition.php"><i class="fas fa-utensils"></i> Ushqimi</a></li>

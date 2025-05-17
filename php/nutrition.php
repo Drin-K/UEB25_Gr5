@@ -10,12 +10,10 @@ $role = $_SESSION['role'];
 <body>
 <div class="content">
     <h2>
-        <?= $role === 'admin' ? 'PANELI I ADMINISTRATORIT' : 'PANELI I KLIENTIT'; ?>
+        Ushqimet
     </h2>
     <p>
-        <?= $role === 'admin'
-            ? 'Mirësevini në panelin e administrimit. Nga këtu mund të menaxhoni të gjitha aspektet e sistemit, duke përfshirë përdoruesit, oraret e trajnerëve dhe abonimet.'
-            : 'Mirësevini në panelin tuaj personal. Këtu mund të shikoni oraret e stërvitjeve, të menaxhoni rezervimet tuaja dhe të ndiqni progresin tuaj.' ?>
+       Koment najsen per ushqime
     </p>
 </div>
 
