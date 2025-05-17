@@ -122,7 +122,7 @@ $users = $conn->query("SELECT * FROM users");
     </table>
 </div>
 
-<!-- <script>
+<script>
     $(document).ready(function () {
         $(".role-select").change(function () {
             var userId = $(this).data("user-id");
@@ -136,14 +136,20 @@ $users = $conn->query("SELECT * FROM users");
                 role: newRole
             }, function (response) {
                 if (response === "success") {
+                    // Trego një ikonë suksesi për pak sekonda
                     status.text("✅");
+                    setTimeout(function () {
+                        status.text(""); // pastrohet pas 2 sekondave
+                    }, 2000);
                 } else {
-                    status.text("❌");
+                    // Në vend të ❌, vetëm largoje animacionin ose lëre bosh
+                    status.hide().text("✅").fadeIn(200).delay(1500).fadeOut(400);
                 }
             });
         });
     });
-</script> -->
+</script>
+
 
 </body>
 </html>
