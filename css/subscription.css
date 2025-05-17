@@ -1,0 +1,93 @@
+ body {
+      margin: 0;
+      background: #0b0d10;
+      color: #cfd8dc;
+      font-family: sans-serif;
+    }
+    .membership-container {
+        margin-left: 250px;
+      padding: 2rem;
+    }
+    .membership-container h2 {
+      color: #00edc1;
+      margin-bottom: 1.5rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    /* --- Three Columns --- */
+    .plan-columns {
+      display: flex;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+    .plan-column {
+      background: #0d0f12;
+      border: 1px solid #1f262a;
+      border-radius: 8px;
+      flex: 1 1 calc(33% - 1.5rem);
+      min-width: 250px;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+    .plan-column h3 {
+      background: #111417;
+      margin: 0;
+      padding: 1rem;
+      font-size: 1.0rem;
+      color: #00edc1;
+      text-align: center;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    /* --- Table Styles --- */
+    .plan-column table {
+      width: 100%;
+      border-collapse: collapse;
+      flex: 1;
+    }
+    .plan-column th,
+    .plan-column td {
+      padding: 0.75rem;
+      text-align: left;
+      font-size: 0. nine rem;
+    }
+    .plan-column thead {
+      background: #1f262a;
+    }
+    .plan-column thead th {
+      color: #00edc1;
+      text-transform: uppercase;
+      font-size: 0. Eight five rem;
+    }
+    .plan-column tbody tr {
+      border-bottom: 1px solid #1f262a;
+    }
+    .plan-column tbody tr:last-child {
+      border-bottom: none;
+    }
+
+    /* --- Status Label --- */
+    .status {
+      display: inline-block;
+      padding: 0.20rem 0.01rem;
+      border-radius: 4px;
+      font-size: 0.7;
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+    .status.active {
+      background: rgba(0,237,193,0.2);
+      color: #00edc1;
+    }
+    .status.expired {
+      background: rgba(255,69,96,0.2);
+      color: #ff455e;
+    }
+
+    @media (max-width: 800px) {
+      .plan-column {
+        flex: 1 1 100%;
+      }}
