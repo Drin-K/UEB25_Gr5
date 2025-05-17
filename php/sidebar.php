@@ -1,6 +1,6 @@
 <?php 
 // sidebar.php
-$role = $_SESSION['role'] ?? 'klient';
+$role = $_SESSION['role'] ?? 'admin';
 ?>
 
 <html>
@@ -17,7 +17,7 @@ $role = $_SESSION['role'] ?? 'klient';
         <?php if ($role === 'admin'): ?>
             <li class="important"><a href="manage_users.php"><i class="fas fa-users-cog"></i> Menaxho Përdoruesit</a></li>
             <li><a href="manage_memberships.php"><i class="fas fa-id-card"></i> Menaxho Memberships</a></li>
-            <li><a href="manage_subscriptions.php"><i class="fas fa-receipt"></i> Menaxho Subscriptions</a></li>
+            <li><a href="subscription.php"><i class="fas fa-receipt"></i> Menaxho Subscriptions</a></li>
             <li><a href="reports.php"><i class="fas fa-chart-line"></i> Raporte</a></li>
             <li><a href="system_settings.php"><i class="fas fa-cog"></i> Cilësimet</a></li>
         <?php else: ?>
