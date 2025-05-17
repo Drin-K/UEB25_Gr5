@@ -16,6 +16,7 @@ arsort($counts);
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Renditja e Workouts</title>
+  <link rel="stylesheet" href="../css/subscription.css">
 </head>
 <body>
   <?php include("header.php"); include("sidebar.php"); ?>
