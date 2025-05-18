@@ -3,6 +3,15 @@
 include("header.php");
 include("sidebar.php");
 include("db.php");
+// Numërimi i vizitave me sesion
+if (!isset($_SESSION['visit_count'])) {
+    $_SESSION['visit_count'] = 1;
+} else {
+    $_SESSION['visit_count']++;
+}
+
+$visitMessage = "Ju keni vizituar këtë faqe " . $_SESSION['visit_count'] . " herë në këtë sesion.";
+
 
 $role = $_SESSION['role'] ?? 'guest';
 $userId = $_SESSION['user_id'] ?? null;
@@ -102,6 +111,12 @@ if (isset($_SESSION['last_payment_date'])) {
             </div>
 
             <button type="submit" class="btn-paguaj">PAGUAJ</button>
+
+
+<div class="visit-counter" style="padding-top: 130px;">
+    <p><?= htmlspecialchars($visitMessage) ?></p>
+</div>
+
         </form>
     </div>
 </body>
