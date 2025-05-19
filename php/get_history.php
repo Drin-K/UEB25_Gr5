@@ -6,11 +6,11 @@ header('Content-Type: application/json');
 
 $user_id = $_SESSION['user_id'];
 
-$sql = "SELECT m.name, m.price, s.start_date, s.end_date, s.status
-        FROM subscriptions s
-        JOIN memberships m ON s.membership_id = m.id
-        WHERE s.user_id = ?
-        ORDER BY s.start_date DESC";
+$sql = "SELECT m.name, m.price, p.payment_date, p.status
+        FROM payments p
+        JOIN memberships m ON p.membership_id = m.id
+        WHERE p.user_id = ?
+        ORDER BY p.payment_date DESC";
 
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("i", $user_id);

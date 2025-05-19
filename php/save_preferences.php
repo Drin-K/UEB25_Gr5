@@ -1,58 +1,53 @@
 <?php
-include("db.php");
 session_start();
+include("db.php");
 
 if (!isset($_SESSION['user_id']) || $_SERVER['REQUEST_METHOD'] !== 'POST') {
     header("Location: login.php");
     exit();
 }
 
-$userId = $_SESSION['user_id'];
+$userId = (int)$_SESSION['user_id'];
 
-// Ruajtja e preferencave bazë
+// Ruaj kaloritë e preferuara
 if (isset($_POST['calories'])) {
-    $calories = (int)$_POST['calories'];
-    
-    // Kontrollo nëse përdoruesi ka preferenca të regjistruara më parë
+    $calories = max(1000, min((int)$_POST['calories'], 8000)); // kufizo kaloritë logjikisht
+
     $stmt = $conn->prepare("SELECT user_id FROM user_nutrition_preferences WHERE user_id = ?");
     $stmt->bind_param("i", $userId);
     $stmt->execute();
     $exists = $stmt->get_result()->num_rows > 0;
 
     if ($exists) {
-        $query = "UPDATE user_nutrition_preferences SET preferred_calories = ? WHERE user_id = ?";
-        $stmt = $conn->prepare($query);
-        $stmt->bind_param("ii", $calories, $userId);
+        $update = $conn->prepare("UPDATE user_nutrition_preferences SET preferred_calories = ? WHERE user_id = ?");
+        $update->bind_param("ii", $calories, $userId);
+        $update->execute();
     } else {
-        $query = "INSERT INTO user_nutrition_preferences (preferred_calories, user_id) VALUES (?, ?)";
-        $stmt = $conn->prepare($query);
-        $stmt->bind_param("ii", $calories, $userId);
+        $insert = $conn->prepare("INSERT INTO user_nutrition_preferences (user_id, preferred_calories) VALUES (?, ?)");
+        $insert->bind_param("ii", $userId, $calories);
+        $insert->execute();
     }
 
-    if ($stmt->execute()) {
-        setcookie('nutrition_calories', $calories, time() + 86400 * 30, "/");
-        $_SESSION['success_message'] = "Preferencat u ruajtën me sukses!";
-    } else {
-        $_SESSION['error_message'] = "Gabim në ruajtjen e preferencave: " . $conn->error;
-    }
-    $stmt->close();
+    setcookie('nutrition_calories', $calories, time() + 86400 * 30, "/");
+    $_SESSION['success_message'] = "Preferencat u ruajtën me sukses!";
 }
 
-// Ruajtja e preferencave vizuale
+// Ruaj ngjyrën e background
 if (isset($_POST['bg_color'])) {
-    $bgColor = $_POST['bg_color'];
-    setcookie('bg_preference', $bgColor, time() + 86400 * 30, "/");
-    $_SESSION['visual_updated'] = true;
+    $color = htmlspecialchars($_POST['bg_color']);
+    if (preg_match('/^#[a-f0-9]{6}$/i', $color)) {
+        setcookie('bg_preference', $color, time() + 86400 * 30, "/");
+        $_SESSION['visual_updated'] = true;
+    }
 }
 
-// Fshirja e cookies
+// Fshi cookies nëse kërkohet
 if (isset($_POST['reset_cookies'])) {
-    setcookie('nutrition_calories', '', time() - 3600, "/");
-    setcookie('viewed_plans', '', time() - 3600, "/");
-    setcookie('bg_preference', '', time() - 3600, "/");
+    foreach (['nutrition_calories', 'viewed_plans', 'bg_preference'] as $cookie) {
+        setcookie($cookie, '', time() - 3600, "/");
+    }
     $_SESSION['success_message'] = "Cookies u fshinë me sukses!";
 }
 
 header("Location: nutrition.php");
 exit();
-?>

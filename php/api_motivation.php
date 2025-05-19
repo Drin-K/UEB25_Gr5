@@ -1,31 +1,22 @@
 <?php
 header('Content-Type: application/json');
 
-$curl = curl_init();
+// Thirr API-n me file_get_contents (më i thjeshtë se cURL)
+$response = @file_get_contents("https://zenquotes.io/api/random");
 
-curl_setopt_array($curl, [
-    CURLOPT_URL => "https://zenquotes.io/api/random",
-    CURLOPT_RETURNTRANSFER => true,
-    CURLOPT_FOLLOWLOCATION => true,
-    CURLOPT_TIMEOUT => 10,
-    CURLOPT_SSL_VERIFYPEER => false, // Nëse ke problem me SSL certifikatat në localhost
-]);
-
-$response = curl_exec($curl);
-
-if (curl_errno($curl)) {
+// Kontrollo nëse mori përgjigje
+if ($response === FALSE) {
     echo json_encode([
         "quote" => "Dështoi marrja e thënies. Provo përsëri më vonë.",
         "author" => "Sistemi"
     ]);
-    curl_close($curl);
     exit;
 }
 
-curl_close($curl);
-
-// API kthen një array me një element të vetëm
+// Dekodo JSON-in
 $data = json_decode($response, true);
+
+// Kontrollo nëse janë të pranishme fushat që duam
 if (isset($data[0]['q']) && isset($data[0]['a'])) {
     echo json_encode([
         "quote" => $data[0]['q'],

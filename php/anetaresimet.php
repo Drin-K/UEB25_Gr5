@@ -1,120 +1,118 @@
 <?php
+
 include("header.php");
 include("sidebar.php");
 
+if (!isset($_SESSION['user_id'])) {
+    header("Location: login.php");
+    exit();
+}
+
 $user_id = $_SESSION['user_id'];
 require_once "db.php";
-
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="sq">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Anëtarësimi</title>
-    <link rel="stylesheet" href="../css/anetaresimet.css">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Anëtarësimet</title>
+    <link rel="stylesheet" href="../css/anetaresimet.css" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
-   <div class="membership-container">
-    <h2>Anëtarësimi aktual</h2>
-    <div id="current-membership">Loading...</div>
-      
-    <h2>Historiku i anëtarësimeve</h2>
-    <table>
-        <thead>
-            <tr>
-                <th>Emri</th>
-                <th>Çmimi</th>
-                <th>Fillimi</th>
-                <th>Skadimi</th>
-                <th>Statusi</th>
-            </tr>
-        </thead>
-        <tbody id="history-body">
-            <tr><td colspan="5">Duke u ngarkuar...</td></tr>
-        </tbody>
-    </table>
-<br>
-  <h2>Thënie motivuese</h2>
-<div id="motivation" style="color:white;">
-</div>
-</div>
+    <div class="membership-container">
+        <h2>Anëtarësimi aktual</h2>
+        <div id="current-membership">Duke u ngarkuar...</div>
 
+        <h2>Historiku i anëtarësimeve</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Emri</th>
+                    <th>Çmimi</th>
+                    <th>Data e pagesës</th>
+                    <th>Skadimi</th>
+                    <th>Statusi</th>
+                </tr>
+            </thead>
+            <tbody id="history-body">
+                <tr><td colspan="5">Duke u ngarkuar...</td></tr>
+            </tbody>
+        </table>
+        <br>
+        <h2>Thënie motivuese</h2>
+        <div id="motivation" style="color:white;">Duke u ngarkuar...</div>
+    </div>
 
-<script>// Anëtarësimi aktual
-fetch('get_membership.php')
-  .then(res => {
-    if (!res.ok) throw new Error('Gabim rrjeti në anëtarësim aktual');
-    return res.json();
-  })
-  .then(data => {
-    const div = document.getElementById('current-membership');
-    if (data) {
-      div.innerHTML = `
-        <p><strong>Emri:</strong> ${data.name}</p>
-        <p><strong>Çmimi:</strong> €${data.price}</p>
-        <p><strong>Fillon më:</strong> ${data.start_date}</p>
-        <p><strong>Skadon më:</strong> ${data.end_date}</p>
-        <p><strong>Statusi:</strong> <span class="status-active">${data.status}</span></p>
-      `;
-    } else {
-      div.innerHTML = '<p class="no-membership">Nuk keni asnjë anëtarësim aktiv.</p>';
-    }
-  })
-  .catch(err => {
-    document.getElementById('current-membership').textContent = 'Gabim gjatë ngarkimit të anëtarësimit.';
-    console.error(err);
-  });
+<script>
+$(document).ready(function(){
 
-// Historiku
-fetch('get_history.php')
-  .then(res => {
-    if (!res.ok) throw new Error('Gabim rrjeti në historikun e anëtarësimeve');
-    return res.json();
-  })
-  .then(data => {
-    const tbody = document.getElementById('history-body');
-    tbody.innerHTML = '';
-    data.forEach(row => {
-      const tr = document.createElement('tr');
-      tr.innerHTML = `
-        <td>${row.name}</td>
-        <td>€${row.price}</td>
-        <td>${row.start_date}</td>
-        <td>${row.end_date}</td>
-        <td class="status-${row.status.toLowerCase()}">${row.status}</td>
-      `;
-      tbody.appendChild(tr);
+    // Anëtarësimi aktual
+    $.ajax({
+        url: 'get_membership.php',
+        method: 'GET',
+        dataType: 'json',
+        success: function(data) {
+            if (data) {
+                $('#current-membership').html(`
+                    <p><strong>Emri:</strong> ${data.name}</p>
+                    <p><strong>Çmimi:</strong> €${data.price}</p>
+                    <p><strong>Data e pagesës:</strong> ${data.payment_date}</p>
+                    <p><strong>Statusi:</strong> <span class="status-active">${data.status}</span></p>
+                `);
+            } else {
+                $('#current-membership').html('<p class="no-membership">Nuk keni asnjë anëtarësim aktiv.</p>');
+            }
+        },
+        error: function() {
+            $('#current-membership').text('Gabim gjatë ngarkimit të anëtarësimit.');
+        }
     });
-  })
-  .catch(err => {
-    const tbody = document.getElementById('history-body');
-    tbody.innerHTML = '<tr><td colspan="5">Gabim gjatë ngarkimit të historikut.</td></tr>';
-    console.error(err);
-  });
 
-// Motivim
-fetch('api_motivation.php')
-  .then(res => {
-    if (!res.ok) throw new Error('Gabim rrjeti në motivim');
-    return res.json();
-  })
-  .then(data => {
-    document.getElementById('motivation').innerHTML = `
-      <blockquote>"${data.quote}" — ${data.author}</blockquote>
-    `;
-  })
-  .catch(err => {
-    document.getElementById('motivation').textContent = 'Gabim gjatë ngarkimit të motivimit.';
-    console.error(err);
-  });
+    // Historiku i anëtarësimeve
+    $.ajax({
+        url: 'get_history.php',
+        method: 'GET',
+        dataType: 'json',
+        success: function(data) {
+            let html = '';
+            data.forEach(function(row) {
+                html += `
+                    <tr>
+                        <td>${row.name}</td>
+                        <td>€${row.price}</td>
+                        <td>${row.payment_date}</td>
+                        <td>-</td>
+                        <td class="status-${row.status.toLowerCase()}">${row.status}</td>
+                    </tr>
+                `;
+            });
+            $('#history-body').html(html);
+        },
+        error: function() {
+            $('#history-body').html('<tr><td colspan="5">Gabim gjatë ngarkimit të historikut.</td></tr>');
+        }
+    });
 
+    // Thënie motivuese
+    $.ajax({
+        url: 'api_motivation.php',
+        method: 'GET',
+        dataType: 'json',
+        success: function(data) {
+            $('#motivation').html(`<blockquote>"${data.quote}" — ${data.author}</blockquote>`);
+        },
+        error: function() {
+            $('#motivation').text('Gabim gjatë ngarkimit të motivimit.');
+        }
+    });
 
+});
 </script>
 
 </body>
 </html>
-<?php
-include("footer.php");
-?>
+
+<?php include("footer.php"); ?>
