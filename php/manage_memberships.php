@@ -13,28 +13,28 @@ $addMessage = "";
 $editMessage = "";
 $deleteMessage = "";
 
-// Shto membership
+// Shto Membership të ri (pa duration)
 if (isset($_POST['add'])) {
     $name = $_POST['name'];
     $price = $_POST['price'];
-    $days = $_POST['duration_days'];
 
-    $stmt = $conn->prepare("INSERT INTO memberships (name, price, duration_days) VALUES (?, ?, ?)");
-    $stmt->bind_param("sdi", $name, $price, $days);
+    $stmt = $conn->prepare("INSERT INTO memberships (name, price) VALUES (?, ?)");
+    $stmt->bind_param("sd", $name, $price);
     $stmt->execute();
 }
+
+// Përditëso Membership-in ekzistues
 if (isset($_POST['edit_inline'])) {
     $id = $_POST['id'];
     $name = $_POST['name'];
     $price = $_POST['price'];
-    $duration = $_POST['duration'];
 
-    $stmt = $conn->prepare("UPDATE memberships SET name=?, price=?, duration_days=? WHERE id=?");
-    $stmt->bind_param("sdii", $name, $price, $duration, $id);
+    $stmt = $conn->prepare("UPDATE memberships SET name=?, price=? WHERE id=?");
+    $stmt->bind_param("sdi", $name, $price, $id);
     $stmt->execute();
 }
 
-// Fshi membership
+// Fshij Membership
 if (isset($_GET['delete'])) {
     $id = $_GET['delete'];
     $stmt = $conn->prepare("DELETE FROM memberships WHERE id=?");
@@ -54,17 +54,17 @@ $memberships = $conn->query("SELECT * FROM memberships");
     <link rel="stylesheet" href="../css/memberships.css">
     <script>  
     function enableEditing(rowId) {
-    const row = document.getElementById(rowId);
-    const inputs = row.querySelectorAll('.editable');
-    inputs.forEach(input => {
-        input.removeAttribute('readonly');
-        input.classList.add('highlight');  // shto highlight
-    });
+        const row = document.getElementById(rowId);
+        const inputs = row.querySelectorAll('.editable');
+        inputs.forEach(input => {
+            input.removeAttribute('readonly');
+            input.classList.add('highlight');
+        });
 
-    document.getElementById("edit-btn-" + rowId).style.display = "none";
-    document.getElementById("save-btn-" + rowId).style.display = "inline-block";
-}
-        </script>
+        document.getElementById("edit-btn-" + rowId).style.display = "none";
+        document.getElementById("save-btn-" + rowId).style.display = "inline-block";
+    }
+    </script>
 </head>
 <body>
 <div class="content-container">
@@ -73,13 +73,6 @@ $memberships = $conn->query("SELECT * FROM memberships");
         <form method="POST">
             <input type="text" name="name" placeholder="Emri i Membership-it" required>
             <input type="number" name="price" placeholder="Çmimi (€)" step="0.01" required>
-            <select name="duration_days" required>
-                <option value="">Zgjidh Kohëzgjatjen</option>
-                <option value="1">1 Muaj</option>
-                <option value="3">3 Muaj</option>
-                <option value="6">6 Muaj</option>
-                <option value="12">12 Muaj</option>
-            </select>
             <button type="submit" name="add">Shto</button>
         </form>
     </div>
@@ -89,7 +82,6 @@ $memberships = $conn->query("SELECT * FROM memberships");
             <tr>
                 <th>Emri</th>
                 <th>Çmimi</th>
-                <th>Kohëzgjatja</th>
                 <th>Veprime</th>
             </tr>
         </thead>
@@ -100,7 +92,6 @@ $memberships = $conn->query("SELECT * FROM memberships");
                     <input type="hidden" name="id" value="<?= $row['id']; ?>">
                     <td><input type="text" name="name" class="editable" value="<?= htmlspecialchars($row['name']); ?>" readonly></td>
                     <td><input type="number" name="price" class="editable" value="<?= number_format($row['price'], 2); ?>" step="0.01" readonly></td>
-                    <td><input type="number" name="duration" class="editable" value="<?= $row['duration_days']; ?>" readonly></td>
                     <td>
                         <button type="button" id="edit-btn-row-<?= $row['id']; ?>" onclick="enableEditing('row-<?= $row['id']; ?>')">Ndrysho</button>
                         <button type="submit" name="edit_inline" id="save-btn-row-<?= $row['id']; ?>" style="display: none;">Ruaj</button>
