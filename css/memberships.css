@@ -1,0 +1,173 @@
+
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background-color: var(--dark-bg, #0d0d0d);
+    color: #fff;
+    margin: 0;
+    padding: 0;
+}
+
+/* Container që mban përmbajtjen e faqes */
+.content-container {
+    margin-left: var(--sidebar-width, 280px);
+    margin-top: var(--header-height, 80px);
+    padding: 30px 40px;
+    box-sizing: border-box;
+    min-height: calc(100vh - var(--header-height, 80px));
+    transition: margin-left 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* Tabela e memberships */
+.membership-table {
+    width: 100%;
+    max-width: 1200px;
+    border-collapse: collapse;
+    margin: 40px auto;
+    background-color: #111;
+    border: 1px solid #2eff7e;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(46, 255, 126, 0.3);
+}
+
+.membership-table th, 
+.membership-table td {
+    padding: 12px;
+    text-align: center;
+    font-size: 15px;
+    border: 1px solid rgba(69, 255, 202, 0.2);
+}
+
+.membership-form {
+    background-color: #111;
+    border: 1px solid #2eff7e;
+    border-radius: 10px;
+    padding: 25px;
+    margin: 30px auto;
+    max-width: 600px;
+    box-shadow: 0 0 15px rgba(46, 255, 126, 0.3);
+}
+
+.membership-form h3 {
+    color: #2eff7e;
+    font-size: 22px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.membership-form input,
+.membership-form select {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border-radius: 6px;
+    border: 1px solid #2eff7e;
+    background-color: #000;
+    color: #fff;
+    font-size: 15px;
+}
+
+.membership-form button {
+    width: 100%;
+    padding: 12px;
+    background-color: #2eff7e;
+    color: #000;
+    border: none;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+}
+/* Stilet e Butonit Edit */
+.edit-btn {
+    background-color: #4caf50;
+    color: #fff;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: background 0.3s, transform 0.2s;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.edit-btn:hover {
+    background-color: #45a049;
+    transform: scale(1.05);
+}
+
+/* Stilet e Butonit Delete */
+.delete-btn {
+    background-color: #f44336;
+    color: #fff;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: background 0.3s, transform 0.2s;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.delete-btn:hover {
+    background-color: #e53935;
+    transform: scale(1.05);
+}
+
+/* Rregullimi i pozicionit të butonave në një rresht */
+.action-buttons {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+.editable {
+    border: none;
+    background-color: transparent;
+    color: #fff;
+    padding: 5px;
+    text-align: center;
+    transition: background 0.2s, box-shadow 0.3s;
+}
+
+.editable.highlight {
+    background-color: #45ffca33; /* very light greenish transparent */
+    box-shadow: 0 0 8px 2px #45ffcaaa;
+    border-radius: 5px;
+}
+
+.editable:focus {
+    background-color: #333;
+    outline: 1px solid #45ffca;
+    border-radius: 4px;
+}
+
+
+.membership-table button {
+    background-color: #0077cc;
+    color: #fff;
+    padding: 6px 12px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.membership-table button:hover {
+    background-color: #005da8;
+}
+
+.delete-btn {
+    background-color: #f44336;
+    color: #fff;
+    padding: 6px 12px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background 0.3s;
+}
+
+.delete-btn:hover {
+    background-color: #e53935;
+}
+
