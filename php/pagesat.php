@@ -27,7 +27,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && $userId !== null) {
     $paymentDate = date('Y-m-d');
     $method = 'Online';
 
-    $stmt = $conn->prepare("INSERT INTO payments (user_id, bank_number, payment_date, method, id_membership) VALUES (?, ?, ?, ?, ?)");
+    $stmt = $conn->prepare("INSERT INTO payments (user_id, numri_bankes, payment_date, method, id_membership) VALUES (?, ?, ?, ?, ?)");
     if ($stmt) {
         $stmt->bind_param("isssi", $userId, $bankNumber, $paymentDate, $method, $id_membership);
         if ($stmt->execute()) {
