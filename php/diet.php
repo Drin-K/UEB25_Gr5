@@ -110,7 +110,7 @@ td {
             <?php echo generateMenu($menu_items, basename($_SERVER['PHP_SELF']));?>
       </ul>
         <div class="top-btn">
-            <a href="login.php" class="nav-btn">Join Us</a>
+            <a href="login.php" class="nav-btn">Log in</a>
         </div>
         <div class="senvichi">
             <span class="bar"></span>
