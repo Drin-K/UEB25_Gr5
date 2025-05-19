@@ -19,13 +19,13 @@ $role = $_SESSION['role'] ?? 'admin';
             <li><a href="manage_memberships.php"><i class="fas fa-id-card"></i> Menaxho Memberships</a></li>
             <li><a href="subscription.php"><i class="fas fa-receipt"></i> Menaxho Subscriptions</a></li>
             <li><a href="reports.php"><i class="fas fa-chart-line"></i> Raporte</a></li>
-            <li><a href="adminUshtrimet.php"><i class="fas fa-cog"></i> Ushtrimet</a></li>
+            <li><a href="adminUshtrimet.php"><i class="fas fa-dumbbell"></i> Ushtrimet</a></li>
         <?php else: ?>
-            <li><a href="dashboard.php"><i class="fas fa-home"></i> Dashboard</a></li>
+             <li><a href="anetaresimet.php"><i class="fas fa-bookmark"></i> Anëtarësimi</a></li>
             <li><a href="pagesat.php"><i class="fas fa-calendar-alt"></i> Pagesat</a></li>
-            <li><a href="anetaresimet.php"><i class="fas fa-bookmark"></i> Anëtarësimi</a></li>
             <li><a href="stervitjet.php"><i class="fas fa-dumbbell"></i> Stërvitjet</a></li>
             <li><a href="nutrition.php"><i class="fas fa-utensils"></i> Ushqimi</a></li>
+            <li><a href="bmiCalculator.php"><i class="fas fa-calculator"></i> BMI Calculator</a></li>
             <li><a href="profile.php"><i class="fas fa-user"></i> Profili</a></li>
         <?php endif; ?>
     </ul>
