@@ -1,71 +1,51 @@
 <?php
-
 include("header.php");
 include("sidebar.php");
 include("db.php");
-// Numërimi i vizitave me sesion
+
 if (!isset($_SESSION['visit_count'])) {
     $_SESSION['visit_count'] = 1;
 } else {
     $_SESSION['visit_count']++;
 }
-
 $visitMessage = "Ju keni vizituar këtë faqe " . $_SESSION['visit_count'] . " herë në këtë sesion.";
-
 
 $role = $_SESSION['role'] ?? 'guest';
 $userId = $_SESSION['user_id'] ?? null;
 
 $successMessage = "";
-$sessionTotal = null;
-$sessionDate = null;
 
-// ✅ Nëse forma është dërguar
+$memberships = [];
+$query = $conn->query("SELECT id, name, price FROM memberships");
+while ($row = $query->fetch_assoc()) {
+    $memberships[] = $row;
+}
+
 if ($_SERVER["REQUEST_METHOD"] == "POST" && $userId !== null) {
-    $amount = $_POST['amount'];
-    $method = 'Online';
     $bankNumber = $_POST['bank_number'];
+    $id_membership = $_POST['id_membership'];
     $paymentDate = date('Y-m-d');
+    $method = 'Online';
 
-    $stmt = $conn->prepare("INSERT INTO payments (user_id, amount, bank_number, payment_date, method) VALUES (?, ?, ?, ?, ?)");
+    $stmt = $conn->prepare("INSERT INTO payments (user_id, bank_number, payment_date, method, id_membership) VALUES (?, ?, ?, ?, ?)");
     if ($stmt) {
-        $stmt->bind_param("idsss", $userId, $amount, $bankNumber, $paymentDate, $method);
+        $stmt->bind_param("isssi", $userId, $bankNumber, $paymentDate, $method, $id_membership);
         if ($stmt->execute()) {
-            // ✅ Ruaj në sesion për një herë
-            $_SESSION['success_message'] = "✅ Pagesa me kartelë u regjistrua me sukses!";
-            $_SESSION['total_paid'] = ($_SESSION['total_paid'] ?? 0) + $amount;
-            $_SESSION['last_payment_date'] = $paymentDate;
-
-            // ✅ Redirect në vetveten për të shmangur riPOST nga refresh
-            header("Location: " . $_SERVER['PHP_SELF']);
-            exit();
+            $_SESSION['success_message'] = "✅ Pagesa për membership u regjistrua me sukses!";
         } else {
             $_SESSION['success_message'] = "❌ Dështoi ekzekutimi i query-t.";
-            header("Location: " . $_SERVER['PHP_SELF']);
-            exit();
         }
         $stmt->close();
     } else {
         $_SESSION['success_message'] = "❌ Gabim gjatë përgatitjes së query-t.";
-        header("Location: " . $_SERVER['PHP_SELF']);
-        exit();
     }
+    header("Location: " . $_SERVER['PHP_SELF']);
+    exit();
 }
 
-// ✅ Pas redirect – shfaq mesazhet dhe pastro sesionin
 if (isset($_SESSION['success_message'])) {
     $successMessage = $_SESSION['success_message'];
     unset($_SESSION['success_message']);
-}
-
-if (isset($_SESSION['total_paid'])) {
-    $sessionTotal = $_SESSION['total_paid'];
-    unset($_SESSION['total_paid']);
-}
-
-if (isset($_SESSION['last_payment_date'])) {
-    $sessionDate = $_SESSION['last_payment_date'];
-    unset($_SESSION['last_payment_date']);
 }
 ?>
 
@@ -78,46 +58,42 @@ if (isset($_SESSION['last_payment_date'])) {
     <link rel="stylesheet" href="../css/pagesat.css">
 </head>
 <body>
-    <div class="content">
-        <h2>Pagesa</h2>
+<div class="content">
+    <h2>Pagesa</h2>
 
-        <?php if (!empty($successMessage)): ?>
-            <div class="alert-success">
-                <?= htmlspecialchars($successMessage) ?>
-            </div>
-        <?php endif; ?>
+    <?php if (!empty($successMessage)): ?>
+        <div class="alert-success"><?= htmlspecialchars($successMessage) ?></div>
+    <?php endif; ?>
 
-        <?php if (!empty($sessionTotal) && !empty($sessionDate)): ?>
-            <div class="session-info">
-                <p><strong>Totali i pagesave në këtë sesion:</strong> €<?= number_format($sessionTotal, 2) ?></p>
-                <p><strong>Data e fundit e pagesës:</strong> <?= htmlspecialchars($sessionDate) ?></p>
-            </div>
-        <?php endif; ?>
+    <p class="payment-instructions">
+        Ju lutemi zgjidhni një membership dhe shkruani numrin e kartelës për të përfunduar pagesën.
+    </p>
 
-        <p class="payment-instructions">
-            Ju lutemi shkruani shumën dhe numrin e kartelës për pagesë. Nëse preferoni të paguani me cash, ju lutemi na vizitoni në zyrën tonë.
-        </p>
+    <form method="post" class="payment-form">
+        <div class="form-group">
+            <label for="id_membership">Zgjidh Membership-in:</label>
+            <select id="id_membership" name="id_membership" required>
+                <option value="">-- Zgjidh --</option>
+                <?php foreach ($memberships as $membership): ?>
+                    <option value="<?= $membership['id'] ?>">
+                        <?= htmlspecialchars($membership['name']) ?> - €<?= number_format($membership['price'], 2) ?>
+                    </option>
+                <?php endforeach; ?>
+            </select>
+        </div>
 
-        <form method="post" class="payment-form">
-            <div class="form-group">
-                <label for="amount">Shuma (€):</label>
-                <input type="number" id="amount" name="amount" step="0.01" min="0.01" required placeholder="Shkruani shumën">
-            </div>
+        <div class="form-group">
+            <label for="bank_number">Numri i Kartelës:</label>
+            <input type="text" id="bank_number" name="bank_number" maxlength="16" pattern="\d{16}" required
+                   placeholder="1234567812345678">
+        </div>
 
-            <div class="form-group">
-                <label for="bank_number">Numri i Kartelës:</label>
-                <input type="text" id="bank_number" name="bank_number" maxlength="16" pattern="\d{16}" required
-                       placeholder="1234 5678 9012 3456">
-            </div>
+        <button type="submit" class="btn-paguaj">PAGUAJ</button>
 
-            <button type="submit" class="btn-paguaj">PAGUAJ</button>
-
-
-<div class="visit-counter" style="padding-top: 130px;">
-    <p><?= htmlspecialchars($visitMessage) ?></p>
+        <div class="visit-counter" style="padding-top: 130px;">
+            <p><?= htmlspecialchars($visitMessage) ?></p>
+        </div>
+    </form>
 </div>
-
-        </form>
-    </div>
 </body>
 </html>

@@ -5,10 +5,7 @@ include("db.php");
 
 // o Kthimi përmes referencës
 
-// Funksioni kthen një referencë të array $reports
-// Për shkak se është me &, ndryshimet jashtë do prekin array-n origjinal
 function &getReports(mysqli &$conn): array {
-    // Ky përdor variablën globale $conn brenda funksionit, edhe pse ajo tashmë është në parametër.
     global $conn;
     $reports = [];
 
@@ -18,15 +15,22 @@ function &getReports(mysqli &$conn): array {
             u.name,
             u.email,
             u.created_at,
-            (SELECT COUNT(*) FROM subscriptions s WHERE s.user_id = u.id) AS total_subscriptions,
             (SELECT COUNT(*) FROM workout_plans wp WHERE wp.user_id = u.id) AS total_workouts,
             (SELECT COUNT(*) FROM payments p WHERE p.user_id = u.id) AS total_payments,
-            (SELECT IFNULL(SUM(amount), 0) FROM payments p WHERE p.user_id = u.id) AS total_paid,
+            (SELECT IFNULL(SUM(m.price), 0) 
+             FROM payments p 
+             JOIN memberships m ON m.id = p.id_membership 
+             WHERE p.user_id = u.id) AS total_paid,
             (SELECT GROUP_CONCAT(DISTINCT np.category SEPARATOR ', ') 
              FROM user_nutrition_preferences unp 
              JOIN nutrition_plans np ON np.category IS NOT NULL 
              WHERE unp.user_id = u.id) AS nutrition_categories,
-            (SELECT preferred_calories FROM user_nutrition_preferences WHERE user_id = u.id) AS preferred_calories
+            (SELECT preferred_calories FROM user_nutrition_preferences WHERE user_id = u.id) AS preferred_calories,
+            (SELECT m.name 
+             FROM payments p 
+             JOIN memberships m ON m.id = p.id_membership 
+             WHERE p.user_id = u.id 
+             ORDER BY p.payment_date DESC LIMIT 1) AS membership
         FROM users u
         WHERE u.role = 'client'
     ";
@@ -36,12 +40,8 @@ function &getReports(mysqli &$conn): array {
         $reports[] = $row;
     }
 
-    return $reports; // <- Kthim përmes referencës
+    return $reports;
 }
-
-// o Përdorimi i funksioneve me referencë
-// o Përcjellja përmes referencës
-// Parametri $conn kalohet me referencë në këtë funksion
 
 function getCalorieDistribution(mysqli $conn): array {
     $query = "
@@ -62,11 +62,9 @@ function getCalorieDistribution(mysqli $conn): array {
     return $data;
 }
 
-// o Vendosja e referencave në mes të anëtarëve të vargut
-$allReports = &getReports($conn); // -> variabla $allReports është referencë ndaj array-t të kthyer
+$allReports = &getReports($conn);
 $calorieData = getCalorieDistribution($conn);
-// o Largimi i referencës
-unset($conn); // -> Heqja e referencës ndaj objektit të lidhjes me DB
+unset($conn);
 ?>
 
 <!DOCTYPE html>
@@ -149,10 +147,10 @@ unset($conn); // -> Heqja e referencës ndaj objektit të lidhjes me DB
                 <th>Emri</th>
                 <th>Email</th>
                 <th>Regjistruar më</th>
-                <th>Abonime</th>
                 <th>Planet e Stërvitjes</th>
                 <th>Pagesa</th>
                 <th>Total i Paguar (€)</th>
+                <th>Membership</th>
                 <th>Preferenca Nutricionale</th>
                 <th>Kaloritë e Preferuara</th>
             </tr>
@@ -164,10 +162,10 @@ unset($conn); // -> Heqja e referencës ndaj objektit të lidhjes me DB
                     <td><?= htmlspecialchars($report['name']) ?></td>
                     <td><?= htmlspecialchars($report['email']) ?></td>
                     <td><?= $report['created_at'] ?></td>
-                    <td><?= $report['total_subscriptions'] ?></td>
                     <td><?= $report['total_workouts'] ?></td>
                     <td><?= $report['total_payments'] ?></td>
                     <td>€<?= number_format($report['total_paid'], 2) ?></td>
+                    <td><?= $report['membership'] ?: 'Pa abonim' ?></td>
                     <td><?= $report['nutrition_categories'] ?: 'Asnjë' ?></td>
                     <td><?= $report['preferred_calories'] ?: 'N/A' ?></td>
                 </tr>
@@ -178,7 +176,6 @@ unset($conn); // -> Heqja e referencës ndaj objektit të lidhjes me DB
 </div>
 
 <script>
-    // Chart për shpërndarjen e kalorive sipas kategorive
     const calorieCtx = document.getElementById('calorieChart').getContext('2d');
     const calorieChart = new Chart(calorieCtx, {
         type: 'pie',
@@ -224,7 +221,6 @@ unset($conn); // -> Heqja e referencës ndaj objektit të lidhjes me DB
         }
     });
 
-    // Chart për kaloritë e preferuara nga përdoruesit
     const userCalorieCtx = document.getElementById('userCalorieChart').getContext('2d');
     const userCalorieChart = new Chart(userCalorieCtx, {
         type: 'doughnut',
