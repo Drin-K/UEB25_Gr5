@@ -29,7 +29,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $stmt->close();
 
             $password_hash = password_hash($password, PASSWORD_DEFAULT);
-            $role = 'client';
+            $role = 'admin';
 
             $stmt = $conn->prepare("INSERT INTO users (name, email, password, role) VALUES (?, ?, ?, ?)");
             $stmt->bind_param("ssss", $name, $email, $password_hash, $role);

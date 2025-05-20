@@ -1,5 +1,4 @@
 <?php
-// Definimi i konstantave dhe variablave
 include 'headers.php';
 define("SLASH_NAME","FruitsVeggies");
 

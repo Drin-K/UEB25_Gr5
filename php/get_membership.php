@@ -8,7 +8,7 @@ $user_id = $_SESSION['user_id'];
 
 $sql_active = "SELECT m.name, m.price, p.payment_date, p.status
                FROM payments p
-               JOIN memberships m ON p.membership_id = m.id
+               JOIN memberships m ON p.id_membership = m.id
                WHERE p.user_id = ? AND p.status = 'active'
                ORDER BY p.payment_date DESC
                LIMIT 1";
