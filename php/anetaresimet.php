@@ -51,7 +51,7 @@ $(document).ready(function(){
 
     // Anëtarësimi aktual
     $.ajax({
-        url: 'get_membership.php',
+        url: '/php/get_set_data/get_membership.php',
         method: 'GET',
         dataType: 'json',
         success: function(data) {
