@@ -38,8 +38,8 @@ if ($res && mysqli_num_rows($res) > 0) {
                  . "Abonimi juaj ka përfunduar më $end.\n"
                  . "Ju lutemi rinovoni për të vazhduar shërbimet tona.\n\n"
                  . "Faleminderit,\nIllyrian Gym";
-        $headers = "From: Illyrian Gym <youremail@gmail.com>\r\n"
-                 . "Reply-To: youremail@gmail.com\r\n"
+        $headers = "From: Illyrian Gym <drinkurti26@gmail.com>\r\n"
+                 . "Reply-To: drinkurti26@gmail.com\r\n"
                  . "Content-Type: text/plain; charset=UTF-8\r\n";
         mail($email, $subject, $message, $headers);
     }
