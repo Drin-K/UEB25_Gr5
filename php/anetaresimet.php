@@ -73,7 +73,7 @@ $(document).ready(function(){
 
     // Historiku i anëtarësimeve
     $.ajax({
-        url: 'get_history.php',
+        url: '/php/get_set_data/get_history.php',
         method: 'GET',
         dataType: 'json',
         success: function(data) {
@@ -98,7 +98,7 @@ $(document).ready(function(){
 
     // Thënie motivuese
     $.ajax({
-        url: 'api_motivation.php',
+        url: '/php/get_set_data/api_motivation.php',
         method: 'GET',
         dataType: 'json',
         success: function(data) {
