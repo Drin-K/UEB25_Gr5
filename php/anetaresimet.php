@@ -51,7 +51,7 @@ $(document).ready(function(){
 
     // Anëtarësimi aktual
     $.ajax({
-        url: '/php/get_set_data/get_membership.php',
+        url: '../php/get_set_data/get_membership.php',
         method: 'GET',
         dataType: 'json',
         success: function(data) {
@@ -73,7 +73,7 @@ $(document).ready(function(){
 
     // Historiku i anëtarësimeve
     $.ajax({
-        url: '/php/get_set_data/get_history.php',
+        url: 'get_history.php',
         method: 'GET',
         dataType: 'json',
         success: function(data) {
@@ -98,7 +98,7 @@ $(document).ready(function(){
 
     // Thënie motivuese
     $.ajax({
-        url: '/php/get_set_data/api_motivation.php',
+        url: 'api_motivation.php',
         method: 'GET',
         dataType: 'json',
         success: function(data) {
