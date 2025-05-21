@@ -36,6 +36,8 @@ Additionally, the system includes an **Admin dashboard** for managing membership
 ---
 
 ## 📂 Folder Structure
-![image](https://github.com/user-attachments/assets/71a8f9c8-d072-4ede-a8c8-9608471b5abd)
+![image](https://github.com/user-attachments/assets/c069bbca-b4db-4add-9ee0-d8158191d8ce)
+
+
 
 
