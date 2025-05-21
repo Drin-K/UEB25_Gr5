@@ -36,5 +36,6 @@ Additionally, the system includes an **Admin dashboard** for managing membership
 ---
 
 ## 📂 Folder Structure
-<pre> ``` project-root/ ├── php/ # All PHP files │ ├── db/ # Database interaction files │ └── logic/ # Business logic for features (e.g., BMI) ├── css/ # Page-specific stylesheets ├── images/ # Static images for content ├── videos/ # Multimedia workout content ├── index.php # Landing page └── README.md # Project documentation ``` </pre>
+![image](https://github.com/user-attachments/assets/71a8f9c8-d072-4ede-a8c8-9608471b5abd)
+
 
