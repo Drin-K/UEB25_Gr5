@@ -1,145 +1,220 @@
 <?php
-include("header.php");
-include("sidebar.php");
-include("db.php");
+include 'header.php';
+include 'db.php';
+include 'sidebar.php';
 
 if (!isset($_SESSION['user_id'])) {
     header("Location: login.php");
     exit();
-}
+}$user_cookie = isset($_COOKIE['user_preference']) ? $_COOKIE['user_preference'] : null;
 
-$userId = (int)$_SESSION['user_id'];
+// Ngjyra për efekt neon
+$neonColor = '#0ff';
 
-// Merr preferencat e përdoruesit në mënyrë të sigurt
-$query = $conn->prepare("SELECT preferred_calories FROM user_nutrition_preferences WHERE user_id = ?");
-$query->bind_param("i", $userId);
-$query->execute();
-$result = $query->get_result();
-$userPreferences = $result->fetch_assoc();
-$preferredCalories = $userPreferences['preferred_calories'] ?? 2000;
-
-// Ngjyra e background nga cookie
-$bgPreference = $_COOKIE['bg_preference'] ?? '#ffffff';
-
-// Planet e shikuara nga cookie
-$viewedPlans = isset($_COOKIE['viewed_plans']) ? json_decode($_COOKIE['viewed_plans'], true) : [];
-if (!is_array($viewedPlans)) {
-    $viewedPlans = [];
-}
-
-// Funksion për ndryshim të ndriçimit të ngjyrës
-function adjustBrightness($hex, $steps) {
-    $steps = max(-255, min(255, $steps));
-    $hex = ltrim($hex, '#');
-    if (strlen($hex) == 3) {
-        $hex = $hex[0].$hex[0].$hex[1].$hex[1].$hex[2].$hex[2];
+// Handle form submissions
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    if (isset($_POST['add_plan']) && $_SESSION['role'] === 'admin') {
+        $stmt = $conn->prepare("INSERT INTO nutrition_plans (title, description, calories, protein, carbs, fats, category) VALUES (?, ?, ?, ?, ?, ?, ?)");
+        $stmt->bind_param("ssiiiis", $_POST['title'], $_POST['description'], $_POST['calories'], $_POST['protein'], $_POST['carbs'], $_POST['fats'], $_POST['category']);
+        $stmt->execute();
+    } elseif (isset($_POST['save_preferences'])) {
+        $stmt = $conn->prepare("REPLACE INTO user_nutrition_preferences (user_id, preferred_calories, dietary_restrictions, favorite_meals) VALUES (?, ?, ?, ?)");
+        $stmt->bind_param("iiss", $_SESSION['user_id'], $_POST['preferred_calories'], $_POST['dietary_restrictions'], $_POST['favorite_meals']);
+        $stmt->execute();
     }
-    $r = max(0, min(255, hexdec(substr($hex, 0, 2)) + $steps));
-    $g = max(0, min(255, hexdec(substr($hex, 2, 2)) + $steps));
-    $b = max(0, min(255, hexdec(substr($hex, 4, 2)) + $steps));
-    return sprintf("#%02x%02x%02x", $r, $g, $b);
 }
 
-// Merr planet e përshtatura
-if ($preferredCalories) {
-    $range = $preferredCalories * 0.1;
-    $minCal = $preferredCalories - $range;
-    $maxCal = $preferredCalories + $range;
+// Get preferences
+$preferences = ['preferred_calories' => '', 'dietary_restrictions' => '', 'favorite_meals' => ''];
+if ($_SESSION['role'] === 'client') {
+    // Merr preferencat e përdoruesit nga DB
+    $stmt = $conn->prepare("SELECT preferred_calories, dietary_restrictions, favorite_meals FROM user_nutrition_preferences WHERE user_id = ?");
+    $stmt->bind_param("i", $_SESSION['user_id']);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    if ($row = $result->fetch_assoc()) {
+        $preferences = $row;
+    }
 
-    $stmt = $conn->prepare("SELECT * FROM nutrition_plans WHERE calories BETWEEN ? AND ?");
-    $stmt->bind_param("ii", $minCal, $maxCal);
+    $minCalories = (int)$preferences['preferred_calories'] - 200;
+    $maxCalories = (int)$preferences['preferred_calories'] + 200;
+
+    // Përgatitim pjesën e query me kushtet e mëposhtme
+    $query = "SELECT * FROM nutrition_plans WHERE calories BETWEEN ? AND ?";
+
+    $params = [$minCalories, $maxCalories];
+    $types = "ii";
+
+    // Trajto dietary restrictions - në këtë shembull thjesht kërkojmë që description të mos përmbajë fjalët e kufizuara (kufizimet ndahen me presje)
+    if (!empty($preferences['dietary_restrictions'])) {
+        $restrictions = explode(',', $preferences['dietary_restrictions']);
+        foreach ($restrictions as $i => $restriction) {
+            $restriction = trim($restriction);
+            if ($restriction !== '') {
+                $query .= " AND description NOT LIKE ?";
+                $params[] = '%' . $restriction . '%';
+                $types .= "s";
+            }
+        }
+    }
+
+    // Trajto favorite meals - kërkojmë që description OSE title të përmbajë të paktën njërën nga ushqimet e preferuara
+    if (!empty($preferences['favorite_meals'])) {
+        $favoriteMeals = explode(',', $preferences['favorite_meals']);
+        $favoriteMealsConditions = [];
+        foreach ($favoriteMeals as $meal) {
+            $meal = trim($meal);
+            if ($meal !== '') {
+                $favoriteMealsConditions[] = "(title LIKE ? OR description LIKE ?)";
+                $params[] = '%' . $meal . '%';
+                $params[] = '%' . $meal . '%';
+                $types .= "ss";
+            }
+        }
+        if (count($favoriteMealsConditions) > 0) {
+            $query .= " AND (" . implode(" OR ", $favoriteMealsConditions) . ")";
+        }
+    }
+
+    $planStmt = $conn->prepare($query);
+    $planStmt->bind_param($types, ...$params);
+    $planStmt->execute();
+    $plansResult = $planStmt->get_result();
 } else {
-    $stmt = $conn->prepare("SELECT * FROM nutrition_plans");
+    $plansResult = $conn->query("SELECT * FROM nutrition_plans");
 }
-$stmt->execute();
-$plans = $stmt->get_result();
+
 ?>
 
 <!DOCTYPE html>
 <html lang="sq">
 <head>
     <meta charset="UTF-8">
-    <title>Ushqimi - ILLYRIAN GYM</title>
-    <link rel="stylesheet" href="../css/nutrition.css">
+    <title>Plani Ushqimor - ILLYRIAN GYM</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Rajdhani:wght@400;700&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --neon-green: #45ffca;
+            --neon-blue: #33ccff;
+            --neon-glow-green: 0 0 5px #45ffca, 0 0 10px rgba(69, 255, 202, 0.5);
+            --neon-glow-blue: 0 0 5px #33ccff, 0 0 10px rgba(51, 204, 255, 0.5);
+        }
+
         body {
-            background-color: <?= htmlspecialchars($bgPreference) ?>;
-            transition: background-color 0.3s ease;
+            background-color: #0a0a0a;
+            color: #e0e0e0;
+            font-family: 'Rajdhani', sans-serif;
+            margin: 0;
+            padding: 0;
         }
+
+        .main-content {
+            margin-left: 250px;
+            padding: 20px;
+        }
+
+        h1, h2 {
+            font-family: 'Orbitron', sans-serif;
+            color: var(--neon-blue);
+            text-shadow: var(--neon-glow-blue);
+        }
+
+        .card, .plan-card {
+            background-color: #111;
+            border: 1px solid var(--neon-green);
+            border-radius: 5px;
+            padding: 20px;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+        }
+
         .plan-card {
-            background-color: <?= adjustBrightness($bgPreference, -20) ?>;
-            border-left: 5px solid <?= adjustBrightness($bgPreference, -40) ?>;
+            border-color: var(--neon-blue);
         }
-        .nutri-item {
-            background: <?= adjustBrightness($bgPreference, 10) ?>;
+
+        .card:hover, .plan-card:hover {
+            box-shadow: var(--neon-glow-green);
+        }
+
+        .btn {
+            background-color: transparent;
+            color: var(--neon-blue);
+            border: 1px solid var(--neon-blue);
+            padding: 8px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 10px;
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        .btn:hover {
+            color: var(--neon-green);
+            border-color: var(--neon-green);
+            box-shadow: var(--neon-glow-green);
+        }
+
+        input, select, textarea {
+            background-color: #1a1a1a;
+            border: 1px solid #333;
+            color: #fff;
+            padding: 8px;
+            border-radius: 4px;
+            margin-bottom: 10px;
+            width: 100%;
+        }
+
+        .plan-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
         }
     </style>
 </head>
 <body>
-<div class="content">
-    <h2><i class="fas fa-utensils"></i> Plani Juaj i Ushqimit</h2>
+    <div class="main-content">
+        <h1><i class="fas fa-utensils"></i> Plani Ushqimor</h1>
 
-    <div class="preferences-form">
-        <h3><i class="fas fa-sliders-h"></i> Preferencat e Ushqimit</h3>
-        <form method="post" action="save_preferences.php">
-            <div class="form-group">
-                <label>Kalori të preferuara:</label>
-                <input type="number" name="calories" value="<?= (int)$preferredCalories ?>" required>
+        <?php if ($_SESSION['role'] === 'admin'): ?>
+            <div class="card">
+                <h2>Shto Plan të Ri Ushqimor</h2>
+                <form method="post">
+                    <input type="text" name="title" placeholder="Titulli" required>
+                    <textarea name="description" placeholder="Përshkrimi" required></textarea>
+                    <select name="category" required>
+                        <option value="weight_loss">Humbje peshe</option>
+                        <option value="muscle_gain">Fitim muskujsh</option>
+                        <option value="maintenance">Mbajtje peshe</option>
+                    </select>
+                    <input type="number" name="calories" placeholder="Kalori" required>
+                    <input type="number" name="protein" placeholder="Proteina (g)" required>
+                    <input type="number" name="carbs" placeholder="Karbohidrate (g)" required>
+                    <input type="number" name="fats" placeholder="Yndyrna (g)" required>
+                    <button type="submit" name="add_plan" class="btn">Shto</button>
+                </form>
             </div>
-            <div class="form-group">
-                <label>Ngjyra e Background:</label>
-                <input type="color" name="bg_color" value="<?= htmlspecialchars($bgPreference) ?>">
+        <?php else: ?>
+            <div class="card">
+                <h2>Preferencat e Mia Ushqimore</h2>
+                <form method="post">
+                    <input type="number" name="preferred_calories" placeholder="Kaloritë e preferuara" value="<?= $preferences['preferred_calories'] ?>" required>
+                    <input type="text" name="dietary_restrictions" placeholder="Kufizime dietike" value="<?= $preferences['dietary_restrictions'] ?>">
+                    <input type="text" name="favorite_meals" placeholder="Ushqime të preferuara" value="<?= $preferences['favorite_meals'] ?>">
+                    <button type="submit" name="save_preferences" class="btn">Ruaj Preferencat</button>
+                </form>
             </div>
-            <div class="form-buttons">
-                <button type="submit" class="btn">Ruaj</button>
-                <button type="submit" name="reset_cookies" class="btn btn-danger">Fshi Cookies</button>
-            </div>
-        </form>
-    </div>
+        <?php endif; ?>
 
-    <h3><i class="fas fa-star"></i> Planet e Ushqimit për Ju</h3>
-    <div class="plans-container">
-        <?php while ($plan = $plans->fetch_assoc()):
-            $planId = (int)$plan['id'];
-            if (!in_array($planId, $viewedPlans)) {
-                array_unshift($viewedPlans, $planId);
-                if (count($viewedPlans) > 5) array_pop($viewedPlans);
-                setcookie('viewed_plans', json_encode($viewedPlans), time() + 86400 * 30, "/");
-            }
-        ?>
-        <div class="plan-card">
-            <h4><?= htmlspecialchars($plan['title']) ?></h4>
-            <p><?= htmlspecialchars($plan['description']) ?></p>
-            <div class="nutri-facts">
-                <div class="nutri-item"><span><?= (int)$plan['calories'] ?></span><small>Kalori</small></div>
-                <div class="nutri-item"><span><?= (int)$plan['protein'] ?>g</span><small>Proteina</small></div>
-                <div class="nutri-item"><span><?= (int)$plan['carbs'] ?>g</span><small>Karbohidrate</small></div>
-                <div class="nutri-item"><span><?= (int)$plan['fats'] ?>g</span><small>Yndyrna</small></div>
-            </div>
-        </div>
-        <?php endwhile; ?>
-    </div>
-
-    <?php if (!empty($viewedPlans)): 
-        $placeholders = implode(',', array_fill(0, count($viewedPlans), '?'));
-        $types = str_repeat('i', count($viewedPlans));
-        $stmtRecent = $conn->prepare("SELECT * FROM nutrition_plans WHERE id IN ($placeholders)");
-        $stmtRecent->bind_param($types, ...$viewedPlans);
-        $stmtRecent->execute();
-        $recentPlans = $stmtRecent->get_result();
-    ?>
-    <div class="recently-viewed">
-        <h3><i class="fas fa-history"></i> Planet e Shikuara Së Fundi</h3>
-        <div class="recent-plans">
-            <?php while ($plan = $recentPlans->fetch_assoc()): ?>
-            <div class="plan-card">
-                <h4><?= htmlspecialchars($plan['title']) ?></h4>
-                <p><?= htmlspecialchars(mb_substr($plan['description'], 0, 100)) ?>...</p>
-            </div>
+        <h2>Planet Ushqimore</h2>
+        <div class="plan-grid">
+            <?php while ($plan = $plansResult->fetch_assoc()): ?>
+                <div class="plan-card">
+                    <h3><?= htmlspecialchars($plan['title']) ?></h3>
+                    <p><?= nl2br(htmlspecialchars($plan['description'])) ?></p>
+                    <p><strong>Kalori:</strong> <?= $plan['calories'] ?> | <strong>Proteina:</strong> <?= $plan['protein'] ?>g | <strong>Karbo:</strong> <?= $plan['carbs'] ?>g | <strong>Yndyrna:</strong> <?= $plan['fats'] ?>g</p>
+                    <p><strong>Kategoria:</strong> <?= ucfirst(str_replace('_', ' ', $plan['category'])) ?></p>
+                </div>
             <?php endwhile; ?>
         </div>
     </div>
-    <?php endif; ?>
-</div>
 </body>
 </html>

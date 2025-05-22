@@ -20,6 +20,7 @@ $role = $_SESSION['role'] ?? 'admin';
             <li><a href="subscription.php"><i class="fas fa-receipt"></i> Menaxho Subscriptions</a></li>
             <li><a href="reports.php"><i class="fas fa-chart-line"></i> Raporte</a></li>
             <li><a href="adminUshtrimet.php"><i class="fas fa-dumbbell"></i> Ushtrimet</a></li>
+              <li><a href="nutrition.php"><i class="fas fa-utensils"></i> Planet ushqimore</a></li>
         <?php else: ?>
              <li><a href="anetaresimet.php"><i class="fas fa-bookmark"></i> Anëtarësimi</a></li>
             <li><a href="pagesat.php"><i class="fas fa-calendar-alt"></i> Pagesat</a></li>
