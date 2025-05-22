@@ -92,7 +92,84 @@ if ($_SESSION['role'] === 'client') {
     <meta charset="UTF-8">
     <title>Plani Ushqimor - ILLYRIAN GYM</title>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Rajdhani:wght@400;700&display=swap" rel="stylesheet">
-    <style>
+
+  <style>
+        :root {
+            --neon-green: #45ffca;
+            --neon-blue: #33ccff;
+            --neon-glow-green: 0 0 5px #45ffca, 0 0 10px rgba(69, 255, 202, 0.5);
+            --neon-glow-blue: 0 0 5px #33ccff, 0 0 10px rgba(51, 204, 255, 0.5);
+        }
+
+        body {
+            background-color: #0a0a0a;
+            color: #e0e0e0;
+            font-family: 'Rajdhani', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .main-content {
+            margin-top:100px;
+            margin-left: 300px;
+            padding: 20px;
+        }
+
+        h1, h2 {
+            font-family: 'Orbitron', sans-serif;
+            color: white;
+            text-shadow: var(--neon-glow-blue);
+        }
+
+        .card, .plan-card {
+            background-color: #111;
+            border: 1px solid var(--neon-green);
+            border-radius: 5px;
+            padding: 20px;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .plan-card {
+            border-color: var(--neon-blue);
+        }
+
+        .card:hover, .plan-card:hover {
+            box-shadow: var(--neon-glow-green);
+        }
+
+        .btn {
+            background-color: transparent;
+            color: var(--neon-blue);
+            border: 1px solid var(--neon-blue);
+            padding: 8px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 10px;
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        .btn:hover {
+            color: var(--neon-green);
+            border-color: var(--neon-green);
+            box-shadow: var(--neon-glow-green);
+        }
+
+        input, select, textarea {
+            background-color: #1a1a1a;
+            border: 1px solid #333;
+            color: #fff;
+            padding: 8px;
+            border-radius: 4px;
+            margin-bottom: 10px;
+            width: 100%;
+        }
+
+        .plan-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
        
     </style>
 </head>
@@ -144,8 +221,5 @@ if ($_SESSION['role'] === 'client') {
     </div>
 </body>
 </html>
-
-
-
 
 
