@@ -1,186 +1,75 @@
-/* client.css - Futuristic Neon Style */
-:root {
-    --neon-blue: #0ff0fc;
-    --neon-green: #00ff7f;
-    --neon-purple: #bc13fe;
-    --dark-space: #0a0a12;
-    --deep-space: #050508;
-    --light-text: #e0e0e0;
-    --neon-glow: 0 0 10px rgba(0, 255, 127, 0.7);
-}
+ :root {
+            --neon-green: #45ffca;
+            --neon-blue: #33ccff;
+            --neon-glow-green: 0 0 5px #45ffca, 0 0 10px rgba(69, 255, 202, 0.5);
+            --neon-glow-blue: 0 0 5px #33ccff, 0 0 10px rgba(51, 204, 255, 0.5);
+        }
 
-body {
-    font-family: 'Orbitron', 'Segoe UI', sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: var(--dark-space);
-    color: var(--light-text);
-    overflow-x: hidden;
-}
+        body {
+            background-color: #0a0a0a;
+            color: #e0e0e0;
+            font-family: 'Rajdhani', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
 
-/* Main content area - shifted right for sidebar */
-.content {
-    margin-left: 270px; /* 250px sidebar + 20px gap */
-    padding: 30px;
-    min-height: 100vh;
-    background: linear-gradient(135deg, var(--deep-space) 0%, var(--dark-space) 100%);
-}
+        .main-content {
+            margin-left: 250px;
+            padding: 20px;
+        }
 
-/* Headers with neon effect */
-h1, h2, h3 {
-    color: var(--neon-green);
-    text-shadow: var(--neon-glow);
-    margin-bottom: 20px;
-}
+        h1, h2 {
+            font-family: 'Orbitron', sans-serif;
+            color: var(--neon-blue);
+            text-shadow: var(--neon-glow-blue);
+        }
 
-h1 {
-    font-size: 2.5rem;
-    border-bottom: 2px solid var(--neon-blue);
-    padding-bottom: 10px;
-    display: inline-block;
-}
+        .card, .plan-card {
+            background-color: #111;
+            border: 1px solid var(--neon-green);
+            border-radius: 5px;
+            padding: 20px;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+        }
 
-h2 {
-    font-size: 1.8rem;
-    margin-top: 30px;
-}
+        .plan-card {
+            border-color: var(--neon-blue);
+        }
 
-/* Cards with futuristic look */
-.plan-card {
-    background: rgba(10, 10, 20, 0.7);
-    border: 1px solid var(--neon-purple);
-    border-radius: 8px;
-    padding: 20px;
-    margin: 20px 0;
-    box-shadow: 0 0 15px rgba(188, 19, 254, 0.3);
-    transition: all 0.3s ease;
-}
+        .card:hover, .plan-card:hover {
+            box-shadow: var(--neon-glow-green);
+        }
 
-.plan-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 0 20px rgba(188, 19, 254, 0.5);
-}
+        .btn {
+            background-color: transparent;
+            color: var(--neon-blue);
+            border: 1px solid var(--neon-blue);
+            padding: 8px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 10px;
+            font-family: 'Orbitron', sans-serif;
+        }
 
-/* Nutrition facts styling */
-.nutrition-facts {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 10px;
-    margin: 15px 0;
-}
+        .btn:hover {
+            color: var(--neon-green);
+            border-color: var(--neon-green);
+            box-shadow: var(--neon-glow-green);
+        }
 
-.nutrition-facts p {
-    margin: 5px 0;
-    font-size: 1.1rem;
-}
+        input, select, textarea {
+            background-color: #1a1a1a;
+            border: 1px solid #333;
+            color: #fff;
+            padding: 8px;
+            border-radius: 4px;
+            margin-bottom: 10px;
+            width: 100%;
+        }
 
-.nutrition-facts strong {
-    color: var(--neon-blue);
-}
-
-/* Forms with neon borders */
-.pref-form {
-    background: rgba(5, 5, 10, 0.8);
-    border: 1px solid var(--neon-green);
-    border-radius: 8px;
-    padding: 20px;
-    margin: 25px 0;
-    box-shadow: var(--neon-glow);
-}
-
-label {
-    display: block;
-    margin: 10px 0 5px;
-    color: var(--neon-blue);
-}
-
-input[type="text"],
-input[type="number"],
-select {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 15px;
-    background: rgba(15, 15, 25, 0.8);
-    border: 1px solid var(--neon-purple);
-    border-radius: 4px;
-    color: var(--light-text);
-    font-family: 'Orbitron', sans-serif;
-}
-
-input[type="checkbox"] {
-    margin-right: 10px;
-    accent-color: var(--neon-green);
-}
-
-/* Buttons with neon effect */
-button {
-    background: linear-gradient(45deg, var(--neon-purple), var(--neon-blue));
-    border: none;
-    color: black;
-    padding: 12px 25px;
-    font-family: 'Orbitron', sans-serif;
-    font-weight: bold;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    margin-top: 10px;
-    box-shadow: 0 0 10px rgba(0, 255, 127, 0.5);
-}
-
-button:hover {
-    transform: scale(1.05);
-    box-shadow: 0 0 20px rgba(0, 255, 127, 0.8);
-}
-
-/* Membership info styling */
-.membership-info {
-    background: rgba(0, 0, 0, 0.3);
-    padding: 15px;
-    border-left: 4px solid var(--neon-green);
-    margin-bottom: 30px;
-}
-
-.membership-info p {
-    margin: 5px 0;
-    font-size: 1.1rem;
-}
-
-.membership-info strong {
-    color: var(--neon-blue);
-}
-
-/* Images with glow effect */
-img {
-    border-radius: 8px;
-    border: 1px solid var(--neon-green);
-    box-shadow: 0 0 15px rgba(0, 255, 127, 0.4);
-    transition: all 0.3s ease;
-}
-
-img:hover {
-    transform: scale(1.02);
-    box-shadow: 0 0 25px rgba(0, 255, 127, 0.7);
-}
-
-/* Font size classes */
-.font-small { font-size: 14px; }
-.font-medium { font-size: 16px; }
-.font-large { font-size: 18px; }
-
-/* Theme classes */
-.light-theme {
-    background-color: #f0f0f0;
-    color: #333;
-}
-
-.light-theme .plan-card,
-.light-theme .pref-form {
-    background-color: #fff;
-    color: #333;
-    border-color: #ddd;
-}
-
-.dark-theme {
-    background-color: var(--dark-space);
-    color: var(--light-text);
-}
+        .plan-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
