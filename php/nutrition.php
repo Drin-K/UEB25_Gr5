@@ -6,10 +6,7 @@ include 'sidebar.php';
 if (!isset($_SESSION['user_id'])) {
     header("Location: login.php");
     exit();
-}$user_cookie = isset($_COOKIE['user_preference']) ? $_COOKIE['user_preference'] : null;
-
-// Ngjyra për efekt neon
-$neonColor = '#0ff';
+}
 
 // Handle form submissions
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
