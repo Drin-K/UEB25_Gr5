@@ -1,5 +1,5 @@
 <?php
-require_once 'db.php'; // lidhja me databazën
+require_once 'db.php'; 
 
 try {
     $queries = [
@@ -53,7 +53,7 @@ try {
         )",
 
         "CREATE TABLE IF NOT EXISTS user_nutrition_preferences (
-            user_id INT NOT NULL,
+            user_id INT AUTO_INCREMENT PRIMARY KEY,
             preferred_calories INT,
             dietary_restrictions VARCHAR(255),
             favorite_meals VARCHAR(255),
