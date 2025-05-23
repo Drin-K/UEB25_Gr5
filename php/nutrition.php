@@ -1,4 +1,4 @@
-<?php
+<?php 
 include 'header.php';
 include 'db.php';
 include 'sidebar.php';
@@ -18,13 +18,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $stmt = $conn->prepare("REPLACE INTO user_nutrition_preferences (user_id, preferred_calories, dietary_restrictions, favorite_meals) VALUES (?, ?, ?, ?)");
         $stmt->bind_param("iiss", $_SESSION['user_id'], $_POST['preferred_calories'], $_POST['dietary_restrictions'], $_POST['favorite_meals']);
         $stmt->execute();
+    } elseif (isset($_POST['delete_plan']) && $_SESSION['role'] === 'admin') {
+        $stmt = $conn->prepare("DELETE FROM nutrition_plans WHERE id = ?");
+        $stmt->bind_param("i", $_POST['plan_id']);
+        $stmt->execute();
     }
 }
 
 // Get preferences
 $preferences = ['preferred_calories' => '', 'dietary_restrictions' => '', 'favorite_meals' => ''];
 if ($_SESSION['role'] === 'client') {
-    // Merr preferencat e përdoruesit nga DB
     $stmt = $conn->prepare("SELECT preferred_calories, dietary_restrictions, favorite_meals FROM user_nutrition_preferences WHERE user_id = ?");
     $stmt->bind_param("i", $_SESSION['user_id']);
     $stmt->execute();
@@ -36,16 +39,13 @@ if ($_SESSION['role'] === 'client') {
     $minCalories = (int)$preferences['preferred_calories'] - 200;
     $maxCalories = (int)$preferences['preferred_calories'] + 200;
 
-    // Përgatitim pjesën e query me kushtet e mëposhtme
     $query = "SELECT * FROM nutrition_plans WHERE calories BETWEEN ? AND ?";
-
     $params = [$minCalories, $maxCalories];
     $types = "ii";
 
-    // Trajto dietary restrictions - në këtë shembull thjesht kërkojmë që description të mos përmbajë fjalët e kufizuara (kufizimet ndahen me presje)
     if (!empty($preferences['dietary_restrictions'])) {
         $restrictions = explode(',', $preferences['dietary_restrictions']);
-        foreach ($restrictions as $i => $restriction) {
+        foreach ($restrictions as $restriction) {
             $restriction = trim($restriction);
             if ($restriction !== '') {
                 $query .= " AND description NOT LIKE ?";
@@ -55,7 +55,6 @@ if ($_SESSION['role'] === 'client') {
         }
     }
 
-    // Trajto favorite meals - kërkojmë që description OSE title të përmbajë të paktën njërën nga ushqimet e preferuara
     if (!empty($preferences['favorite_meals'])) {
         $favoriteMeals = explode(',', $preferences['favorite_meals']);
         $favoriteMealsConditions = [];
@@ -80,7 +79,6 @@ if ($_SESSION['role'] === 'client') {
 } else {
     $plansResult = $conn->query("SELECT * FROM nutrition_plans");
 }
-
 ?>
 
 <!DOCTYPE html>
@@ -89,8 +87,7 @@ if ($_SESSION['role'] === 'client') {
     <meta charset="UTF-8">
     <title>Plani Ushqimor - ILLYRIAN GYM</title>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Rajdhani:wght@400;700&display=swap" rel="stylesheet">
-
-  <style>
+    <style>
         :root {
             --neon-green: #45ffca;
             --neon-blue: #33ccff;
@@ -107,7 +104,7 @@ if ($_SESSION['role'] === 'client') {
         }
 
         .main-content {
-            margin-top:100px;
+            margin-top: 100px;
             margin-left: 300px;
             padding: 20px;
         }
@@ -167,7 +164,6 @@ if ($_SESSION['role'] === 'client') {
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
             gap: 20px;
         }
-       
     </style>
 </head>
 <body>
@@ -212,11 +208,16 @@ if ($_SESSION['role'] === 'client') {
                     <p><?= nl2br(htmlspecialchars($plan['description'])) ?></p>
                     <p><strong>Kalori:</strong> <?= $plan['calories'] ?> | <strong>Proteina:</strong> <?= $plan['protein'] ?>g | <strong>Karbo:</strong> <?= $plan['carbs'] ?>g | <strong>Yndyrna:</strong> <?= $plan['fats'] ?>g</p>
                     <p><strong>Kategoria:</strong> <?= ucfirst(str_replace('_', ' ', $plan['category'])) ?></p>
+
+                    <?php if ($_SESSION['role'] === 'admin'): ?>
+                        <form method="post" onsubmit="return confirm('A jeni i sigurt që doni ta fshini këtë plan?');">
+                            <input type="hidden" name="plan_id" value="<?= $plan['id'] ?>">
+                            <button type="submit" name="delete_plan" class="btn">Fshij</button>
+                        </form>
+                    <?php endif; ?>
                 </div>
             <?php endwhile; ?>
         </div>
     </div>
 </body>
 </html>
-
-
