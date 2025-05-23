@@ -33,7 +33,6 @@ require_once "db.php";
                     <th>Emri</th>
                     <th>Çmimi</th>
                     <th>Data e pagesës</th>
-                    <th>Skadimi</th>
                     <th>Statusi</th>
                 </tr>
             </thead>
@@ -84,7 +83,6 @@ $(document).ready(function(){
                         <td>${row.name}</td>
                         <td>€${row.price}</td>
                         <td>${row.payment_date}</td>
-                        <td>-</td>
                         <td class="status-${row.status.toLowerCase()}">${row.status}</td>
                     </tr>
                 `;
