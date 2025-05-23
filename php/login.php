@@ -2,33 +2,36 @@
 require_once("db.php");
 session_start();
 
-// Autologin nga cookie nëse nuk ka sesion aktiv
+// Nëse përdoruesi nuk është në sesion, por ka cookie "remember_user"
 if (!isset($_SESSION['user_id']) && isset($_COOKIE['remember_user'])) {
-    list($user_id, $token) = explode(':', $_COOKIE['remember_user']);
+   $cookie_value = urldecode($_COOKIE['remember_user']);
+list($user_id, $token) = explode(':', $cookie_value);
 
+
+    // Merr të dhënat nga DB për atë user_id
     $stmt = $conn->prepare("SELECT id, name, password, role FROM users WHERE id = ?");
     $stmt->bind_param("i", $user_id);
     $stmt->execute();
     $user = $stmt->get_result()->fetch_assoc();
 
+    // Kontrollo nëse tokeni i cookie-së përputhet me hash-in e password-it në DB
     if ($user && hash_equals(hash('sha256', $user['password']), $token)) {
-        $_SESSION = [
-            'user_id' => $user['id'],
-            'name'    => $user['name'],
-            'role'    => $user['role']
-        ];
+        // Vendos sesionin dhe ridrejto në dashboard
+        $_SESSION['user_id'] = $user['id'];
+        $_SESSION['name'] = $user['name'];
+        $_SESSION['role'] = $user['role'];
+
         header("Location: dashboard.php");
         exit();
+    } else {
+        // Nëse nuk përputhet, fshi cookie-n për të mos krijuar probleme
+        setcookie('remember_user', '', time() - 3600, '/');
     }
-
-    setcookie('remember_user', '', time() - 3600, '/');
 }
 
-// Vlerat fillestare
 $error = "";
 $email = $_COOKIE['remember_email'] ?? '';
 
-// Login manual
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = trim($_POST["email"]);
     $password = $_POST["password"];
@@ -43,11 +46,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $user = $stmt->get_result()->fetch_assoc();
 
         if ($user && password_verify($password, $user['password'])) {
-            $_SESSION = [
-                'user_id' => $user['id'],
-                'name'    => $user['name'],
-                'role'    => $user['role']
-            ];
+            $_SESSION['user_id'] = $user['id'];
+            $_SESSION['name'] = $user['name'];
+            $_SESSION['role'] = $user['role'];
 
             if ($remember) {
                 $token = $user['id'] . ':' . hash('sha256', $user['password']);
@@ -66,6 +67,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 }
 ?>
+
 
 <!DOCTYPE html>
 <html lang="sq">
