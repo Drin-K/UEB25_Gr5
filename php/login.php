@@ -1,41 +1,34 @@
-<?php 
+<?php
 require_once("db.php");
 session_start();
 
-// Nëse përdoruesi nuk është në sesion, por ka cookie "remember_user"
-if (!isset($_SESSION['user_id']) && isset($_COOKIE['remember_user'])) {
-   $cookie_value = urldecode($_COOKIE['remember_user']);
-list($user_id, $token) = explode(':', $cookie_value);
-
-
-    // Merr të dhënat nga DB për atë user_id
+if (!isset($_SESSION['user_id']) && !empty($_COOKIE['remember_user'])) {
+    list($user_id, $token) = explode(':', urldecode($_COOKIE['remember_user']));
     $stmt = $conn->prepare("SELECT id, name, password, role FROM users WHERE id = ?");
     $stmt->bind_param("i", $user_id);
     $stmt->execute();
     $user = $stmt->get_result()->fetch_assoc();
+    $stmt->close();
 
-    // Kontrollo nëse tokeni i cookie-së përputhet me hash-in e password-it në DB
     if ($user && hash_equals(hash('sha256', $user['password']), $token)) {
-        // Vendos sesionin dhe ridrejto në dashboard
-        $_SESSION['user_id'] = $user['id'];
-        $_SESSION['name'] = $user['name'];
-        $_SESSION['role'] = $user['role'];
-
+        $_SESSION = [
+            'user_id' => $user['id'],
+            'name' => $user['name'],
+            'role' => $user['role']
+        ];
         header("Location: ../php/admin&client/dashboard.php");
-        exit();
-    } else {
-        // Nëse nuk përputhet, fshi cookie-n për të mos krijuar probleme
-        setcookie('remember_user', '', time() - 3600, '/');
+        exit;
     }
+    setcookie('remember_user', '', time() - 3600, '/');
 }
 
-$error = "";
+$error = '';
 $email = $_COOKIE['remember_email'] ?? '';
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $email = trim($_POST["email"]);
-    $password = $_POST["password"];
-    $remember = isset($_POST["remember"]);
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $email = trim($_POST['email'] ?? '');
+    $password = $_POST['password'] ?? '';
+    $remember = isset($_POST['remember']);
 
     if (!$email || !$password) {
         $error = "Ju lutem plotësoni të gjitha fushat.";
@@ -44,11 +37,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $stmt->bind_param("s", $email);
         $stmt->execute();
         $user = $stmt->get_result()->fetch_assoc();
+        $stmt->close();
 
         if ($user && password_verify($password, $user['password'])) {
-            $_SESSION['user_id'] = $user['id'];
-            $_SESSION['name'] = $user['name'];
-            $_SESSION['role'] = $user['role'];
+            $_SESSION = [
+                'user_id' => $user['id'],
+                'name' => $user['name'],
+                'role' => $user['role']
+            ];
 
             if ($remember) {
                 $token = $user['id'] . ':' . hash('sha256', $user['password']);
@@ -60,14 +56,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             }
 
             header("Location: ../php/admin&client/dashboard.php");
-            exit();
+            exit;
         } else {
             $error = "Email ose fjalëkalim i pasaktë.";
         }
     }
 }
 ?>
-
 
 <!DOCTYPE html>
 <html lang="sq">
@@ -108,9 +103,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         <div class="signup-link">
             Nuk ke llogari? <a href="signup.php">REGJISTROHU KËTU</a>
-            <br>
-            <br>
-             <a href="main_site/index.php">Kthehu në faqe Kryesore</a>
+            <br><br>
+            <a href="main_site/index.php">Kthehu në faqe Kryesore</a>
         </div>
     </div>
 </body>
