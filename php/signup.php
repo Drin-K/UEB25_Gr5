@@ -6,55 +6,57 @@ session_start();
 $error = "";
 $success = "";
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $name = trim($_POST["username"] ?? '');
     $email = trim($_POST["email"] ?? '');
     $password = $_POST["password"] ?? '';
     $confirm_password = $_POST["confirm_password"] ?? '';
 
-    if (empty($name) || empty($email) || empty($password) || empty($confirm_password)) {
-        trigger_error("Ju lutem plotësoni të gjitha fushat.", E_USER_WARNING);
+    if (!$name || !$email || !$password || !$confirm_password) {
         $error = "Ju lutem plotësoni të gjitha fushat.";
+        trigger_error($error, E_USER_WARNING);
     } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        trigger_error("Email i pavlefshëm: $email", E_USER_WARNING);
         $error = "Email i pavlefshëm.";
+        trigger_error("Email i pavlefshëm: $email", E_USER_WARNING);
     } elseif ($password !== $confirm_password) {
-        trigger_error("Fjalëkalimet nuk përputhen.", E_USER_WARNING);
         $error = "Fjalëkalimet nuk përputhen.";
+        trigger_error($error, E_USER_WARNING);
     } else {
-        if ($stmt = $conn->prepare("SELECT id FROM users WHERE email = ?")) {
+        // Kontrollo nëse email ekziston
+        $stmt = $conn->prepare("SELECT id FROM users WHERE email = ?");
+        if (!$stmt) {
+            $error = "Ndodhi një problem gjatë regjistrimit. Ju lutem provoni përsëri.";
+            trigger_error("Gabim në përgatitjen e query: " . $conn->error, E_USER_ERROR);
+        } else {
             $stmt->bind_param("s", $email);
             $stmt->execute();
             $stmt->store_result();
 
             if ($stmt->num_rows > 0) {
-                trigger_error("Email i përdorur më parë: $email", E_USER_WARNING);
                 $error = "Ky email është përdorur më parë.";
-            } 
+                trigger_error("Email i përdorur më parë: $email", E_USER_WARNING);
+            }
             $stmt->close();
-        } else {
-            trigger_error("Gabim në përgatitjen e query: " . $conn->error, E_USER_ERROR);
-            $error = "Ndodhi një problem gjatë regjistrimit. Ju lutem provoni përsëri.";
         }
 
-        if (empty($error)) {
+        if (!$error) {
             $password_hash = password_hash($password, PASSWORD_DEFAULT);
             $role = 'client';
 
-            if ($stmt = $conn->prepare("INSERT INTO users (name, email, password, role) VALUES (?, ?, ?, ?)")) {
+            $stmt = $conn->prepare("INSERT INTO users (name, email, password, role) VALUES (?, ?, ?, ?)");
+            if (!$stmt) {
+                $error = "Ndodhi një problem gjatë regjistrimit. Ju lutem provoni përsëri.";
+                trigger_error("Gabim në përgatitjen e insert query: " . $conn->error, E_USER_ERROR);
+            } else {
                 $stmt->bind_param("ssss", $name, $email, $password_hash, $role);
 
                 if ($stmt->execute()) {
                     $success = "Regjistrimi u krye me sukses. Tani mund të kyçeni.";
                 } else {
-                    trigger_error("Gabim gjatë insertimit në DB: " . $stmt->error, E_USER_ERROR);
                     $error = "Ndodhi një problem gjatë regjistrimit. Ju lutem provoni përsëri.";
+                    trigger_error("Gabim gjatë insertimit në DB: " . $stmt->error, E_USER_ERROR);
                 }
-
                 $stmt->close();
-            } else {
-                trigger_error("Gabim në përgatitjen e insert query: " . $conn->error, E_USER_ERROR);
-                $error = "Ndodhi një problem gjatë regjistrimit. Ju lutem provoni përsëri.";
             }
         }
     }
@@ -108,7 +110,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <div class="login-link">
             Ke llogari? <a href="login.php">KYÇU KËTU</a>
             <br><br>
-            <a href="index.php">Kthehu në faqe Kryesore</a>
+            <a href="main_site/index.php">Kthehu në faqe Kryesore</a>
         </div>
     </div>
 </body>

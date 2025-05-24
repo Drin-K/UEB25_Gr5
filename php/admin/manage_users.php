@@ -1,7 +1,7 @@
 <?php
 include("../general/header.php");
 include("../general/sidebar.php");
-include("../get_set_data/get_users.php"); // Fetch users and handle messages  
+include("../get_set_data/get_users.php");  
 ?>
 
 <!DOCTYPE html>

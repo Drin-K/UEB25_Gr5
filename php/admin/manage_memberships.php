@@ -1,15 +1,7 @@
 <?php
-session_start();
-if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
-    header("Location: ../login.php");
-    exit();
-}
-
+include("logic/membershipsLogic.php");
 include("../general/header.php");
 include("../general/sidebar.php");
-include("../db.php");
-
-include("../get_set_data/get_memberships.php");
 ?>
 
 <!DOCTYPE html>
@@ -55,6 +47,15 @@ include("../get_set_data/get_memberships.php");
     </table>
 
     <div id="update-message" style="margin-top: 15px; color: green;"></div>
+    <?php if ($addMessage): ?>
+        <p style="color:red;"><?= htmlspecialchars($addMessage); ?></p>
+    <?php endif; ?>
+    <?php if ($editMessage): ?>
+        <p style="color:red;"><?= htmlspecialchars($editMessage); ?></p>
+    <?php endif; ?>
+    <?php if ($deleteMessage): ?>
+        <p style="color:red;"><?= htmlspecialchars($deleteMessage); ?></p>
+    <?php endif; ?>
 </div>
 
 <script>

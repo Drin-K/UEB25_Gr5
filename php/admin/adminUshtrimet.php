@@ -1,14 +1,5 @@
 <?php
-
-$allWorkouts = ['Back', 'Bicep', 'Tricep', 'Leg', 'Shoulder'];
-$counts = [];
-foreach ($allWorkouts as $w) {
-    $cookieName = "count_$w";
-    $counts[$w] = isset($_COOKIE[$cookieName]) ? (int)$_COOKIE[$cookieName] : 0;
-}
-
-// 3. Sort the workouts by count descending
-arsort($counts);
+$counts = require_once("logic/workoutCountsLogic.php");
 ?>
 <!DOCTYPE html>
 <html lang="sq">
@@ -36,7 +27,6 @@ arsort($counts);
           $rank = 1;
           $total = count($counts);
           foreach ($counts as $workout => $cnt):
-            // determine classes for most/least used
             $classes = ['rank'];
             if ($rank === 1)      $classes[] = 'most-used';
             if ($rank === $total) $classes[] = 'least-used';

@@ -1,92 +1,9 @@
 <?php
 include("../general/header.php");
 include("../general/sidebar.php");
-include("../db.php");
-
-// Check if user is logged in
-if (!isset($_SESSION['user_id'])) {
-    header("Location: ../login.php");
-    exit();
-}
-
-// Function to get user data using MySQLi
-function getUserData($userId, $conn) {
-    $query = "SELECT Name, Email, created_at FROM users WHERE id = ?";
-    $stmt = $conn->prepare($query);
-    $stmt->bind_param("i", $userId);
-    $stmt->execute();
-    $result = $stmt->get_result();
-    return $result->fetch_assoc();
-}
-
-// Function to update user data using MySQLi
-function updateUserData($userId, $name, $email, $conn) {
-    $query = "UPDATE users SET Name = ?, Email = ? WHERE id = ?";
-    $stmt = $conn->prepare($query);
-    $stmt->bind_param("ssi", $name, $email, $userId);
-    return $stmt->execute();
-}
-
-// NEW FUNCTION: Change password
-function changePassword($userId, $currentPass, $newPass, $conn) {
-    // Get current password hash
-    $stmt = $conn->prepare("SELECT password FROM users WHERE id = ?");
-    $stmt->bind_param("i", $userId);
-    $stmt->execute();
-    $result = $stmt->get_result();
-    $user = $result->fetch_assoc();
-    
-    // Verify current password
-    if (!password_verify($currentPass, $user['password'])) {
-        return "Current password is incorrect";
-    }
-    
-    // Update password
-    $newHash = password_hash($newPass, PASSWORD_DEFAULT);
-    $updateStmt = $conn->prepare("UPDATE users SET password = ? WHERE id = ?");
-    $updateStmt->bind_param("si", $newHash, $userId);
-    
-    return $updateStmt->execute() ? true : $conn->error;
-}
-
-// Get current user data
-$userData = getUserData($_SESSION['user_id'], $conn);
-
-// Handle profile update
-$successMessage = '';
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['name'])) {
-    $name = $_POST['name'];
-    $email = $_POST['email'];
-    
-    if (updateUserData($_SESSION['user_id'], $name, $email, $conn)) {
-        $successMessage = "Profile updated successfully!";
-        $userData = getUserData($_SESSION['user_id'], $conn);
-    } else {
-        $successMessage = "Error updating profile: " . $conn->error;
-    }
-}
-
-// NEW: Handle password change
-$passwordMessage = '';
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['current_password'])) {
-    $currentPass = $_POST['current_password'];
-    $newPass = $_POST['new_password'];
-    $confirmPass = $_POST['confirm_password'];
-    
-    if ($newPass !== $confirmPass) {
-        $passwordMessage = "New passwords don't match";
-    } elseif (strlen($newPass) < 8) {
-        $passwordMessage = "Password must be at least 8 characters";
-    } else {
-        $result = changePassword($_SESSION['user_id'], $currentPass, $newPass, $conn);
-        if ($result === true) {
-            $passwordMessage = "Password changed successfully!";
-        } else {
-            $passwordMessage = "Error: " . $result;
-        }
-    }
-}
+include("logic/profile_logic.php"); // përfshin logjikën dhe variablat si $userData, $successMessage, $passwordMessage
 ?>
+
 
 <!DOCTYPE html>
 <html lang="sq">

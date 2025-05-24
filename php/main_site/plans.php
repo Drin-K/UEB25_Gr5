@@ -103,24 +103,5 @@ if ($result && $result->num_rows > 0) {
         <?php endforeach; ?>
     </div>
 </section>
-
-<script>
-    <?php foreach ($memberships as $index => $plan): ?>
-        $("#p<?= $index + 1 ?>").click(function () {
-            <?php foreach ($memberships as $i => $ignore): ?>
-                <?php if ($i !== $index): ?>
-                    $("#p<?= $i + 1 ?>").hide();
-                <?php endif; ?>
-            <?php endforeach; ?>
-
-            $("#p<?= $index + 1 ?>").css({
-                transform: "translateX(29vw)",
-                position: "relative",
-                zIndex: 10
-            });
-        });
-    <?php endforeach; ?>
-</script>
-
 </body>
 </html>

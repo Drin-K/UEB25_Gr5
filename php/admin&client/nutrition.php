@@ -1,84 +1,7 @@
 <?php 
 include '../general/header.php';
-include '../db.php';
 include '../general/sidebar.php';
-
-if (!isset($_SESSION['user_id'])) {
-    header("Location: ../login.php");
-    exit();
-}
-
-// Handle form submissions
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    if (isset($_POST['add_plan']) && $_SESSION['role'] === 'admin') {
-        $stmt = $conn->prepare("INSERT INTO nutrition_plans (title, description, calories, protein, carbs, fats, category) VALUES (?, ?, ?, ?, ?, ?, ?)");
-        $stmt->bind_param("ssiiiis", $_POST['title'], $_POST['description'], $_POST['calories'], $_POST['protein'], $_POST['carbs'], $_POST['fats'], $_POST['category']);
-        $stmt->execute();
-    } elseif (isset($_POST['save_preferences'])) {
-        $stmt = $conn->prepare("REPLACE INTO user_nutrition_preferences (user_id, preferred_calories, dietary_restrictions, favorite_meals) VALUES (?, ?, ?, ?)");
-        $stmt->bind_param("iiss", $_SESSION['user_id'], $_POST['preferred_calories'], $_POST['dietary_restrictions'], $_POST['favorite_meals']);
-        $stmt->execute();
-    } elseif (isset($_POST['delete_plan']) && $_SESSION['role'] === 'admin') {
-        $stmt = $conn->prepare("DELETE FROM nutrition_plans WHERE id = ?");
-        $stmt->bind_param("i", $_POST['plan_id']);
-        $stmt->execute();
-    }
-}
-
-// Get preferences
-$preferences = ['preferred_calories' => '', 'dietary_restrictions' => '', 'favorite_meals' => ''];
-if ($_SESSION['role'] === 'client') {
-    $stmt = $conn->prepare("SELECT preferred_calories, dietary_restrictions, favorite_meals FROM user_nutrition_preferences WHERE user_id = ?");
-    $stmt->bind_param("i", $_SESSION['user_id']);
-    $stmt->execute();
-    $result = $stmt->get_result();
-    if ($row = $result->fetch_assoc()) {
-        $preferences = $row;
-    }
-
-    $minCalories = (int)$preferences['preferred_calories'] - 200;
-    $maxCalories = (int)$preferences['preferred_calories'] + 200;
-
-    $query = "SELECT * FROM nutrition_plans WHERE calories BETWEEN ? AND ?";
-    $params = [$minCalories, $maxCalories];
-    $types = "ii";
-
-    if (!empty($preferences['dietary_restrictions'])) {
-        $restrictions = explode(',', $preferences['dietary_restrictions']);
-        foreach ($restrictions as $restriction) {
-            $restriction = trim($restriction);
-            if ($restriction !== '') {
-                $query .= " AND description NOT LIKE ?";
-                $params[] = '%' . $restriction . '%';
-                $types .= "s";
-            }
-        }
-    }
-
-    if (!empty($preferences['favorite_meals'])) {
-        $favoriteMeals = explode(',', $preferences['favorite_meals']);
-        $favoriteMealsConditions = [];
-        foreach ($favoriteMeals as $meal) {
-            $meal = trim($meal);
-            if ($meal !== '') {
-                $favoriteMealsConditions[] = "(title LIKE ? OR description LIKE ?)";
-                $params[] = '%' . $meal . '%';
-                $params[] = '%' . $meal . '%';
-                $types .= "ss";
-            }
-        }
-        if (count($favoriteMealsConditions) > 0) {
-            $query .= " AND (" . implode(" OR ", $favoriteMealsConditions) . ")";
-        }
-    }
-
-    $planStmt = $conn->prepare($query);
-    $planStmt->bind_param($types, ...$params);
-    $planStmt->execute();
-    $plansResult = $planStmt->get_result();
-} else {
-    $plansResult = $conn->query("SELECT * FROM nutrition_plans");
-}
+include 'data/nutrition_data.php'; 
 ?>
 
 <!DOCTYPE html>
@@ -87,83 +10,9 @@ if ($_SESSION['role'] === 'client') {
     <meta charset="UTF-8">
     <title>Plani Ushqimor - ILLYRIAN GYM</title>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Rajdhani:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../css/nutrition.css">
     <style>
-        :root {
-            --neon-green: #45ffca;
-            --neon-blue: #33ccff;
-            --neon-glow-green: 0 0 5px #45ffca, 0 0 10px rgba(69, 255, 202, 0.5);
-            --neon-glow-blue: 0 0 5px #33ccff, 0 0 10px rgba(51, 204, 255, 0.5);
-        }
-
-        body {
-            background-color: #0a0a0a;
-            color: #e0e0e0;
-            font-family: 'Rajdhani', sans-serif;
-            margin: 0;
-            padding: 0;
-        }
-
-        .main-content {
-            margin-top: 100px;
-            margin-left: 300px;
-            padding: 20px;
-        }
-
-        h1, h2 {
-            font-family: 'Orbitron', sans-serif;
-            color: white;
-            text-shadow: var(--neon-glow-blue);
-        }
-
-        .card, .plan-card {
-            background-color: #111;
-            border: 1px solid var(--neon-green);
-            border-radius: 5px;
-            padding: 20px;
-            margin-bottom: 20px;
-            transition: all 0.3s ease;
-        }
-
-        .plan-card {
-            border-color: var(--neon-blue);
-        }
-
-        .card:hover, .plan-card:hover {
-            box-shadow: var(--neon-glow-green);
-        }
-
-        .btn {
-            background-color: transparent;
-            color: var(--neon-blue);
-            border: 1px solid var(--neon-blue);
-            padding: 8px 15px;
-            border-radius: 4px;
-            cursor: pointer;
-            margin-top: 10px;
-            font-family: 'Orbitron', sans-serif;
-        }
-
-        .btn:hover {
-            color: var(--neon-green);
-            border-color: var(--neon-green);
-            box-shadow: var(--neon-glow-green);
-        }
-
-        input, select, textarea {
-            background-color: #1a1a1a;
-            border: 1px solid #333;
-            color: #fff;
-            padding: 8px;
-            border-radius: 4px;
-            margin-bottom: 10px;
-            width: 100%;
-        }
-
-        .plan-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 20px;
-        }
+       
     </style>
 </head>
 <body>
