@@ -19,7 +19,7 @@ class PageContent {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../../css/style.css">
     <title><?php echo SITE_NAME?></title>
     <script src="https://code.jquery.com/jquery-3.7.1.js"></script> 
 </head>
@@ -32,7 +32,7 @@ class PageContent {
             <?php echo generateMenu($menu_items, basename($_SERVER['PHP_SELF']));?>
       </ul>
         <div class="top-btn">
-            <a href="login.php" class="nav-btn">Log in</a>
+            <a href="../login.php" class="nav-btn">Log in</a>
         </div>
         <div class="senvichi">
             <span class="bar"></span>
@@ -50,11 +50,11 @@ class PageContent {
             </div>
             <p>“Take care of your body. It’s the only place you have to live.” <br>
                 <abbr title="High-intensity interval training">HIIT</abbr></p>
-            <a href="login.php" class="btn">Join Us</a>
+            <a href="../login.php" class="btn">Join Us</a>
         </div>
 
         <div class="home-img">
-            <img src="../fotot1/image.png" alt="HeroImage">
+            <img src="../../fotot1/image.png" alt="HeroImage">
         </div>
     </section>
     <footer class="footer">
@@ -68,7 +68,7 @@ class PageContent {
             &copy; <?php echo date("Y")." ".SITE_NAME; ?>
         </p>
     </footer>
-    <script src="../javascj/javascript.js"></script>
+    <script src="../../javascj/javascript.js"></script>
     <script>
         $(document).ready(function(){
             $("h3").click(function(){

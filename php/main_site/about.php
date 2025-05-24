@@ -8,7 +8,7 @@ include 'headers.php';
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../../css/style.css">
     <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
     <title><?php echo SITE_NAME?></title>
 </head>
@@ -24,20 +24,20 @@ include 'headers.php';
         </ul>
 
         <div class="top-btn">
-            <a href="login.php" class="nav-btn">Log in</a>
+            <a href="../login.php" class="nav-btn">Log in</a>
         </div>
         <div class="senvichi">
             <span class="bar"></span>
             <span class="bar"></span>
             <span class="bar"></span>
         </div>
-        <script src="../javascj/javascript.js"></script>
+        <script src="../../javascj/javascript.js"></script>
        
     </header>
 
     <section id="about" class="about">
         <div class="about-img" data-aos="zoom-in-down">
-            <img src="../fotot1/whychooseus.jpg" alt="">
+            <img src="../../fotot1/whychooseus.jpg" alt="">
         </div>
     
         <div class="about-content" data-aos="zoom-in-up">
@@ -47,7 +47,7 @@ include 'headers.php';
             <p>Unlock your potential with our expert Personal Trainers.</p>
             <p>Elevate your fitness with practice sessions.</p>
             <p>We provide Supportive management, for your fitness success.</p>
-            <a href="login.php" class="btn">Book A Free Class</a><br><br><br><br><br><br>
+            <a href="../login.php" class="btn">Book A Free Class</a><br><br><br><br><br><br>
             <b><p id= problem style="font-size: 3rem;">Have a problem ?</p></b>
             <p id = 'linku'style="font-size: large;">
                 <a href="mailto:name@email.com" style="color: rgb(20, 145, 57);">Contact Us</a>

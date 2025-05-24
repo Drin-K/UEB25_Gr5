@@ -18,8 +18,8 @@ include 'headers.php';
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="../css/style.css">
-  <link rel="stylesheet" href="../css/workouts.css">
+  <link rel="stylesheet" href="../../css/style.css">
+  <link rel="stylesheet" href="../../css/workouts.css">
   <title><?php echo SITE_NAME; ?></title>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
@@ -32,7 +32,7 @@ include 'headers.php';
       <?php echo generateMenu($menu_items, basename($_SERVER['PHP_SELF'])); ?>
     </ul>
     <div class="top-btn">
-      <a href="login.php" class="nav-btn">Log in</a>
+      <a href="../login.php" class="nav-btn">Log in</a>
     </div>
     <div class="senvichi">
       <span class="bar"></span>
@@ -114,61 +114,61 @@ include 'headers.php';
   </div>
   <section class="Back" id="Back">
     <div class="video-container">
-      <video controls poster="../fotot1/foto-poster.avif" src="../video/video-back.mp4"></video>
+      <video controls poster="../../fotot1/foto-poster.avif" src="../../video/video-back.mp4"></video>
     </div>
     <div class="text-container">
       <h1>Back <span class="spn">Workouts</span></h1>
     </div>
-    <img class="image-right top-right" src="../fotot1/back.jpg" style="top:110px; right:30px;">
-    <img class="image-right bottom-right" src="../fotot1/back2.jpg" style="bottom:30px; right:510px; width:390px;">
+    <img class="image-right top-right" src="../../fotot1/back.jpg" style="top:110px; right:30px;">
+    <img class="image-right bottom-right" src="../../fotot1/back2.jpg" style="bottom:30px; right:510px; width:390px;">
   </section>
 
   <section class="Leg" id="Leg">
     <div class="video-container">
-      <video controls poster="../fotot1/foto-poster.avif" src="../video/video-leg.mp4"></video>
+      <video controls poster="../../fotot1/foto-poster.avif" src="../../video/video-leg.mp4"></video>
     </div>
     <div class="text-container">
       <h1>Leg <span class="spn">Workouts</span></h1>
     </div>
-    <img class="image-right top-right" src="../fotot1/leg.webp" style="top:110px; right:30px;">
-    <img class="image-right bottom-right" src="../fotot1/leg2.jpg" style="bottom:30px; right:510px;">
+    <img class="image-right top-right" src="../../fotot1/leg.webp" style="top:110px; right:30px;">
+    <img class="image-right bottom-right" src="../../fotot1/leg2.jpg" style="bottom:30px; right:510px;">
   </section>
 
   <section class="Shoulder" id="Shoulder">
     <div class="video-container">
-      <video controls poster="../fotot1/foto-poster.avif" src="../video/video-shoulders.mp4"></video>
+      <video controls poster="../../fotot1/foto-poster.avif" src="../../video/video-shoulders.mp4"></video>
     </div>
     <div class="text-container">
       <h1>Shoulder <span class="spn">Workouts</span></h1>
     </div>
-    <img class="image-right top-right" src="../fotot1/shoulder.webp" style="top:130px; right:30px; width:480px;">
-    <img class="image-right bottom-right" src="../fotot1/shoulder2.webp" style="bottom:50px; right:510px;">
+    <img class="image-right top-right" src="../../fotot1/shoulder.webp" style="top:130px; right:30px; width:480px;">
+    <img class="image-right bottom-right" src="../../fotot1/shoulder2.webp" style="bottom:50px; right:510px;">
   </section>
 
   <section class="Bicep" id="Bicep">
     <div class="video-container">
-      <video controls poster="../fotot1/foto-poster.avif" src="../video/video-bicep.mp4"></video>
+      <video controls poster="../../fotot1/foto-poster.avif" src="../../video/video-bicep.mp4"></video>
     </div>
     <div class="text-container">
       <h1>Bicep <span class="spn">Workouts</span></h1>
     </div>
-    <img class="image-right top-right" src="../fotot1/bicep.webp" style="top:145px; right:15px; width:430px;">
-    <img class="image-right bottom-right" src="../fotot1/bicep2.jpg" style="bottom:35px; right:520px; width:385px;">
+    <img class="image-right top-right" src="../../fotot1/bicep.webp" style="top:145px; right:15px; width:430px;">
+    <img class="image-right bottom-right" src="../../fotot1/bicep2.jpg" style="bottom:35px; right:520px; width:385px;">
   </section>
 
   <section class="Tricep" id="Tricep">
     <div class="video-container">
-      <video controls poster="../fotot1/foto-poster.avif" src="../video/video-tricep.mp4"></video>
+      <video controls poster="../../fotot1/foto-poster.avif" src="../../video/video-tricep.mp4"></video>
     </div>
     <div class="text-container">
       <h1>Tricep <span class="spn">Workouts</span></h1>
     </div>
-    <img class="image-right top-right" src="../fotot1/tricep.jpg" style="top:100px; right:55px; width:300px;">
-    <img class="image-right bottom-right" src="../fotot1/tricep2.webp" style="bottom:49px; right:545px; width:385px;">
+    <img class="image-right top-right" src="../../fotot1/tricep.jpg" style="top:100px; right:55px; width:300px;">
+    <img class="image-right bottom-right" src="../../fotot1/tricep2.webp" style="bottom:49px; right:545px; width:385px;">
   </section>
 
   <button id="scrollTopBtn">Go to Top</button>
-  <script src="../javascj/javascript.js"></script>
+  <script src="../../javascj/javascript.js"></script>
   <script>
     $(document).ready(function(){
       $('#scrollTopBtn').click(function(){

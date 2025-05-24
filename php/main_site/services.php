@@ -61,16 +61,16 @@ return "
 }
 // Lista e shërbimeve të zakonshme
 $services = [
-new Service("../fotot1/c670cb02d9db41a0af7680a6c1fdc55a.jpg","Weightlifting"),
-new Service("../fotot1/woman-running-hard-sweating-37785236.webp","Running"),
-new Service("../fotot1/calisthenics-feature.jpg", "Calisthenics"),
+new Service("../../fotot1/c670cb02d9db41a0af7680a6c1fdc55a.jpg","Weightlifting"),
+new Service("../../fotot1/woman-running-hard-sweating-37785236.webp","Running"),
+new Service("../../fotot1/calisthenics-feature.jpg", "Calisthenics"),
 ];
 // Lista e shërbimeve premium
 $premiumServices = [
-    new PremiumService("../fotot1/jump-roping-total-body-workout-0-1516282424.jpg",
+    new PremiumService("../../fotot1/jump-roping-total-body-workout-0-1516282424.jpg",
     "Physical Fitness","Tailored fitness programs designed to improve overall health, endurance, and flexibility."),
-    new PremiumService("../fotot1/Pro-Boxing-Gallery2.png", "Boxing","Intense boxing workouts focused on technique, strength, and agility to enhance performance."),
-    new PremiumService("../fotot1/Fitness Strenght.jpg", "Strength Training","Progressive weightlifting and resistance exercises aimed at building muscle and increasing strength."),
+    new PremiumService("../../fotot1/Pro-Boxing-Gallery2.png", "Boxing","Intense boxing workouts focused on technique, strength, and agility to enhance performance."),
+    new PremiumService("../../fotot1/Fitness Strenght.jpg", "Strength Training","Progressive weightlifting and resistance exercises aimed at building muscle and increasing strength."),
 ];
 ?>
 <!DOCTYPE html>
@@ -78,7 +78,7 @@ $premiumServices = [
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../../css/style.css">
 <title><?php echo SITE_NAME; ?></title>
 </head>
 <body>
@@ -90,7 +90,7 @@ $premiumServices = [
 </ul>
 
 <div class="top-btn">
-<a href="login.php" class="nav-btn">Log in</a>
+<a href="../login.php" class="nav-btn">Log in</a>
 </div>
 <div class="senvichi">
             <span class="bar"></span>
@@ -99,7 +99,7 @@ $premiumServices = [
         </div>
         
 </header>
-<script src="../javascj/javascript.js"></script>
+<script src="../../javascj/javascript.js"></script>
 <section class="services" id="services">
 <h2 class="heading">Our <span>Services</span></h2>
 <!-- Shfaq numrin total të shërbimeve -->

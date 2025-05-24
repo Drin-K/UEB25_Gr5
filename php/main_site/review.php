@@ -8,7 +8,7 @@ include 'headers.php';
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../../css/style.css">
     <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
     <title><?php echo SITE_NAME?></title>
 </head>
@@ -24,7 +24,7 @@ include 'headers.php';
     </ul>
 
 <div class="top-btn">
-    <a href="login.php" class="nav-btn">Log in</a>
+    <a href="../login.php" class="nav-btn">Log in</a>
 </div>
 </div>
 <div class="senvichi">
@@ -35,7 +35,7 @@ include 'headers.php';
 
 </header>
 
-<script src="../javascj/javascript.js"></script>
+<script src="../../javascj/javascript.js"></script>
 
 <section id="review" class="review">
     <div class="review-box">
@@ -45,7 +45,7 @@ include 'headers.php';
             <div class="review-item">
 
                 <h2>John Depp</h2>
-                <img src="../fotot1/assets/3.jpg" alt="">
+                <img src="../../fotot1/assets/3.jpg" alt="">
                 <div class="rating">
                     <i class='bx bxs-star' id="star"></i>
                     <i class='bx bxs-star' id="star"></i>
@@ -66,7 +66,7 @@ include 'headers.php';
             </div>
             <div class="review-item">
                 <h2>Çamërie Peci</h2>
-                <img src="../fotot1/assets/2.jpg" alt="">
+                <img src="../../fotot1/assets/2.jpg" alt="">
 
                 <div class="rating">
                     <i class='bx bxs-star' id="star"></i>
@@ -87,7 +87,7 @@ include 'headers.php';
 
             <div class="review-item">
                 <h2>Jon Jones</h2>
-                <img src="../fotot1/assets/3.jpg" alt="">
+                <img src="../../fotot1/assets/3.jpg" alt="">
                 <div class="rating">
                     <i class='bx bxs-star' id="star"></i>
                     <i class='bx bxs-star' id="star"></i>
@@ -108,7 +108,7 @@ include 'headers.php';
 
             <div class="review-item">
                 <h2>Alice Cooper</h2>
-                <img src="../fotot1/assets/4.jpg" alt="">
+                <img src="../../fotot1/assets/4.jpg" alt="">
                 <div class="rating">
                     <i class='bx bxs-star' id="star"></i>
                     <i class='bx bxs-star' id="star"></i>
@@ -124,7 +124,7 @@ include 'headers.php';
 
             <div class="review-item">
                 <h2>Mark Smith</h2>
-                <img src="../fotot1/assets/5.jpg" alt="">
+                <img src="../../fotot1/assets/5.jpg" alt="">
                 <div class="rating">
                     <i class='bx bxs-star' id="star"></i>
                     <i class='bx bxs-star' id="star"></i>
@@ -146,7 +146,7 @@ echo $review5;
             
             <div class="review-item">
                 <h2>Jane Doe</h2>
-                <img src="../fotot1/assets/4.jpg" alt="">
+                <img src="../../fotot1/assets/4.jpg" alt="">
                 <div class="rating">
                     <i class='bx bxs-star' id="star"></i>
                     <i class='bx bxs-star' id="star"></i>

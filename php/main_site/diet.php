@@ -44,7 +44,7 @@ $sortMethod = $_POST['calorieSort'] ?? 'krsort'; // default: descending
     
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../../css/style.css">
     <title><?php echo SITE_NAME?></title>
     <style>
         table {
@@ -109,14 +109,14 @@ td {
             <?php echo generateMenu($menu_items, basename($_SERVER['PHP_SELF']));?>
       </ul>
         <div class="top-btn">
-            <a href="login.php" class="nav-btn">Log in</a>
+            <a href="../login.php" class="nav-btn">Log in</a>
         </div>
         <div class="senvichi">
             <span class="bar"></span>
             <span class="bar"></span>
             <span class="bar"></span>
         </div>
-        <script src="../javascj/javascript.js"></script>
+        <script src="../../javascj/javascript.js"></script>
     </header>
 <div class = "diet" data-aos="zoom-in">
 <h1>Balance food plate for weight loss</h1>

@@ -1,6 +1,6 @@
 <?php
 include 'headers.php';
-include 'db.php'; // Sigurohu që lidhet me databazën
+include '../db.php'; // Sigurohu që lidhet me databazën
 
 // Merr membership-et nga databaza
 $result = $conn->query("SELECT * FROM memberships");
@@ -18,7 +18,7 @@ if ($result && $result->num_rows > 0) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../../css/style.css">
     <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
     <title><?php echo SITE_NAME ?></title>
 <style>
@@ -63,14 +63,14 @@ if ($result && $result->num_rows > 0) {
         <?php echo generateMenu($menu_items, basename($_SERVER['PHP_SELF'])); ?>
     </ul>
     <div class="top-btn">
-        <a href="login.php" class="nav-btn">Log in</a>
+        <a href="../login.php" class="nav-btn">Log in</a>
     </div>
     <div class="senvichi">
         <span class="bar"></span>
         <span class="bar"></span>
         <span class="bar"></span>
     </div>
-    <script src="../javascj/javascript.js"></script>
+    <script src="../../javascj/javascript.js"></script>
 </header>
 
 <section class="plans" id="plans">
@@ -95,7 +95,7 @@ if ($result && $result->num_rows > 0) {
                     <?php endif; ?>
                     <li style="list-style-type: none;">At home workouts</li>
                 </ul>
-                <a href="login.php">
+                <a href="../login.php">
                     Join Now
                     <i class='bx bx-right-arrow-alt'></i>
                 </a>

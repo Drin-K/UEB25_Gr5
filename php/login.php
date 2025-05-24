@@ -110,7 +110,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             Nuk ke llogari? <a href="signup.php">REGJISTROHU KËTU</a>
             <br>
             <br>
-             <a href="index.php">Kthehu në faqe Kryesore</a>
+             <a href="main_site/index.php">Kthehu në faqe Kryesore</a>
         </div>
     </div>
 </body>
