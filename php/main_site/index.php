@@ -59,9 +59,9 @@ class PageContent {
     </section>
     <footer class="footer">
         <div class="social">
-            <a href="https://www.instagram.com" target="_blank"><img src="../fotot1/instagram.jpg"></img></a>
-            <a href="https://www.facebook.com" target="_blank"><img src="../fotot1/facebook.jpg"></img></a>
-            <a href="https://www.linkedin.com" target="_blank"><img src="../fotot1/linkedin.jpg"></img></a>
+            <a href="https://www.instagram.com" target="_blank"><img src="../../fotot1/instagram.jpg"></img></a>
+            <a href="https://www.facebook.com" target="_blank"><img src="../../fotot1/facebook.jpg"></img></a>
+            <a href="https://www.linkedin.com" target="_blank"><img src="../../fotot1/linkedin.jpg"></img></a>
         </div>
 
         <p class="copyright">
