@@ -1,105 +1,158 @@
+/* PROFILI - STIL FUTURISTIK */
+    .profile-container {
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 30px;
+        background: rgba(10, 10, 10, 0.7);
+        border-radius: 10px;
+        box-shadow: 0 0 20px rgba(51, 204, 255, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.05);
+    }
 
-        :root {
-            --neon-green: #22ff88;
-            --neon-blue: #33ccff;
-            --dark-bg: #0a0a0a;
-            --darker-bg: #050505;
-            --sidebar-width: 280px;
-        }
+    h2 {
+        color: var(--neon-green);
+        margin-bottom: 30px;
+        font-size: 2rem;
+        text-shadow: 0 0 10px rgba(34, 255, 136, 0.3);
+        position: relative;
+        padding-bottom: 10px;
+    }
 
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: 'Arial', sans-serif;
-            background: var(--dark-bg);
-            color: white;
-            display: flex;
-            min-height: 100vh;
-        }
+    h2::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100px;
+        height: 3px;
+        background: linear-gradient(90deg, var(--neon-green), var(--neon-blue));
+    }
 
-        .sidebar {
-            width: var(--sidebar-width);
-            background: var(--darker-bg);
-            padding: 20px;
-            border-right: 1px solid rgba(255,255,255,0.1);
-        }
+    .profile-info {
+        margin-bottom: 40px;
+    }
 
-        .menu {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
+    .form-group {
+        margin-bottom: 25px;
+    }
 
-        .menu li {
-            padding: 12px 0;
-            border-bottom: 1px solid rgba(255,255,255,0.05);
-        }
+    label {
+        display: block;
+        margin-bottom: 8px;
+        color: var(--neon-blue);
+        font-size: 0.9rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
 
-        .menu li a {
-            color: rgba(255,255,255,0.8);
-            text-decoration: none;
-            font-size: 1.1rem;
-            transition: all 0.3s;
-        }
+    input {
+        width: 100%;
+        padding: 12px 15px;
+        background: rgba(0, 0, 0, 0.3);
+        border: 1px solid rgba(51, 204, 255, 0.2);
+        border-radius: 6px;
+        color: white;
+        font-size: 1rem;
+        transition: all 0.3s ease;
+    }
 
-        .menu li a:hover {
-            color: var(--neon-blue);
-        }
+    input:focus {
+        outline: none;
+        border-color: var(--neon-blue);
+        box-shadow: 0 0 10px rgba(51, 204, 255, 0.3);
+    }
 
-        .content {
-            flex: 1;
-            padding: 40px;
-            background: var(--darker-bg);
-        }
+    .readonly-field {
+        background: rgba(0, 0, 0, 0.2);
+        color: rgba(255, 255, 255, 0.6);
+        border: 1px solid rgba(255, 255, 255, 0.05);
+    }
 
-        .profile-container {
-            max-width: 600px;
-            margin: 0 auto;
-        }
+    button[type="submit"] {
+        background: linear-gradient(135deg, var(--neon-green), var(--neon-blue));
+        color: black;
+        border: none;
+        padding: 12px 25px;
+        font-weight: bold;
+        font-size: 1rem;
+        border-radius: 6px;
+        cursor: pointer;
+        margin-top: 10px;
+        transition: all 0.3s ease;
+        box-shadow: 0 0 15px rgba(51, 204, 255, 0.3);
+    }
 
-        h2 {
-            color: var(--neon-green);
-            margin-bottom: 30px;
-            font-size: 2rem;
-        }
+    button[type="submit"]:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 0 20px rgba(51, 204, 255, 0.5);
+    }
 
-        .form-group {
-            margin-bottom: 20px;
-        }
+    /* SEKSIONI I FJALËKALIMIT */
+    .password-section {
+        margin-top: 40px;
+        padding: 25px;
+        background: rgba(5, 5, 5, 0.6);
+        border-radius: 10px;
+        border: 1px solid rgba(34, 255, 136, 0.1);
+        box-shadow: 0 0 15px rgba(34, 255, 136, 0.1);
+    }
 
-        label {
-            display: block;
-            margin-bottom: 8px;
-            color: var(--neon-blue);
-        }
+    .password-section h3 {
+        color: var(--neon-green);
+        margin-top: 0;
+        margin-bottom: 20px;
+        font-size: 1.5rem;
+    }
 
-        input {
-            width: 100%;
-            padding: 12px;
-            background: rgba(0,0,0,0.3);
-            border: 1px solid rgba(255,255,255,0.1);
-            border-radius: 4px;
-            color: white;
-            font-size: 1rem;
-        }
+    .password-form input[type="password"] {
+        background: rgba(0, 0, 0, 0.4);
+        border: 1px solid rgba(34, 255, 136, 0.2);
+    }
 
-        .readonly-field {
-            background: rgba(0,0,0,0.1);
-            color: rgba(255,255,255,0.6);
-        }
+    .password-form input[type="password"]:focus {
+        border-color: var(--neon-green);
+        box-shadow: 0 0 10px rgba(34, 255, 136, 0.3);
+    }
 
-        .btn {
-            background: var(--neon-green);
-            color: black;
-            border: none;
-            padding: 12px 20px;
-            font-weight: bold;
-            border-radius: 4px;
-            cursor: pointer;
-            margin-top: 20px;
-        }
+    /* MESAZHET */
+    .message {
+        padding: 15px;
+        margin: 15px 0;
+        border-radius: 6px;
+        font-weight: 500;
+        animation: fadeIn 0.5s ease;
+    }
 
-        .success-message {
-            color: var(--neon-green);
-            margin-bottom: 20px;
+    .success {
+        background: rgba(34, 255, 136, 0.1);
+        color: var(--neon-green);
+        border: 1px solid rgba(34, 255, 136, 0.3);
+    }
+
+    .error {
+        background: rgba(255, 51, 102, 0.1);
+        color: #ff3366;
+        border: 1px solid rgba(255, 51, 102, 0.3);
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(-10px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ANIMACIONE */
+    .profile-container {
+        animation: glow 8s ease-in-out infinite alternate;
+    }
+
+    @keyframes glow {
+        0% {
+            box-shadow: 0 0 10px rgba(51, 204, 255, 0.1);
         }
+        50% {
+            box-shadow: 0 0 20px rgba(34, 255, 136, 0.2);
+        }
+        100% {
+            box-shadow: 0 0 10px rgba(51, 204, 255, 0.1);
+        }
+    }

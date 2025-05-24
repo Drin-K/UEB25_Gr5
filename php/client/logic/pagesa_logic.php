@@ -1,5 +1,4 @@
 <?php
-session_start();
 require_once("../db.php");
 
 if (!isset($_SESSION['user_id'])) {
@@ -7,7 +6,7 @@ if (!isset($_SESSION['user_id'])) {
     exit();
 }
 
-// Numërimi i vizitave
+
 if (!isset($_SESSION['visit_count'])) {
     $_SESSION['visit_count'] = 1;
 } else {
@@ -15,7 +14,7 @@ if (!isset($_SESSION['visit_count'])) {
 }
 $GLOBALS['visitMessage'] = "Ju keni vizituar këtë faqe " . $_SESSION['visit_count'] . " herë në këtë sesion.";
 
-// Ngarko të gjitha membership-et për dropdown
+
 $memberships = [];
 $query = $conn->query("SELECT id, name, price FROM memberships");
 while ($row = $query->fetch_assoc()) {
@@ -23,7 +22,6 @@ while ($row = $query->fetch_assoc()) {
 }
 $GLOBALS['memberships'] = $memberships;
 
-// Përpunimi i formës së pagesës
 $successMessage = "";
 $userId = $_SESSION['user_id'];
 
@@ -50,7 +48,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     exit();
 }
 
-// Merr mesazhin e suksesit nëse ka
+
 if (isset($_SESSION['success_message'])) {
     $successMessage = $_SESSION['success_message'];
     unset($_SESSION['success_message']);
