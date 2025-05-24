@@ -2,14 +2,13 @@
 include '../db.php';
 session_start();
 
-// Verifikimi i përdoruesit
+// Kontrolli i sesionit
 if (!isset($_SESSION['user_id'])) {
     header("Location: ../login.php");
     exit();
 }
 
-// Trajtimi i POST kërkesave
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['add_plan']) && $_SESSION['role'] === 'admin') {
         $stmt = $conn->prepare("INSERT INTO nutrition_plans (title, description, calories, protein, carbs, fats, category) VALUES (?, ?, ?, ?, ?, ?, ?)");
         $stmt->bind_param("ssiiiis", $_POST['title'], $_POST['description'], $_POST['calories'], $_POST['protein'], $_POST['carbs'], $_POST['fats'], $_POST['category']);
@@ -25,9 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 }
 
-// Marrja e preferencave dhe planeve
-$preferences = ['preferred_calories' => '', 'dietary_restrictions' => '', 'favorite_meals' => ''];
-$plansResult = null;
+$preferences = ['preferred_calories' => 0, 'dietary_restrictions' => '', 'favorite_meals' => ''];
 
 if ($_SESSION['role'] === 'client') {
     $stmt = $conn->prepare("SELECT preferred_calories, dietary_restrictions, favorite_meals FROM user_nutrition_preferences WHERE user_id = ?");
@@ -38,46 +35,48 @@ if ($_SESSION['role'] === 'client') {
         $preferences = $row;
     }
 
-    $minCalories = (int)$preferences['preferred_calories'] - 200;
+    $minCalories = max(0, (int)$preferences['preferred_calories'] - 200);
     $maxCalories = (int)$preferences['preferred_calories'] + 200;
 
     $query = "SELECT * FROM nutrition_plans WHERE calories BETWEEN ? AND ?";
     $params = [$minCalories, $maxCalories];
     $types = "ii";
 
-    if (!empty($preferences['dietary_restrictions'])) {
-        $restrictions = explode(',', $preferences['dietary_restrictions']);
-        foreach ($restrictions as $restriction) {
-            $restriction = trim($restriction);
-            if ($restriction !== '') {
+    // Shtojmë kushtet për kufizimet dietike
+    if ($preferences['dietary_restrictions'] !== '') {
+        foreach (explode(',', $preferences['dietary_restrictions']) as $r) {
+            $r = trim($r);
+            if ($r !== '') {
                 $query .= " AND description NOT LIKE ?";
-                $params[] = '%' . $restriction . '%';
+                $params[] = "%$r%";
                 $types .= "s";
             }
         }
     }
 
-    if (!empty($preferences['favorite_meals'])) {
-        $favoriteMeals = explode(',', $preferences['favorite_meals']);
-        $favoriteMealsConditions = [];
-        foreach ($favoriteMeals as $meal) {
-            $meal = trim($meal);
-            if ($meal !== '') {
-                $favoriteMealsConditions[] = "(title LIKE ? OR description LIKE ?)";
-                $params[] = '%' . $meal . '%';
-                $params[] = '%' . $meal . '%';
+    // Shtojmë kushtet për ushqimet e preferuara
+    if ($preferences['favorite_meals'] !== '') {
+        $likes = [];
+        foreach (explode(',', $preferences['favorite_meals']) as $m) {
+            $m = trim($m);
+            if ($m !== '') {
+                $likes[] = "(title LIKE ? OR description LIKE ?)";
+                $params[] = "%$m%";
+                $params[] = "%$m%";
                 $types .= "ss";
             }
         }
-        if (count($favoriteMealsConditions) > 0) {
-            $query .= " AND (" . implode(" OR ", $favoriteMealsConditions) . ")";
+        if ($likes) {
+            $query .= " AND (" . implode(" OR ", $likes) . ")";
         }
     }
 
-    $planStmt = $conn->prepare($query);
-    $planStmt->bind_param($types, ...$params);
-    $planStmt->execute();
-    $plansResult = $planStmt->get_result();
+    $stmt = $conn->prepare($query);
+    $stmt->bind_param($types, ...$params);
+    $stmt->execute();
+    $plansResult = $stmt->get_result();
+
 } else {
+    // Admin dhe të tjerët marrin të gjitha planet
     $plansResult = $conn->query("SELECT * FROM nutrition_plans");
 }
