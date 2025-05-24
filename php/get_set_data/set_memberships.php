@@ -42,6 +42,9 @@ if (isset($_POST['add'])) {
             exit();
         }
         $stmt->close();
+        $msg = "Membership-i u shtua me sukses.";
+        header("Location: ../admin/manage_memberships.php?addMessage=" . urlencode($msg));
+        exit();
     } else {
         header("Location: ../admin/manage_memberships.php?addMessage=" . urlencode("Emri ose çmimi nuk janë të vlefshëm."));
         exit();
@@ -63,3 +66,4 @@ if (isset($_GET['delete'])) {
     header("Location: ../admin/manage_memberships.php");
     exit();
 }
+?>
