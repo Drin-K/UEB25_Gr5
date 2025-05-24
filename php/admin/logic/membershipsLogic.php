@@ -5,14 +5,12 @@
 //     exit();
 // }
 
-include("../db.php");
-
+require_once("../db.php");
+require_once("../general/error_handler.php");
+trigger_error("Ky është një test nga membershipsLogic.php!", E_USER_WARNING);
 function handleDbError($msg, $stmt = null) {
-    if ($stmt) {
-        throw new Exception($msg . " " . $stmt->error);
-    } else {
-        throw new Exception($msg);
-    }
+    $details = $stmt ? $stmt->error : '';
+    trigger_error($msg . ' ' . $details, E_USER_WARNING);
 }
 
 $addMessage = "";
