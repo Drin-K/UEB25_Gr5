@@ -65,6 +65,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 }
 
-header("Location: ../stervitjet.php");
+header("Location: ../client/stervitjet.php");
 exit();
 ?>

@@ -1,11 +1,11 @@
 <?php
-include("header.php");
-include("sidebar.php");
+include("../general/header.php");
+include("../general/sidebar.php");
 
 $role = $_SESSION['role'];
 ?>
 <html>
-<head><link rel="stylesheet" href="../css/dashboard.css"></head>
+<head><link rel="stylesheet" href="../../css/dashboard.css"></head>
 
 <body>
 <div class="content">
@@ -19,6 +19,6 @@ $role = $_SESSION['role'];
     </p>
 </div>
 
-<?php include("footer.php"); ?>
+<?php include("../general/footer.php"); ?>
 </body>
 </html>

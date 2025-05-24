@@ -1,5 +1,5 @@
 <?php
-require_once "db.php";
+require_once "../db.php";
 
 $addMessage = $_GET['add'] ?? '';
 $deleteMessage = $_GET['delete'] ?? '';

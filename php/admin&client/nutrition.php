@@ -1,10 +1,10 @@
 <?php 
-include 'header.php';
-include 'db.php';
-include 'sidebar.php';
+include '../general/header.php';
+include '../db.php';
+include '../general/sidebar.php';
 
 if (!isset($_SESSION['user_id'])) {
-    header("Location: login.php");
+    header("Location: ../login.php");
     exit();
 }
 

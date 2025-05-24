@@ -1,8 +1,8 @@
 <?php
-include("header.php");
-include("sidebar.php");
-require_once "db.php";
-include("../php/get_set_data/get_subscriptionANDpaymentsUpdate.php")
+include("../general/header.php");
+include("../general/sidebar.php");
+require_once "../db.php";
+include("../get_set_data/get_subscriptionANDpaymentsUpdate.php")
 
 ?>
 <!DOCTYPE html>
@@ -11,7 +11,7 @@ include("../php/get_set_data/get_subscriptionANDpaymentsUpdate.php")
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Menaxho Subscription</title>
-  <link rel="stylesheet" href="../css/subscription.css">
+  <link rel="stylesheet" href="../../css/subscription.css">
 </head>
 <body>
   <div class="membership-container">
@@ -58,6 +58,6 @@ include("../php/get_set_data/get_subscriptionANDpaymentsUpdate.php")
 
     </div>
   </div>
-<?php include("footer.php"); ?>
+<?php include("../general/footer.php"); ?>
 </body>
 </html>

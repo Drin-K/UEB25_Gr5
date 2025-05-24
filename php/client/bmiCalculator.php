@@ -1,6 +1,6 @@
 <?php
-include("header.php");
-include("sidebar.php");
+include("../general/header.php");
+include("../general/sidebar.php");
 ?>
 
 <!DOCTYPE html>
@@ -8,7 +8,7 @@ include("sidebar.php");
 <head>
   <meta charset="UTF-8">
   <title>BMI Calculator</title>
-  <link rel="stylesheet" href="../css/bmiCalculator.css">
+  <link rel="stylesheet" href="../../css/bmiCalculator.css">
 
 </head>
 <body>
@@ -43,7 +43,7 @@ include("sidebar.php");
               echo "Hello {$name}, your BMI is {$bmi} ({$category}).";
 
               $line = date("Y-m-d H:i:s") . "|$user_id|$name|$weight|$height|$bmi|$category\n";
-              $file = fopen("../bmihistory/bmi_logs.txt", "a");
+              $file = fopen("../../bmihistory/bmi_logs.txt", "a");
               fwrite($file, $line);
               fclose($file);
           } else {
@@ -67,7 +67,7 @@ include("sidebar.php");
       </tr>
       <?php
       if (isset($_SESSION['user_id'])) {
-          $filePath = "../bmihistory/bmi_logs.txt";
+          $filePath = "../../bmihistory/bmi_logs.txt";
           if (file_exists($filePath)) {
               $rows = file($filePath, FILE_IGNORE_NEW_LINES);
               foreach (array_reverse($rows) as $row) {

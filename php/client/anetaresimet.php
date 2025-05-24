@@ -1,15 +1,15 @@
 <?php
 
-include("header.php");
-include("sidebar.php");
+include("../general/header.php");
+include("../general/sidebar.php");
 
 if (!isset($_SESSION['user_id'])) {
-    header("Location: login.php");
+    header("Location: ../login.php");
     exit();
 }
 
 $user_id = $_SESSION['user_id'];
-require_once "db.php";
+require_once "../db.php";
 ?>
 
 <!DOCTYPE html>
@@ -18,7 +18,7 @@ require_once "db.php";
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Anëtarësimet</title>
-    <link rel="stylesheet" href="../css/anetaresimet.css" />
+    <link rel="stylesheet" href="../../css/anetaresimet.css" />
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
@@ -50,7 +50,7 @@ $(document).ready(function(){
 
     // Anëtarësimi aktual
     $.ajax({
-        url: '../php/get_set_data/get_membership.php',
+        url: '../get_set_data/get_membership.php',
         method: 'GET',
         dataType: 'json',
         success: function(data) {
@@ -72,7 +72,7 @@ $(document).ready(function(){
 
     // Historiku i anëtarësimeve
     $.ajax({
-        url: '../php/get_set_data/get_history.php',
+        url: '../get_set_data/get_history.php',
         method: 'GET',
         dataType: 'json',
         success: function(data) {
@@ -96,7 +96,7 @@ $(document).ready(function(){
 
     // Thënie motivuese
     $.ajax({
-        url: '../php/get_set_data/api_motivation.php',
+        url: '../get_set_data/api_motivation.php',
         method: 'GET',
         dataType: 'json',
         success: function(data) {
@@ -113,4 +113,4 @@ $(document).ready(function(){
 </body>
 </html>
 
-<?php include("footer.php"); ?>
+<?php include("../general/footer.php"); ?>

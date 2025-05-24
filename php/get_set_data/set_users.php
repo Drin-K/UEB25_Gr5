@@ -11,9 +11,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['add_user'])) {
     $stmt = $conn->prepare("INSERT INTO users (name, email, password, role) VALUES (?, ?, ?, ?)");
     $stmt->bind_param("ssss", $name, $email, $password, $role);
     if ($stmt->execute()) {
-        header("Location: ../manage_users.php?add=✅ Përdoruesi u shtua me sukses!");
+        header("Location: ../admin/manage_users.php?add=✅ Përdoruesi u shtua me sukses!");
     } else {
-        header("Location: ../manage_users.php?add=❌ Emaili ekziston ose ndodhi një gabim!");
+        header("Location: ../admin/manage_users.php?add=❌ Emaili ekziston ose ndodhi një gabim!");
     }
     exit;
 }
@@ -24,9 +24,9 @@ if (isset($_POST['delete_user_id'])) {
     $stmt = $conn->prepare("DELETE FROM users WHERE id = ?");
     $stmt->bind_param("i", $userId);
     if ($stmt->execute()) {
-        header("Location: ../manage_users.php?delete=✅ Përdoruesi u fshi me sukses!");
+        header("Location: ../admin/manage_users.php?delete=✅ Përdoruesi u fshi me sukses!");
     } else {
-        header("Location: ../manage_users.php?delete=❌ Ndodhi një gabim gjatë fshirjes!");
+        header("Location: ../admin/manage_users.php?delete=❌ Ndodhi një gabim gjatë fshirjes!");
     }
     exit;
 }

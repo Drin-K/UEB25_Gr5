@@ -1,7 +1,7 @@
 <?php
-include("header.php");
-include("sidebar.php");
-include("db.php");
+include("../general/header.php");
+include("../general/sidebar.php");
+include("../db.php");
 
 if (!isset($_SESSION['visit_count'])) {
     $_SESSION['visit_count'] = 1;
@@ -10,7 +10,7 @@ if (!isset($_SESSION['visit_count'])) {
 }
 $visitMessage = "Ju keni vizituar këtë faqe " . $_SESSION['visit_count'] . " herë në këtë sesion.";
 
-$role = $_SESSION['role'] ?? 'guest';
+$role = $_SESSION['role'] ?? 'client';
 $userId = $_SESSION['user_id'] ?? null;
 
 $successMessage = "";
@@ -54,8 +54,8 @@ if (isset($_SESSION['success_message'])) {
 <head>
     <meta charset="UTF-8">
     <title>Pagesa - ILLYRIAN GYM</title>
-    <link rel="stylesheet" href="../css/dashboard.css">
-    <link rel="stylesheet" href="../css/pagesat.css">
+    <link rel="stylesheet" href="../../css/dashboard.css">
+    <link rel="stylesheet" href="../../css/pagesat.css">
 </head>
 <body>
 <div class="content">

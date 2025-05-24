@@ -1,11 +1,11 @@
 <?php
-include("header.php");
-include("sidebar.php");
-include("db.php");
+include("../general/header.php");
+include("../general/sidebar.php");
+include("../db.php");
 
 // Check if user is logged in
 if (!isset($_SESSION['user_id'])) {
-    header("Location: login.php");
+    header("Location: ../login.php");
     exit();
 }
 
@@ -94,7 +94,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['current_password'])) 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profili - ILLYRIAN GYM</title>
-    <link rel="stylesheet" href="../css/pagesat.css">
+    <link rel="stylesheet" href="../../css/pagesat.css">
     <style>
     /* PROFILI - STIL FUTURISTIK */
     .profile-container {

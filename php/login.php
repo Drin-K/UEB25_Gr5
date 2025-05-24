@@ -21,7 +21,7 @@ list($user_id, $token) = explode(':', $cookie_value);
         $_SESSION['name'] = $user['name'];
         $_SESSION['role'] = $user['role'];
 
-        header("Location: dashboard.php");
+        header("Location: ../php/admin&client/dashboard.php");
         exit();
     } else {
         // Nëse nuk përputhet, fshi cookie-n për të mos krijuar probleme
@@ -59,7 +59,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 setcookie('remember_email', '', time() - 3600, '/');
             }
 
-            header("Location: dashboard.php");
+            header("Location: ../php/admin&client/dashboard.php");
             exit();
         } else {
             $error = "Email ose fjalëkalim i pasaktë.";

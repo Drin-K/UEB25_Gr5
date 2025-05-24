@@ -1,8 +1,8 @@
 <?php 
-include("header.php");
-include("sidebar.php");
-include("db.php");
-include("../php/get_set_data/get_stervitjet.php");
+include("../general/header.php");
+include("../general/sidebar.php");
+include("../db.php");
+include("../get_set_data/get_stervitjet.php");
 ?>
 
 <!DOCTYPE html>
@@ -11,8 +11,8 @@ include("../php/get_set_data/get_stervitjet.php");
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Planet e Stërvitjes</title>
-    <link rel="stylesheet" href="../css/dashboard.css">
-    <link rel="stylesheet" href="../css/stervitjet.css">
+    <link rel="stylesheet" href="../../css/dashboard.css">
+    <link rel="stylesheet" href="../../css/stervitjet.css">
 </head>
 <body>
 <div class="content">
@@ -24,7 +24,7 @@ include("../php/get_set_data/get_stervitjet.php");
 
     <div class="create-plan-form">
         <h3>Krijo Plan të Ri</h3>
-        <form method="post" action="../php/get_set_data/set_stervitjet.php">
+        <form method="post" action="../get_set_data/set_stervitjet.php">
             <div class="form-group">
                 <input type="text" name="new_title" placeholder="Titulli i Planit" required>
             </div>
@@ -42,7 +42,7 @@ include("../php/get_set_data/get_stervitjet.php");
                 $isActive = ($activePlanId == $row['id']);
         ?>
             <div class="plan-card <?= $isActive ? 'active-plan' : ($isSuggested ? 'suggested-plan' : '') ?>">
-                <form method="post" action="../php/get_set_data/set_stervitjet.php" class="desc-form">
+                <form method="post" action="../get_set_data/set_stervitjet.php" class="desc-form">
                     <input type="text" name="title" value="<?= htmlspecialchars($row['title']) ?>" class="plan-title">
                     <small>🗓️ <?= date("d M Y", strtotime($row['created_at'])) ?></small>
                     <textarea name="description" rows="4"><?= htmlspecialchars($row['description']) ?></textarea>

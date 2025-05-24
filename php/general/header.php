@@ -3,7 +3,7 @@
 session_start();
 
 if (!isset($_SESSION['user_id'])) {
-    header("Location: login.php");
+    header("Location: ../login.php");
     exit();
 }
 ?>
@@ -16,23 +16,23 @@ if (!isset($_SESSION['user_id'])) {
     <title>Dashboard - ILLYRIAN Gym</title>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Rajdhani:wght@400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-<link rel="stylesheet" href="../css/header.css">
+<link rel="stylesheet" href="../../css/header.css">
 </head>
 <body>
     <header>
-        <a href="dashboard.php" class="logo">ILLYRIAN <span>GYM</span></a>
+        <a href="../admin&client/dashboard.php" class="logo">ILLYRIAN <span>GYM</span></a>
         
         <i class="fas fa-bars" id="menu-icon"></i>
         
         <nav id="navbar">
             <div class="user-menu">
                 <span class="user-greeting">Mirë se erdhe, <?php echo htmlspecialchars($_SESSION['name']); ?></span>
-                <button class="logout-btn" onclick="window.location.href='logout.php'">Dil</button>
+                <button class="logout-btn" onclick="window.location.href='../logout.php'">Dil</button>
             </div>
         </nav>
     </header>
     <body>
-<script src="../javascj/header.js"></script>
+<script src="../../javascj/header.js"></script>
 
 </body>
 </html>

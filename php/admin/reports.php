@@ -1,7 +1,7 @@
 <?php
-include("header.php");
-include("sidebar.php");
-include("../php/get_set_data/get_reports.php");
+include("../general/header.php");
+include("../general/sidebar.php");
+include("../get_set_data/get_reports.php");
 ?>
 
 <!DOCTYPE html>
@@ -9,7 +9,7 @@ include("../php/get_set_data/get_reports.php");
 <head>
     <meta charset="UTF-8">
     <title>Raportet e Përdoruesve</title>
-    <link rel="stylesheet" href="../css/dashboard.css">
+    <link rel="stylesheet" href="../../css/dashboard.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         .report-table {

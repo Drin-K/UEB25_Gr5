@@ -1,5 +1,5 @@
 <?php
-require_once "../php/db.php";
+require_once "../db.php";
 // --- STEP 1: EXPIRE OLD PAYMENTS & NOTIFY USERS ----------------------
 // Find any payments still marked 'active' whose 30‑day window has passed
 $check_sql = "

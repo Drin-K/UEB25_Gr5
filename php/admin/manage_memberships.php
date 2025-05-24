@@ -1,13 +1,13 @@
 <?php
 session_start();
 if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
-    header("Location: login.php");
+    header("Location: ../login.php");
     exit();
 }
 
-include("header.php");
-include("sidebar.php");
-include("db.php");
+include("../general/header.php");
+include("../general/sidebar.php");
+include("../db.php");
 
 function handleDbError($msg, $stmt = null) {
     if ($stmt) {
@@ -87,7 +87,7 @@ $memberships = $conn->query("SELECT * FROM memberships");
 <head>
     <meta charset="UTF-8">
     <title>Menaxhimi i Anëtarësimeve</title>
-    <link rel="stylesheet" href="../css/memberships.css">
+    <link rel="stylesheet" href="../../css/memberships.css">
     <script>  
     function enableEditing(rowId) {
         const row = document.getElementById(rowId);

@@ -1,7 +1,7 @@
 <?php
-include("header.php");
-include("sidebar.php");
-include("../php/get_set_data/get_users.php"); // Fetch users and handle messages  
+include("../general/header.php");
+include("../general/sidebar.php");
+include("../get_set_data/get_users.php"); // Fetch users and handle messages  
 ?>
 
 <!DOCTYPE html>
@@ -9,8 +9,8 @@ include("../php/get_set_data/get_users.php"); // Fetch users and handle messages
 <head>
     <meta charset="UTF-8">
     <title>Menaxho Përdoruesit</title>
-    <link rel="stylesheet" href="../css/dashboard.css">
-    <link rel="stylesheet" href="../css/users.css">
+    <link rel="stylesheet" href="../../css/dashboard.css">
+    <link rel="stylesheet" href="../../css/users.css">
 </head>
 <body>
 <div class="content">
@@ -20,7 +20,7 @@ include("../php/get_set_data/get_users.php"); // Fetch users and handle messages
     <?php if ($deleteMessage): ?><div class="alert"><?= $deleteMessage ?></div><?php endif; ?>
 
     <!-- Forma për shtimin e përdoruesit -->
-    <form method="post" action="../php/get_set_data/set_users.php" class="add-user-form">
+    <form method="post" action="../get_set_data/set_users.php" class="add-user-form">
         <h3>Shto Përdorues të Ri</h3>
         <input type="text" name="name" placeholder="Emri" required>
         <input type="email" name="email" placeholder="Email" required>
@@ -50,7 +50,7 @@ include("../php/get_set_data/get_users.php"); // Fetch users and handle messages
                 <td><?= htmlspecialchars($row['email']) ?></td>
                 <td><?= htmlspecialchars($row['role']) ?></td>
                 <td>
-                    <form method="post" action="../php/get_set_data/set_users.php" onsubmit="return confirm('Jeni i sigurt që doni të fshini këtë përdorues?');">
+                    <form method="post" action="../get_set_data/set_users.php" onsubmit="return confirm('Jeni i sigurt që doni të fshini këtë përdorues?');">
                         <input type="hidden" name="delete_user_id" value="<?= $row['id'] ?>">
                         <button type="submit" class="delete-btn">Fshi</button>
                     </form>

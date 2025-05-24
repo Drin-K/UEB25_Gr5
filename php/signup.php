@@ -1,6 +1,6 @@
 <?php  
 require_once("db.php");
-require_once("error_handler.php");
+require_once("../php/general/error_handler.php");
 session_start();
 
 $error = "";

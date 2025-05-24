@@ -1,5 +1,5 @@
 <?php
-require_once "db.php";
+require_once "../db.php";
 
 // o Kthimi përmes referencës
 function &getReports(mysqli &$conn): array {

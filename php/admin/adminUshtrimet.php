@@ -16,10 +16,10 @@ arsort($counts);
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Renditja e Workouts</title>
-  <link rel="stylesheet" href="../css/subscription.css">
+  <link rel="stylesheet" href="../../css/subscription.css">
 </head>
 <body>
-  <?php include("header.php"); include("sidebar.php"); ?>
+  <?php include("../general/header.php"); include("../general/sidebar.php"); ?>
 
   <div class="container">
     <h2>Renditja e Workouts (24 h)</h2>
@@ -54,6 +54,6 @@ arsort($counts);
     </table>
   </div>
 
-  <?php include("footer.php"); ?>
+  <?php include("../general/footer.php"); ?>
 </body>
 </html>
