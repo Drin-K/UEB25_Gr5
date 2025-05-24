@@ -5,14 +5,12 @@ if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
     exit();
 }
 
-include("../db.php");
-
+require_once("../db.php");
+require_once("../general/error_handler.php");
+trigger_error("Ky është një test nga membershipsLogic.php!", E_USER_WARNING);
 function handleDbError($msg, $stmt = null) {
-    if ($stmt) {
-        throw new Exception($msg . " " . $stmt->error);
-    } else {
-        throw new Exception($msg);
-    }
+    $details = $stmt ? $stmt->error : '';
+    trigger_error($msg . ' ' . $details, E_USER_WARNING);
 }
 
 $addMessage = "";
@@ -24,17 +22,21 @@ if (isset($_POST['add'])) {
     $price = $_POST['price'];
 
     if (!empty($name) && is_numeric($price) && $price > 0) {
-        try {
-            $stmt = $conn->prepare("INSERT INTO memberships (name, price) VALUES (?, ?)");
-            if (!$stmt) handleDbError("Gabim gjatë përgatitjes për insert.");
+        $stmt = $conn->prepare("INSERT INTO memberships (name, price) VALUES (?, ?)");
+        if (!$stmt) {
+            $addMessage = "Gabim gjatë përgatitjes për insert.";
+            handleDbError($addMessage);
+        } else {
             $stmt->bind_param("sd", $name, $price);
-            if (!$stmt->execute()) handleDbError("Gabim gjatë shtimit të membership-it.", $stmt);
+            if (!$stmt->execute()) {
+                $addMessage = "Gabim gjatë shtimit të membership-it.";
+                handleDbError($addMessage, $stmt);
+            }
             $stmt->close();
-        } catch (Exception $e) {
-            $addMessage = $e->getMessage();
         }
     } else {
         $addMessage = "Emri ose çmimi nuk janë të vlefshëm.";
+        trigger_error($addMessage, E_USER_WARNING);
     }
 }
 
@@ -44,33 +46,41 @@ if (isset($_POST['edit_inline'])) {
     $price = $_POST['price'];
 
     if (!empty($name) && is_numeric($price) && $price > 0) {
-        try {
-            $stmt = $conn->prepare("UPDATE memberships SET name=?, price=? WHERE id=?");
-            if (!$stmt) handleDbError("Gabim gjatë përgatitjes për update.");
+        $stmt = $conn->prepare("UPDATE memberships SET name=?, price=? WHERE id=?");
+        if (!$stmt) {
+            $editMessage = "Gabim gjatë përgatitjes për update.";
+            handleDbError($editMessage);
+        } else {
             $stmt->bind_param("sdi", $name, $price, $id);
-            if (!$stmt->execute()) handleDbError("Gabim gjatë përditësimit.", $stmt);
+            if (!$stmt->execute()) {
+                $editMessage = "Gabim gjatë përditësimit.";
+                handleDbError($editMessage, $stmt);
+            }
             $stmt->close();
-        } catch (Exception $e) {
-            $editMessage = $e->getMessage();
         }
     } else {
         $editMessage = "Të dhënat për përditësim janë të pavlefshme.";
+        trigger_error($editMessage, E_USER_WARNING);
     }
 }
 
 if (isset($_GET['delete'])) {
     $id = $_GET['delete'];
     if (is_numeric($id)) {
-        try {
-            $stmt = $conn->prepare("DELETE FROM memberships WHERE id=?");
-            if (!$stmt) handleDbError("Gabim gjatë përgatitjes për fshirje.");
+        $stmt = $conn->prepare("DELETE FROM memberships WHERE id=?");
+        if (!$stmt) {
+            $deleteMessage = "Gabim gjatë përgatitjes për fshirje.";
+            handleDbError($deleteMessage);
+        } else {
             $stmt->bind_param("i", $id);
-            if (!$stmt->execute()) handleDbError("Gabim gjatë fshirjes.", $stmt);
+            if (!$stmt->execute()) {
+                $deleteMessage = "Gabim gjatë fshirjes.";
+                handleDbError($deleteMessage, $stmt);
+            }
             $stmt->close();
-        } catch (Exception $e) {
-            $deleteMessage = $e->getMessage();
         }
     }
 }
 
 $memberships = $conn->query("SELECT * FROM memberships");
+?>

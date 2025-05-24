@@ -69,7 +69,7 @@ include("../general/sidebar.php");
       if (isset($_SESSION['user_id'])) {
           $filePath = "../../bmihistory/bmi_logs.txt";
           if (file_exists($filePath)) {
-              $rows = file($filePath, FILE_IGNORE_NEW_LINES);
+              $rows = file($filePath, FILE_IGNORE_NEW_LINES| FILE_SKIP_EMPTY_LINES);
               foreach (array_reverse($rows) as $row) {
                   list($date, $uid, $name, $w, $h, $bmi, $cat) = explode("|", $row);
                   if ($uid == $_SESSION['user_id']) {
