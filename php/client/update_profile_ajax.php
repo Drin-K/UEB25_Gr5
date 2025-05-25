@@ -14,11 +14,16 @@ if (!isset($_SESSION['user_id'])) {
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $name = $_POST['name'] ?? '';
-    $email = $_POST['email'] ?? '';
+    $name = trim($_POST['name'] ?? '');
+    $email = trim($_POST['email'] ?? '');
 
     if (empty($name) || empty($email)) {
         echo "Emri dhe emaili janë të detyrueshme.";
+        exit;
+    }
+
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        echo "Emaili nuk është në formatin e duhur.";
         exit;
     }
 
@@ -26,7 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (updateUserData($id, $name, $email, $conn)) {
         echo "Profili u përditësua me sukses!";
     } else {
-        echo "Gabim gjatë përditësimit.";
+        echo "Gabim gjatë përditësimit të të dhënave. Ju lutem provoni përsëri.";
     }
 }
 ?>

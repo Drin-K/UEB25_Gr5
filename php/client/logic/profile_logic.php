@@ -12,6 +12,7 @@ function getUserData($id, $conn) {
     return $stmt->get_result()->fetch_assoc();
 }
 
+
 function changePassword($id, $curr, $new, $conn) {
     $stmt = $conn->prepare("SELECT password FROM users WHERE id=?");
     $stmt->bind_param("i", $id);
