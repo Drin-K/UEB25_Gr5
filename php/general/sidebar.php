@@ -14,7 +14,7 @@ $role = $_SESSION['role'] ?? 'admin';
     <h3>Menu</h3>
     <ul>
         <?php if ($role === 'admin'): ?>
-            <li class="important"><a href="../admin/manage_users.php"><i class="fas fa-users-cog"></i> Menaxho Përdoruesit</a></li>
+            <li><a href="../admin/manage_users.php"><i class="fas fa-users-cog"></i> Menaxho Përdoruesit</a></li>
             <li><a href="../admin/manage_memberships.php"><i class="fas fa-id-card"></i> Menaxho Memberships</a></li>
             <li><a href="../admin/subscription.php"><i class="fas fa-receipt"></i> Menaxho Subscriptions</a></li>
             <li><a href="../admin/reports.php"><i class="fas fa-chart-line"></i> Raporte</a></li>
