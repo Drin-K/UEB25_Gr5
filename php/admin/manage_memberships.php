@@ -16,7 +16,7 @@ include("../general/sidebar.php");
 <div class="content-container">
     <div class="membership-form">
         <h3>Shto Membership të Ri</h3>
-        <form method="POST" action="../get_set_data/set_memberships.php">
+        <form method="POST" action="logic/membershipsLogic.php">
             <input type="text" name="name" placeholder="Emri i Membership-it" required>
             <input type="number" name="price" placeholder="Çmimi (€)" step="0.01" required>
             <button type="submit" name="add">Shto</button>
@@ -39,7 +39,7 @@ include("../general/sidebar.php");
                 <td>
                     <button type="button" onclick="enableEditing(<?= $row['id']; ?>)">Ndrysho</button>
                     <button type="button" id="save-btn-<?= $row['id']; ?>" onclick="saveChanges(<?= $row['id']; ?>)" style="display:none;">Ruaj</button>
-                    <a href="../get_set_data/set_memberships.php?delete=<?= $row['id']; ?>" class="delete-btn" onclick="return confirm('A jeni i sigurt?')">Fshij</a>
+                    <a href="logic/membershipsLogic.php?delete=<?= $row['id']; ?>" class="delete-btn" onclick="return confirm('A jeni i sigurt?')">Fshij</a>
                 </td>
             </tr>
         <?php endwhile; ?>
@@ -70,7 +70,7 @@ function saveChanges(id) {
     const price = $('#price-' + id).val();
 
     $.ajax({
-        url: '../get_set_data/set_memberships.php',
+        url: 'logic/membershipsLogic.php',
         method: 'POST',
         data: {
             ajax_edit: true,
