@@ -2,7 +2,7 @@
 include '../general/header.php';
 include '../general/sidebar.php';
 include 'data/nutrition_data.php'; 
-?>
+
 
 <!DOCTYPE html>
 <html lang="sq">
@@ -11,9 +11,6 @@ include 'data/nutrition_data.php';
     <title>Plani Ushqimor - ILLYRIAN GYM</title>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Rajdhani:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../../css/nutrition.css">
-    <style>
-       
-    </style>
 </head>
 <body>
     <div class="main-content">
@@ -50,23 +47,36 @@ include 'data/nutrition_data.php';
         <?php endif; ?>
 
         <h2>Planet Ushqimore</h2>
-        <div class="plan-grid">
-            <?php while ($plan = $plansResult->fetch_assoc()): ?>
-                <div class="plan-card">
-                    <h3><?= htmlspecialchars($plan['title']) ?></h3>
-                    <p><?= nl2br(htmlspecialchars($plan['description'])) ?></p>
-                    <p><strong>Kalori:</strong> <?= $plan['calories'] ?> | <strong>Proteina:</strong> <?= $plan['protein'] ?>g | <strong>Karbo:</strong> <?= $plan['carbs'] ?>g | <strong>Yndyrna:</strong> <?= $plan['fats'] ?>g</p>
-                    <p><strong>Kategoria:</strong> <?= ucfirst(str_replace('_', ' ', $plan['category'])) ?></p>
 
-                    <?php if ($_SESSION['role'] === 'admin'): ?>
-                        <form method="post" onsubmit="return confirm('A jeni i sigurt që doni ta fshini këtë plan?');">
-                            <input type="hidden" name="plan_id" value="<?= $plan['id'] ?>">
-                            <button type="submit" name="delete_plan" class="btn">Fshij</button>
-                        </form>
-                    <?php endif; ?>
-                </div>
-            <?php endwhile; ?>
-        </div>
+        <?php if ($plansResult->num_rows === 0): ?>
+            <div class="no-matching-plans">
+                <p style="color:darkred; font-weight:bold;">Nuk u gjet asnjë plan ushqimor që përputhet me preferencat tuaja të kalorive ose ushqimeve!</p>
+                <form method="post">
+                    <button type="submit" name="show_all_plans" class="btn">Shfaq të gjitha planet</button>
+                </form>
+            </div>
+        <?php else: ?>
+            <div class="plan-grid">
+                <?php while ($plan = $plansResult->fetch_assoc()): ?>
+                    <div class="plan-card">
+                        <h3><?= htmlspecialchars($plan['title']) ?></h3>
+                        <p><?= nl2br(htmlspecialchars($plan['description'])) ?></p>
+                        <p><strong>Kalori:</strong> <?= $plan['calories'] ?> |
+                           <strong>Proteina:</strong> <?= $plan['protein'] ?>g |
+                           <strong>Karbo:</strong> <?= $plan['carbs'] ?>g |
+                           <strong>Yndyrna:</strong> <?= $plan['fats'] ?>g</p>
+                        <p><strong>Kategoria:</strong> <?= ucfirst(str_replace('_', ' ', $plan['category'])) ?></p>
+
+                        <?php if ($_SESSION['role'] === 'admin'): ?>
+                            <form method="post" onsubmit="return confirm('A jeni i sigurt që doni ta fshini këtë plan?');">
+                                <input type="hidden" name="plan_id" value="<?= $plan['id'] ?>">
+                                <button type="submit" name="delete_plan" class="btn">Fshij</button>
+                            </form>
+                        <?php endif; ?>
+                    </div>
+                <?php endwhile; ?>
+            </div>
+        <?php endif; ?>
     </div>
 </body>
 </html>

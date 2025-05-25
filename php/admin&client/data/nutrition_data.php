@@ -75,3 +75,9 @@ if ($_SESSION['role'] === 'client') {
 } else {
     $plansResult = $conn->query("SELECT * FROM nutrition_plans");
 }
+if (isset($_POST['show_all_plans'])) {
+    $plansQuery = "SELECT * FROM nutrition_plans";
+    $plansResult = $conn->query($plansQuery);
+}
+?>
+
