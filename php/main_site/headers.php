@@ -4,7 +4,7 @@ const SITE_NAME = "ILLYRIAN Gym";
 
 $menu_items = [
     "index.php" => "Home",
-    "services.php" => "Statistics",
+    "statistics.php" => "Statistics",
     "diet.php" => "Diet",
     "about.php" => "About Us",
     "plans.php" => "Pricing",
