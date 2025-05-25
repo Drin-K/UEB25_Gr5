@@ -8,3 +8,6 @@
 [2025-05-24 19:22:50] Paralajmërim: Fjalëkalimet nuk përputhen. në file: C:\xampp\htdocs\UEB25_Gr5\php\signup.php, linja: 23
 [2025-05-24 19:22:57] Paralajmërim: Email i përdorur më parë: admin@gmail.com në file: C:\xampp\htdocs\UEB25_Gr5\php\signup.php, linja: 37
 [2025-05-25 22:29:48] Paralajmërim: Email i pavlefshëm: dion.haradinaj në file: C:\xampp\htdocs\GitHub\UEB24_Gr22\php\signup.php, linja: 20
+[2025-05-25 22:53:54] Paralajmërim: Perdoruesi nuk i ka plotesu te gjitha fushat në file: C:\xampp\htdocs\UEB25_Gr5\php\login.php, linja: 36
+[2025-05-25 22:55:23] Paralajmërim: Formulari i dërguar nga përdoruesi përmban fusha të paplotësuara. në file: C:\xampp\htdocs\UEB25_Gr5\php\login.php, linja: 36
+[2025-05-25 22:55:34] Paralajmërim: Kyçje e pasuksesshme nga albena.veseli@gmail.com në file: C:\xampp\htdocs\UEB25_Gr5\php\login.php, linja: 65

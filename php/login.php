@@ -1,4 +1,5 @@
 <?php
+require_once("general/error_handler.php");
 require_once("db.php");
 session_start();
 
@@ -32,6 +33,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if (!$email || !$password) {
         $error = "Ju lutem plotësoni të gjitha fushat.";
+       trigger_error("Formulari i dërguar nga përdoruesi përmban fusha të paplotësuara.", E_USER_WARNING);
+
     } else {
         $stmt = $conn->prepare("SELECT id, name, password, role FROM users WHERE email = ?");
         $stmt->bind_param("s", $email);
@@ -59,6 +62,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             exit;
         } else {
             $error = "Email ose fjalëkalim i pasaktë.";
+            trigger_error("Kyçje e pasuksesshme nga $email", E_USER_WARNING);
+
         }
     }
 }
