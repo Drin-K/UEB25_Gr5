@@ -12,12 +12,6 @@ function getUserData($id, $conn) {
     return $stmt->get_result()->fetch_assoc();
 }
 
-function updateUserData($id, $name, $email, $conn) {
-    $stmt = $conn->prepare("UPDATE users SET name=?, email=? WHERE id=?");
-    $stmt->bind_param("ssi", $name, $email, $id);
-    return $stmt->execute();
-}
-
 function changePassword($id, $curr, $new, $conn) {
     $stmt = $conn->prepare("SELECT password FROM users WHERE id=?");
     $stmt->bind_param("i", $id);
