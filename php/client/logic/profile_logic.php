@@ -1,4 +1,4 @@
-<?php
+<?php 
 include("../db.php");
 
 if (!isset($_SESSION['user_id'])) {
@@ -14,7 +14,7 @@ function getUserData($id, $conn) {
 }
 
 function updateUserData($id, $name, $email, $conn) {
-    $stmt = $conn->prepare("UPDATE users SET Name=?, Email=? WHERE id=?");
+    $stmt = $conn->prepare("UPDATE users SET name=?, email=? WHERE id=?");
     $stmt->bind_param("ssi", $name, $email, $id);
     return $stmt->execute();
 }
@@ -35,18 +35,10 @@ function changePassword($id, $curr, $new, $conn) {
 
 $userData = getUserData($_SESSION['user_id'], $conn);
 
-$successMessage = '';
 $passwordMessage = '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    if (isset($_POST['name'])) {
-        if (updateUserData($_SESSION['user_id'], $_POST['name'], $_POST['email'], $conn)) {
-            $successMessage = "Profili u përditësua me sukses!";
-            $userData = getUserData($_SESSION['user_id'], $conn);
-        } else {
-            $successMessage = "Gabim në përditësim: " . $conn->error;
-        }
-    } elseif (isset($_POST['current_password'])) {
+    if (isset($_POST['current_password'])) {
         if ($_POST['new_password'] !== $_POST['confirm_password']) {
             $passwordMessage = "Fjalëkalimet e reja nuk përputhen.";
         } elseif (strlen($_POST['new_password']) < 8) {

@@ -18,12 +18,9 @@ include("logic/profile_logic.php"); // përfshin logjikën dhe variablat si $use
         <div class="profile-container">
             <h2>Profili Juaj</h2>
             
-            <?php if ($successMessage): ?>
-                <div class="message success"><?= htmlspecialchars($successMessage) ?></div>
-            <?php endif; ?>
-            
+           
             <div class="profile-info">
-                <form method="POST">
+                <form method="POST" id="profileForm">
                     <div class="form-group">
                         <label>Emri:</label>
                         <input type="text" name="name" value="<?= htmlspecialchars($userData['Name']) ?>">
@@ -73,5 +70,27 @@ include("logic/profile_logic.php"); // përfshin logjikën dhe variablat si $use
             </div>
         </div>
     </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+$(document).ready(function(){
+    $('#profileForm').on('submit', function(e){
+        e.preventDefault();
+        
+        $.ajax({
+            url: 'update_profile_ajax.php',
+            method: 'POST',
+            data: $(this).serialize(),
+            success: function(response){
+                $('.message.success, .message.error').remove();
+                $('<div class="message success">' + response + '</div>').insertBefore('.profile-info');
+            },
+            error: function(){
+                alert("Gabim gjatë përditësimit.");
+            }
+        });
+    });
+});
+</script>
+
 </body>
 </html>
