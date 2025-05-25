@@ -50,7 +50,7 @@ include 'headers.php';
             <a href="../login.php" class="btn">Book A Free Class</a><br><br><br><br><br><br>
             <b><p id= problem style="font-size: 3rem;">Have a problem ?</p></b>
             <p id = 'linku'style="font-size: large;">
-                <a href="mailto:name@email.com" style="color: rgb(20, 145, 57);">Contact Us</a>
+                <a href="mailto:drinkurti26@gmail.com" style="color: rgb(20, 145, 57);">Contact Us</a>
               </p>          
         </div>
     

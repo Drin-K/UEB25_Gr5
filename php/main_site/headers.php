@@ -8,8 +8,7 @@ $menu_items = [
     "diet.php" => "Diet",
     "about.php" => "About Us",
     "plans.php" => "Pricing",
-    "workouts.php" => "Workouts",
-    "review.php" => "Review"
+    "workouts.php" => "Workouts"
 ];
 
 function generateMenu($items, $activePage) {
