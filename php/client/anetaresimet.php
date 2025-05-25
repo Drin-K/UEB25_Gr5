@@ -9,7 +9,6 @@ if (!isset($_SESSION['user_id'])) {
 }
 
 $user_id = $_SESSION['user_id'];
-require_once "../db.php";
 ?>
 
 <!DOCTYPE html>
