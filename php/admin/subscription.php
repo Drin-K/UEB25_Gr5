@@ -1,7 +1,6 @@
 <?php
 include("../general/header.php");
 include("../general/sidebar.php");
-require_once "../db.php";
 include("../get_set_data/get_subscriptionANDpaymentsUpdate.php")
 
 ?>
