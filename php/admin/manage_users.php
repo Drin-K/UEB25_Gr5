@@ -25,10 +25,7 @@ include("../get_set_data/get_users.php");
         <input type="text" name="name" placeholder="Emri" required>
         <input type="email" name="email" placeholder="Email" required>
         <input type="password" name="password" placeholder="Fjalëkalimi" required>
-        <select name="role">
-            <option value="client">Client</option>
-            <option value="admin">Admin</option>
-        </select>
+       <input type="hidden" name="role" value="client">
         <button type="submit" name="add_user">SHTO</button>
     </form>
 
@@ -42,22 +39,25 @@ include("../get_set_data/get_users.php");
                 <th>Veprime</th>
             </tr>
         </thead>
-        <tbody>
-        <?php while ($row = $users->fetch_assoc()): ?>
-            <tr id="user-row-<?= $row['id'] ?>">
-                <td><?= $row['id'] ?></td>
-                <td><?= htmlspecialchars($row['name']) ?></td>
-                <td><?= htmlspecialchars($row['email']) ?></td>
-                <td><?= htmlspecialchars($row['role']) ?></td>
-                <td>
-                    <form method="post" action="../get_set_data/set_users.php" onsubmit="return confirm('Jeni i sigurt që doni të fshini këtë përdorues?');">
-                        <input type="hidden" name="delete_user_id" value="<?= $row['id'] ?>">
-                        <button type="submit" class="delete-btn">Fshi</button>
-                    </form>
-                </td>
-            </tr>
-        <?php endwhile; ?>
-        </tbody>
+       <tbody>
+<?php while ($row = $users->fetch_assoc()): ?>
+    <?php if ($row['role'] === 'client'): ?>
+        <tr id="user-row-<?= $row['id'] ?>">
+            <td><?= $row['id'] ?></td>
+            <td><?= htmlspecialchars($row['name']) ?></td>
+            <td><?= htmlspecialchars($row['email']) ?></td>
+            <td><?= htmlspecialchars($row['role']) ?></td>
+            <td>
+                <form method="post" action="../get_set_data/set_users.php" onsubmit="return confirm('Jeni i sigurt që doni të fshini këtë përdorues?');">
+                    <input type="hidden" name="delete_user_id" value="<?= $row['id'] ?>">
+                    <button type="submit" class="delete-btn">Fshi</button>
+                </form>
+            </td>
+        </tr>
+    <?php endif; ?>
+<?php endwhile; ?>
+</tbody>
+
     </table>
 </div>
 </body>
