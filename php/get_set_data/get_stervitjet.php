@@ -2,8 +2,8 @@
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
-$role = $_SESSION['role'] ?? 'guest';
-$userId = $_SESSION['user_id'] ?? 0;
+$role = $_SESSION['role'];
+$userId = $_SESSION['user_id'];
 
 $successMessage = $_SESSION['success_message'] ?? "";
 unset($_SESSION['success_message']);

@@ -1,41 +1,48 @@
 <?php
 require_once "../db.php";
+
 function &getReports(mysqli &$conn): array {
     global $conn;
     $reports = [];
 
     $query = "
-        SELECT 
+    SELECT 
         u.id AS user_id,
         u.name,
         u.email,
         u.created_at,
-        (SELECT COUNT(*) FROM workout_plans wp WHERE wp.user_id = u.id) AS total_workouts,
-        (SELECT COUNT(*) FROM payments p WHERE p.user_id = u.id) AS total_payments,
-        (SELECT IFNULL(SUM(m.price), 0) 
-        FROM payments p 
-        JOIN memberships m ON m.id = p.id_membership 
-        WHERE p.user_id = u.id) AS total_paid,
-        (SELECT GROUP_CONCAT(DISTINCT np.category SEPARATOR ', ') 
-        FROM user_nutrition_preferences unp 
-        JOIN nutrition_plans np ON np.category IS NOT NULL 
-        WHERE unp.user_id = u.id) AS nutrition_categories,
-        (SELECT preferred_calories 
-        FROM user_nutrition_preferences 
-        WHERE user_id = u.id 
-        LIMIT 1) AS preferred_calories,
-        (SELECT m.name 
-        FROM payments p 
-        JOIN memberships m ON m.id = p.id_membership 
-        WHERE p.user_id = u.id 
-        ORDER BY p.payment_date DESC LIMIT 1) AS membership
-        FROM users u
-        WHERE u.role = 'client'
+        (
+            SELECT COUNT(*) 
+            FROM workout_plans wp 
+            WHERE wp.user_id = u.id
+        ) AS total_workouts,
+        (
+            SELECT COUNT(*) 
+            FROM payments p 
+            WHERE p.user_id = u.id
+        ) AS total_payments,
+        (
+            SELECT m.name 
+            FROM payments p 
+            JOIN memberships m ON m.id = p.id_membership 
+            WHERE p.user_id = u.id 
+            ORDER BY p.payment_date DESC 
+            LIMIT 1
+        ) AS last_membership,
+        (
+            SELECT preferred_calories 
+            FROM user_nutrition_preferences unp 
+            WHERE unp.user_id = u.id
+        ) AS preferred_calories
+    FROM users u
+    WHERE u.role = 'client'
     ";
 
     $result = $conn->query($query);
-    while ($row = $result->fetch_assoc()) {
-        $reports[] = $row;
+    if ($result) {
+        while ($row = $result->fetch_assoc()) {
+            $reports[] = $row;
+        }
     }
 
     return $reports;
@@ -53,8 +60,10 @@ function getCalorieDistribution(mysqli $conn): array {
     
     $result = $conn->query($query);
     $data = [];
-    while ($row = $result->fetch_assoc()) {
-        $data[] = $row;
+    if ($result) {
+        while ($row = $result->fetch_assoc()) {
+            $data[] = $row;
+        }
     }
     
     return $data;
@@ -62,5 +71,6 @@ function getCalorieDistribution(mysqli $conn): array {
 
 $allReports = &getReports($conn);
 $calorieData = getCalorieDistribution($conn);
-unset($conn);
+
+$conn->close();
 ?>

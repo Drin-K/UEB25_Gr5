@@ -2,7 +2,7 @@
 session_start();
 require_once "../db.php";
 
-$userId = $_SESSION['user_id'] ?? 0;
+$userId = $_SESSION['user_id'];
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (isset($_POST['update_plan'])) {

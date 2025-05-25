@@ -70,9 +70,9 @@ include("../get_set_data/get_reports.php");
             <h3 class="chart-title">Shpërndarja e Kalorive sipas Kategorive</h3>
             <canvas id="calorieChart"></canvas>
         </div>
-        
+
         <div class="chart-box">
-            <h3 class="chart-title">Kaloritë e Preferuara nga Përdoruesit</h3>
+            <h3 class="chart-title">Kaloritë e Preferuara nga Përdoresit</h3>
             <canvas id="userCalorieChart"></canvas>
         </div>
     </div>
@@ -84,12 +84,10 @@ include("../get_set_data/get_reports.php");
                 <th>Emri</th>
                 <th>Email</th>
                 <th>Regjistruar më</th>
-                <th>Planet e Stërvitjes</th>
+                <th>Stërvitje</th>
                 <th>Pagesa</th>
-                <th>Total i Paguar (€)</th>
-                <th>Membership</th>
-                <th>Preferenca Nutricionale</th>
-                <th>Kaloritë e Preferuara</th>
+                <th>Anëtarësimi i fundit</th>
+                <th>Kalori të preferuara</th>
             </tr>
         </thead>
         <tbody>
@@ -98,13 +96,11 @@ include("../get_set_data/get_reports.php");
                     <td><?= $report['user_id'] ?></td>
                     <td><?= htmlspecialchars($report['name']) ?></td>
                     <td><?= htmlspecialchars($report['email']) ?></td>
-                    <td><?= $report['created_at'] ?></td>
-                    <td><?= $report['total_workouts'] ?></td>
-                    <td><?= $report['total_payments'] ?></td>
-                    <td>€<?= number_format($report['total_paid'], 2) ?></td>
-                    <td><?= $report['membership'] ?: 'Pa abonim' ?></td>
-                    <td><?= $report['nutrition_categories'] ?: 'Asnjë' ?></td>
-                    <td><?= $report['preferred_calories'] ?: 'N/A' ?></td>
+                    <td><?= htmlspecialchars($report['created_at']) ?></td>
+                    <td><?= (int)$report['total_workouts'] ?></td>
+                    <td><?= (int)$report['total_payments'] ?></td>
+                    <td><?= $report['last_membership'] ?? '—' ?></td>
+                    <td><?= $report['preferred_calories'] ?? '—' ?></td>
                 </tr>
             <?php endforeach; ?>
             <?php unset($report); ?>
@@ -113,95 +109,51 @@ include("../get_set_data/get_reports.php");
 </div>
 
 <script>
-    const calorieCtx = document.getElementById('calorieChart').getContext('2d');
-    const calorieChart = new Chart(calorieCtx, {
-        type: 'pie',
-        data: {
-            labels: [<?php echo implode(',', array_map(function($item) { 
-                return "'" . ucfirst(str_replace('_', ' ', $item['category'])) . "'"; 
-            }, $calorieData)); ?>],
-            datasets: [{
-                data: [<?php echo implode(',', array_column($calorieData, 'avg_calories')); ?>],
-                backgroundColor: [
-                    'rgba(46, 255, 126, 0.7)',
-                    'rgba(255, 99, 132, 0.7)',
-                    'rgba(54, 162, 235, 0.7)'
-                ],
-                borderColor: [
-                    'rgba(46, 255, 126, 1)',
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(54, 162, 235, 1)'
-                ],
-                borderWidth: 1
-            }]
-        },
-        options: {
-            responsive: true,
-            plugins: {
-                legend: {
-                    position: 'bottom',
-                    labels: {
-                        color: '#fff',
-                        font: {
-                            size: 12
-                        }
-                    }
-                },
-                tooltip: {
-                    callbacks: {
-                        label: function(context) {
-                            return `${context.label}: ${context.raw} kalori (mesatare)`;
+    const calorieLabels = <?= json_encode(array_map(fn($i) => ucfirst(str_replace('_', ' ', $i['category'])), $calorieData)) ?>;
+    const calorieValues = <?= json_encode(array_column($calorieData, 'avg_calories')) ?>;
+    const withPrefs = <?= count(array_filter($allReports, fn($r) => !empty($r['preferred_calories']))) ?>;
+    const withoutPrefs = <?= count(array_filter($allReports, fn($r) => empty($r['preferred_calories']))) ?>;
+
+    const makeChart = (id, type, labels, data, bg, border, labelText) => {
+        new Chart(document.getElementById(id), {
+            type,
+            data: {
+                labels,
+                datasets: [{
+                    data,
+                    backgroundColor: bg,
+                    borderColor: border,
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: { position: 'bottom', labels: { color: '#fff', font: { size: 12 } } },
+                    tooltip: {
+                        callbacks: {
+                            label: ctx => `${ctx.label}: ${ctx.raw} ${labelText}`
                         }
                     }
                 }
             }
-        }
-    });
+        });
+    };
 
-    const userCalorieCtx = document.getElementById('userCalorieChart').getContext('2d');
-    const userCalorieChart = new Chart(userCalorieCtx, {
-        type: 'doughnut',
-        data: {
-            labels: ['Përdorues me preferenca', 'Përdorues pa preferenca'],
-            datasets: [{
+    makeChart('calorieChart', 'pie', calorieLabels, calorieValues,
+        ['rgba(46,255,126,0.7)', 'rgba(255,99,132,0.7)', 'rgba(54,162,235,0.7)'],
+        ['rgba(46,255,126,1)', 'rgba(255,99,132,1)', 'rgba(54,162,235,1)'],
+        'kalori (mesatare)'
+    );
 
-                data: [
-                    <?= count(array_filter($allReports, fn($r) => !empty($r['preferred_calories']))); ?>,
-                    <?= count(array_filter($allReports, fn($r) => empty($r['preferred_calories']))); ?>
-                ],
-                backgroundColor: [
-                    'rgba(46, 255, 126, 0.7)',
-                    'rgba(255, 255, 255, 0.3)'
-                ],
-                borderColor: [
-                    'rgba(46, 255, 126, 1)',
-                    'rgba(255, 255, 255, 0.5)'
-                ],
-                borderWidth: 1
-            }]
-        },
-        options: {
-            responsive: true,
-            plugins: {
-                legend: {
-                    position: 'bottom',
-                    labels: {
-                        color: '#fff',
-                        font: {
-                            size: 12
-                        }
-                    }
-                },
-                tooltip: {
-                    callbacks: {
-                        label: function(context) {
-                            return `${context.label}: ${context.raw} përdorues`;
-                        }
-                    }
-                }
-            }
-        }
-    });
+    makeChart('userCalorieChart', 'doughnut',
+        ['Përdorues me preferenca', 'Përdorues pa preferenca'],
+        [withPrefs, withoutPrefs],
+        ['rgba(46,255,126,0.7)', 'rgba(255,255,255,0.3)'],
+        ['rgba(46,255,126,1)', 'rgba(255,255,255,0.5)'],
+        'përdorues'
+    );
 </script>
+
 </body>
 </html>
