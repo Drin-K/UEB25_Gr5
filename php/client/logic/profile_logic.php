@@ -2,10 +2,9 @@
 include("../db.php");
 
 if (!isset($_SESSION['user_id'])) {
-    header("Location: ../login.php");
+    header("Location: ../../login.php");
     exit();
 }
-
 function getUserData($id, $conn) {
     $stmt = $conn->prepare("SELECT Name, Email, created_at FROM users WHERE id=?");
     $stmt->bind_param("i", $id);
