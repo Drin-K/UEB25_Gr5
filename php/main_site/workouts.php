@@ -1,12 +1,12 @@
 <?php 
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_POST['workout'])) {
-    $w = preg_replace('/[^A-Za-z]/', '', $_POST['workout']); // sanitize
+    $w = preg_replace('/[^A-Za-z]/', '', $_POST['workout']);
 
     $cookieName = "count_$w";
     $current    = isset($_COOKIE[$cookieName]) ? (int)$_COOKIE[$cookieName] : 0;
 
-    setcookie($cookieName, $current + 1, time() + 86400, '/');//Per24 or
+    setcookie($cookieName, $current + 1, time() + 86400, '/');
     header('Location: ' . $_SERVER['PHP_SELF'] . '#' . $w);
     exit;
 }

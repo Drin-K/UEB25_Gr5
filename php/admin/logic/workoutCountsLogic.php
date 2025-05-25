@@ -7,8 +7,8 @@ foreach ($allWorkouts as $w) {
     $counts[$w] = isset($_COOKIE[$cookieName]) ? (int)$_COOKIE[$cookieName] : 0;
 }
 
-// Rendit sipas përdorimit në mënyrë zbritëse
+
 arsort($counts);
 
-// Kthe array-n për përdorim te klienti
+
 return $counts;

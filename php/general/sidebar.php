@@ -1,5 +1,4 @@
 <?php 
-// sidebar.php
 $role = $_SESSION['role'] ?? 'admin';
 ?>
 

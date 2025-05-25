@@ -1,7 +1,5 @@
 <?php
 require_once "../db.php";
-// --- STEP 1: EXPIRE OLD PAYMENTS & NOTIFY USERS ----------------------
-// Find any payments still marked 'active' whose 30‑day window has passed
 $check_sql = "
   SELECT p.id            AS payment_id,
          u.name          AS username,
@@ -22,14 +20,14 @@ if ($res && mysqli_num_rows($res) > 0) {
         $start     = filter_var($row['start_date'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
         $end       = date('Y-m-d', strtotime($start . ' +30 days'));
 
-        // Mark expired
+        
         $upd = "UPDATE payments SET status = 'expired' WHERE id = ?";
         $stmt = mysqli_prepare($conn, $upd);
         mysqli_stmt_bind_param($stmt, "i", $pid);
         mysqli_stmt_execute($stmt);
         mysqli_stmt_close($stmt);
 
-        // Send email
+     
         $subject = "Abonimi juaj ka skaduar";
         $message = "Përshëndetje $name,\n\n"
                  . "Abonimi juaj ka përfunduar më $end.\n"
@@ -42,8 +40,6 @@ if ($res && mysqli_num_rows($res) > 0) {
     }
 }
 
-// --- STEP 2: PULL ALL DATA FOR DISPLAY -------------------------------
-// 2.a) fetch all membership names, so we can render one column each
 $plans       = [];
 $plan_query  = "SELECT id, name FROM memberships ORDER BY name";
 $plan_res    = mysqli_query($conn, $plan_query);
@@ -51,7 +47,7 @@ while ($p = mysqli_fetch_assoc($plan_res)) {
     $plans[$p['id']] = $p['name'];
 }
 
-// 2.b) fetch all payments + user + membership
+
 $data_sql = "
   SELECT
     p.id,
@@ -67,7 +63,6 @@ $data_sql = "
 ";
 $data_res = mysqli_query($conn, $data_sql);
 
-// group rows by membership_id
 $by_plan = [];
 while ($r = mysqli_fetch_assoc($data_res)) {
     $by_plan[ $r['membership_id'] ][] = $r;

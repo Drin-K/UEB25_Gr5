@@ -1,6 +1,6 @@
 <?php include 'headers.php'?>
 <?php
-// Klasa për të ruajtur të dhënat e faqes
+
 class PageContent {
     public $title;
     public $welcomeMessage;

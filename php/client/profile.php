@@ -14,8 +14,6 @@ include("logic/profile_logic.php"); // përfshin logjikën dhe variablat si $use
     <link rel="stylesheet" href="../../css/profili.css">
 </head>
 <body>
-    
-    <!-- Main Content -->
     <div class="content">
         <div class="profile-container">
             <h2>Profili Juaj</h2>
@@ -45,7 +43,6 @@ include("logic/profile_logic.php"); // përfshin logjikën dhe variablat si $use
                 </form>
             </div>
             
-            <!-- NEW PASSWORD CHANGE SECTION -->
             <div class="password-section">
                 <h3>Ndrysho Fjalëkalimin</h3>
                 

@@ -11,7 +11,7 @@ unset($_SESSION['success_message']);
 $suggestedPlanId = null;
 $activePlanId = $_SESSION['active_plan_id'] ?? null;
 
-// Get most used plan (suggested)
+
 $stmt = $conn->prepare("SELECT id FROM workout_plans WHERE user_id = ? ORDER BY usage_count DESC LIMIT 1");
 $stmt->bind_param("i", $userId);
 $stmt->execute();
@@ -22,10 +22,10 @@ if ($result->num_rows > 0) {
 }
 $stmt->close();
 
-// From cookie
+
 $lastUsedPlanId = $_COOKIE['last_used_plan'] ?? null;
 
-// Fetch all plans
+
 $stmt = $conn->prepare("SELECT * FROM workout_plans WHERE user_id = ?");
 $stmt->bind_param("i", $userId);
 $stmt->execute();

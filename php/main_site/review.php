@@ -55,9 +55,9 @@ include 'headers.php';
                 </div>
                 <p id="1">
                 <?php
-                // Përdorimi i str_replace për të zëvendësuar fjalët
+           
                 $review1 = "Good service with friendly staff and super clean and comfortable gym for everyone from beginners to professional athletes to train at.";
-                $review1 = str_replace("Good", "Excellent", $review1); // str_replace()
+                $review1 = str_replace("Good", "Excellent", $review1);
                 echo $review1;
                 ?> </p>
 
@@ -76,9 +76,9 @@ include 'headers.php';
                 </div>
                 <p id="2">
                 <?php
-                // Përdorimi i substr për të prerë përshkrimin në një gjatësi të caktuar
+             
                 $review2 = "Kjo është një palestër e mrekullueshme e pajisur shumë mirë dhe me të gjitha mundësitë që ofron një ambient modern dhe të rehatshëm për stërvitje. Pajisjet janë të reja dhe të llojllojshme, duke përfshirë makineri për kardio, peshë dhe për trajnime të ndryshme. Përveç kësaj, ka ajër të kondicionuar në të gjithë hapësirën, që siguron një ambient të freskët dhe komod gjatë stërvitjeve. Dhomat e ndërrimit janë shumë të pastra dhe të mirëpajisura, me tualete dhe dushe të cilat janë gjithashtu shumë të rehatshme dhe ofrojnë mundësi për tu ndjerë si në shtëpinë tuaj. Ky është një vend ku çdo anëtar mund të gjejë hapësirën e tij për të stërvitur në mënyrën më të mirë dhe për të shijuar një eksperiencë të plotë të palestrës.";
-                $review2 = substr($review2, 0, 200); // substr() - marrim vetëm 100 karaktere
+                $review2 = substr($review2, 0, 200);
                 echo $review2;
                 ?></p>
 
@@ -96,9 +96,9 @@ include 'headers.php';
                     <i class='bx bxs-star' id="star"></i>
                 </div>
                 <p id="3">  <?php
-                // Përdorimi i trim për të hequr hapësirat e tepërta
+                
                 $review3 = "    Plenty of weight and hell even has a climbing rope and kettle bells plus the cardio machines. All     equipment is new. it's clean and the staff friendly. Never busy and honestly I Wish gyms in Australia were to this standard!    ";
-                $review3 = trim($review3); // trim() - heq hapësirat e tepërta në fillim dhe fund
+                $review3 = trim($review3); 
                 echo $review3;
                 ?></p>
 
@@ -133,10 +133,9 @@ include 'headers.php';
                 </div>
                 <p id="5">
                 <?php
-// Përdorimi i explode dhe implode për të krijuar një frazë të thjeshtë me viza
 $review5 = "Great place to work out, friendly staff, and very clean!";
-$words = explode(", ", $review5); // Përdorim explode për të ndarë fjalët me hapësirë pas çdo presje
-$review5 = implode(" | ", $words); // Përdorim implode për të bashkuar fjalët me viza
+$words = explode(", ", $review5);
+$review5 = implode(" | ", $words); 
 echo $review5;
 ?>
                 </p>

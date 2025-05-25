@@ -51,13 +51,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     elseif (isset($_POST['select_plan'])) {
         $planId = $_POST['plan_id'];
 
-        // Update usage count
         $stmt = $conn->prepare("UPDATE workout_plans SET usage_count = usage_count + 1 WHERE id = ? AND user_id = ?");
         $stmt->bind_param("ii", $planId, $userId);
         $stmt->execute();
         $stmt->close();
 
-        // Set session and cookie
         $_SESSION['active_plan_id'] = $planId;
         setcookie('last_used_plan', $planId, time() + (30 * 24 * 60 * 60), "/");
 

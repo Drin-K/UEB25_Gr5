@@ -22,7 +22,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $error = "Fjalëkalimet nuk përputhen.";
         trigger_error($error, E_USER_WARNING);
     } else {
-        // Kontrollo nëse email ekziston
+    
         $stmt = $conn->prepare("SELECT id FROM users WHERE email = ?");
         if (!$stmt) {
             $error = "Ndodhi një problem gjatë regjistrimit. Ju lutem provoni përsëri.";

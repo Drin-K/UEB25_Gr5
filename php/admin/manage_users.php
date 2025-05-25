@@ -19,7 +19,7 @@ include("../get_set_data/get_users.php");
     <?php if ($addMessage): ?><div class="alert"><?= $addMessage ?></div><?php endif; ?>
     <?php if ($deleteMessage): ?><div class="alert"><?= $deleteMessage ?></div><?php endif; ?>
 
-    <!-- Forma për shtimin e përdoruesit -->
+
     <form method="post" action="../get_set_data/set_users.php" class="add-user-form">
         <h3>Shto Përdorues të Ri</h3>
         <input type="text" name="name" placeholder="Emri" required>

@@ -2,39 +2,37 @@
 include 'headers.php';
 define("SLASH_NAME","FruitsVeggies");
 
-$oneletterword = "1"; //Perdorimi i strlen per te zevendesuar
-//Vargjet numerike
+$oneletterword = "1"; 
+
 $lean_protein = ["Chicken", "Turkey", "Salmon", "Eggs", "Tofu", "Greek Yogurt"];
 $carbs = ["Rice", "Potatoes", "Oats", "Beans", "Pasta", "Rice cakes"];
 $fats = ["Avocado", "Peanut butter", "Olive oil", "Cheese", "Dark chocolate"];
 $fruits_veggies = ["Broccoli", "Carrots", "Zucchini", "Apples", "Bananas", "Spinach"];
 
-// Funksionet e sortimit
 function sortFoods(&$array, $method) {
     switch ($method) {
         case 'sort':
-            sort($array); // rendit alfabetikisht
+            sort($array); 
             break;
         case 'rsort':
-            rsort($array); // rendit në mënyrë zbritëse
+            rsort($array); 
             break;
         case 'ksort':
-            ksort($array); // rendit sipas çelësit
+            ksort($array); 
             break;
         case 'krsort':
-            krsort($array); // rendit në mënyrë zbritëse sipas çelësit
+            krsort($array); 
             break;
         default:
             echo "Method not supported.";
             break;
     }
 }
-//nese klienti i supozuar kerkon qe sortimi te behet ne radhe reverse mafton te shtojme 'r' para 'sort' ne anen e djathte
 sortFoods($lean_protein,'sort'); 
 sortFoods($carbs,'sort');      
 sortFoods($fats,'sort');       
 sortFoods($fruits_veggies,'sort');
-$sortMethod = $_POST['calorieSort'] ?? 'krsort'; // default: descending
+$sortMethod = $_POST['calorieSort'] ?? 'krsort'; 
 
 ?>
 
@@ -339,7 +337,6 @@ $diets = [
 ];
 
 $carbohidrates = "Carbohidrates";
-// Përdorimi i array-ve multidimensional për të shfaqur informacionin
 echo "<h1>Maintenance Diet </h1>";
 echo "<table border='1'>";
 echo "<tr><th>Lean Protein</th><th>".str_replace("Carbohidrates","Carbs",$carbohidrates)."</th><th>Fats</th><th>".addcslashes(SLASH_NAME,"V")."</th></tr>";
@@ -350,7 +347,6 @@ foreach ($diets['Maintenance Diet'] as $category => $items) {
     echo "<td><ul>";
     foreach ($items as $item => $value) {
         if (is_array($value)) {
-            // Përdorimi i funksionit sortFoods për renditjen e elementeve
             sortFoods($value, 'sort');
             echo "<li>$item<ul>";
             foreach ($value as $subitem) {

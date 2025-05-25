@@ -1,8 +1,8 @@
 <?php
 include 'headers.php';
-include '../db.php'; // Sigurohu që lidhet me databazën
+include '../db.php'; 
 
-// Merr membership-et nga databaza
+
 $result = $conn->query("SELECT * FROM memberships");
 
 $memberships = [];

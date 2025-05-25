@@ -1,29 +1,27 @@
 <?php
 include 'headers.php';
 
-// Klasa bazë për shërbimet
 class Service {
 protected string $image;
 protected string $title;
-private static int $serviceCount = 0; // Numëron totalin e shërbimeve
+private static int $serviceCount = 0; 
 public function __construct(string $image, string $title) {
 $this->image = $image;
 $this->title = $title;
-self::$serviceCount++; // Inkremento numrin e shërbimeve
-}
-// Destruktori (Opsional - për të treguar kur shërbimi shkatërrohet)
-public function __destruct() {
-self::$serviceCount--; // Ul numrin e shërbimeve kur një objekt fshihet
+self::$serviceCount++; 
 }
 
-// GET dhe SET për titullin
+public function __destruct() {
+self::$serviceCount--;
+}
+
+
 public function getTitle(): string {
 return $this->title;
 }
 public function setTitle(string $title): void {
 $this->title = $title;
 }
-// GET për numrin total të shërbimeve
 public static function getServiceCount(): int {
 return self::$serviceCount;
 }
@@ -35,14 +33,12 @@ return "
 </div>";
 }
 }
-// Klasa e specializuar për shërbimet premium (trashëgon nga Service)
 class PremiumService extends Service {
 private string $description;
 public function __construct(string $image, string $title, string $description) {
 parent::__construct($image, $title);
 $this->description = $description;
 }
-// GET dhe SET për përshkrimin
 public function getDescription(): string {
 return $this->description;
 }
@@ -59,13 +55,13 @@ return "
 </div>";
 }
 }
-// Lista e shërbimeve të zakonshme
+
 $services = [
 new Service("../../fotot1/c670cb02d9db41a0af7680a6c1fdc55a.jpg","Weightlifting"),
 new Service("../../fotot1/woman-running-hard-sweating-37785236.webp","Running"),
 new Service("../../fotot1/calisthenics-feature.jpg", "Calisthenics"),
 ];
-// Lista e shërbimeve premium
+
 $premiumServices = [
     new PremiumService("../../fotot1/jump-roping-total-body-workout-0-1516282424.jpg",
     "Physical Fitness","Tailored fitness programs designed to improve overall health, endurance, and flexibility."),
@@ -102,16 +98,16 @@ $premiumServices = [
 <script src="../../javascj/javascript.js"></script>
 <section class="services" id="services">
 <h2 class="heading">Our <span>Services</span></h2>
-<!-- Shfaq numrin total të shërbimeve -->
+
 <h5>Total Services Offered: <?php echo
 Service::getServiceCount(); ?></h5>
 <div class="services-content">
 <?php
-// Shfaq shërbimet normale
+
 foreach ($services as $service) {
 echo $service->displayService();
 }
-// Shfaq shërbimet premium me një ndarje vizuale
+
 echo "<br/>";
 echo "<h2 class='heading'>Premium <span>Services</span></h2>";
 echo "<br/>";

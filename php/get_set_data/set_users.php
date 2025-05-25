@@ -1,7 +1,7 @@
 <?php
 require_once "../db.php";
 
-// Form: Add user
+
 if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['add_user'])) {
     $name = $_POST['name'];
     $email = $_POST['email'];
@@ -18,7 +18,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['add_user'])) {
     exit;
 }
 
-// Form: Delete user
 if (isset($_POST['delete_user_id'])) {
     $userId = $_POST['delete_user_id'];
     $stmt = $conn->prepare("DELETE FROM users WHERE id = ?");

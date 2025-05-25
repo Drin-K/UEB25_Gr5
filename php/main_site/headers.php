@@ -1,7 +1,7 @@
 <?php
-// Definimi i konstantave dhe variablave
+
 const SITE_NAME = "ILLYRIAN Gym";
-//vargu asociativ
+
 $menu_items = [
     "index.php" => "Home",
     "services.php" => "Services",
@@ -11,7 +11,7 @@ $menu_items = [
     "workouts.php" => "Workouts",
     "review.php" => "Review"
 ];
-// Funksion për të gjeneruar menunë
+
 function generateMenu($items, $activePage) {
     $menuHtml = "";
     foreach ($items as $link => $title) {

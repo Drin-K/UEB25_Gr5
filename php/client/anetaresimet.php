@@ -48,7 +48,7 @@ require_once "../db.php";
 <script>
 $(document).ready(function(){
 
-    // Anëtarësimi aktual
+ 
     $.ajax({
         url: '../get_set_data/get_membership.php',
         method: 'GET',
@@ -70,7 +70,6 @@ $(document).ready(function(){
         }
     });
 
-    // Historiku i anëtarësimeve
     $.ajax({
         url: '../get_set_data/get_history.php',
         method: 'GET',
@@ -94,7 +93,6 @@ $(document).ready(function(){
         }
     });
 
-    // Thënie motivuese
     $.ajax({
         url: '../get_set_data/api_motivation.php',
         method: 'GET',

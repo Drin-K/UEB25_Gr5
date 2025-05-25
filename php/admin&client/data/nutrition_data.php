@@ -2,7 +2,7 @@
 include '../db.php';
 session_start();
 
-// Kontrolli i sesionit
+
 if (!isset($_SESSION['user_id'])) {
     header("Location: ../login.php");
     exit();
@@ -42,7 +42,6 @@ if ($_SESSION['role'] === 'client') {
     $params = [$minCalories, $maxCalories];
     $types = "ii";
 
-    // Shtojmë kushtet për kufizimet dietike
     if ($preferences['dietary_restrictions'] !== '') {
         foreach (explode(',', $preferences['dietary_restrictions']) as $r) {
             $r = trim($r);
@@ -53,8 +52,6 @@ if ($_SESSION['role'] === 'client') {
             }
         }
     }
-
-    // Shtojmë kushtet për ushqimet e preferuara
     if ($preferences['favorite_meals'] !== '') {
         $likes = [];
         foreach (explode(',', $preferences['favorite_meals']) as $m) {
@@ -77,6 +74,5 @@ if ($_SESSION['role'] === 'client') {
     $plansResult = $stmt->get_result();
 
 } else {
-    // Admin dhe të tjerët marrin të gjitha planet
     $plansResult = $conn->query("SELECT * FROM nutrition_plans");
 }
