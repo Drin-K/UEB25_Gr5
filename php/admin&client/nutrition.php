@@ -42,8 +42,8 @@ include 'data/nutrition_data.php';
                 <h2>Preferencat e Mia Ushqimore</h2>
                 <form method="post">
                     <input type="number" name="preferred_calories" placeholder="Kaloritë e preferuara" value="<?= $preferences['preferred_calories'] ?>" required>
-                    <input type="text" name="dietary_restrictions" placeholder="Kufizime dietike" value="<?= $preferences['dietary_restrictions'] ?>">
-                    <input type="text" name="favorite_meals" placeholder="Ushqime të preferuara" value="<?= $preferences['favorite_meals'] ?>">
+                    <input type="text" name="dietary_restrictions" placeholder="Kufizime dietike" value="<?= $preferences['dietary_restrictions'] ?>" required>
+                    <input type="text" name="favorite_meals" placeholder="Ushqime të preferuara" value="<?= $preferences['favorite_meals'] ?>" required>
                     <button type="submit" name="save_preferences" class="btn">Ruaj Preferencat</button>
                 </form>
             </div>
