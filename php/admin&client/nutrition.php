@@ -3,7 +3,7 @@ include '../general/header.php';
 include '../general/sidebar.php';
 include 'data/nutrition_data.php'; 
 
-
+?>
 <!DOCTYPE html>
 <html lang="sq">
 <head>
