@@ -1,8 +1,7 @@
 <?php
 require_once "../db.php";
 
-
-if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['add_user'])) {
+if (isset($_POST['add_user'])) {
     $name = $_POST['name'];
     $email = $_POST['email'];
     $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
@@ -29,3 +28,4 @@ if (isset($_POST['delete_user_id'])) {
     }
     exit;
 }
+?>

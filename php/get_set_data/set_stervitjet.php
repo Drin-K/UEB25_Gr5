@@ -4,7 +4,6 @@ require_once "../db.php";
 
 $userId = $_SESSION['user_id'];
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (isset($_POST['update_plan'])) {
         $planId = $_POST['plan_id'];
         $newDescription = $_POST['description'];
@@ -61,7 +60,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         $_SESSION['success_message'] = "✅ Plani u zgjodh si aktiv!";
     }
-}
 
 header("Location: ../client/stervitjet.php");
 exit();
