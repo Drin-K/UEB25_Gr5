@@ -1,8 +1,7 @@
 <?php
 include("../general/header.php");
 include("../general/sidebar.php");
-include("logic/profile_logic.php"); // Përfshin logjikën dhe variablat si $userData, $successMessage, $passwordMessage
-?>
+include("logic/profile_logic.php"); ?>
 
 <!DOCTYPE html>
 <html lang="sq">
