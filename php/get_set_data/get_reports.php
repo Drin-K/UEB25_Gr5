@@ -1,7 +1,7 @@
 <?php
 require_once "../db.php";
 
-function &getReports(mysqli &$conn): array {
+function getReports(mysqli $conn): array {
     $reports = [];
 
     $query = "
@@ -68,7 +68,7 @@ function getCalorieDistribution(mysqli $conn): array {
     return $data;
 }
 
-$allReports = &getReports($conn);
+$allReports = getReports($conn);
 $calorieData = getCalorieDistribution($conn);
 
 $conn->close();
