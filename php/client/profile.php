@@ -50,7 +50,7 @@ include("logic/profile_logic.php"); // Përfshin logjikën dhe variablat si $use
 
                     <div class="form-group">
                         <label>Data e Regjistrimit:</label>
-                        <input type="text" value="<?= htmlspecialchars($userData['created_at']) ?>" readonly>
+                        <input type="text" name="created_at" value="<?= htmlspecialchars($userData['created_at']) ?>" disabled>
                     </div>
 
                     <button type="submit">Ruaj Ndryshimet</button>
