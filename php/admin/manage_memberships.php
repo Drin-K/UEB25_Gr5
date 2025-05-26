@@ -37,8 +37,8 @@ include("../general/sidebar.php");
                 <td><input type="text" class="editable" id="name-<?= $row['id']; ?>" value="<?= htmlspecialchars($row['name']); ?>" readonly></td>
                 <td><input type="number" class="editable" id="price-<?= $row['id']; ?>" value="<?= number_format($row['price'], 2); ?>" step="0.01" readonly></td>
                 <td>
-                    <button type="button" onclick="enableEditing(<?= $row['id']; ?>)">Ndrysho</button>
-                    <button type="button" id="save-btn-<?= $row['id']; ?>" onclick="saveChanges(<?= $row['id']; ?>)" style="display:none;">Ruaj</button>
+                    <button type="button" onclick="edit(<?= $row['id']; ?>)">Ndrysho</button>
+                    <button type="button" id="save-btn-<?= $row['id']; ?>" onclick="save(<?= $row['id']; ?>)" style="display:none;">Ruaj</button>
                     <a href="logic/membershipsLogic.php?delete=<?= $row['id']; ?>" class="delete-btn" onclick="return confirm('A jeni i sigurt?')">Fshij</a>
                 </td>
             </tr>
@@ -59,36 +59,39 @@ include("../general/sidebar.php");
 </div>
 
 <script>
-function enableEditing(id) {
-    $('#name-' + id).prop('readonly', false).addClass('highlight');
-    $('#price-' + id).prop('readonly', false).addClass('highlight');
-    $('#save-btn-' + id).show();
-}
+$(document).ready(function() {
+    window.edit = function edit(id) {
+        $('#name-' + id + ', #price-' + id).prop('readonly', false).addClass('highlight');
+        $('#save-btn-' + id).show();
+    }
 
-function saveChanges(id) {
-    const name = $('#name-' + id).val();
-    const price = $('#price-' + id).val();
+    window.save = function(id) {
+        const name = $('#name-' + id).val();
+        const price = $('#price-' + id).val();
 
-    $.ajax({
-        url: 'logic/membershipsLogic.php',
-        method: 'POST',
-        data: {
-            ajax_edit: true,
-            id: id,
-            name: name,
-            price: price
-        },
-        success: function(response) {
-            $('#update-message').text(response.message).css('color', response.success ? 'green' : 'red');
-            $('#name-' + id).prop('readonly', true).removeClass('highlight');
-            $('#price-' + id).prop('readonly', true).removeClass('highlight');
-            $('#save-btn-' + id).hide();
-        },
-        error: function() {
-            $('#update-message').text('Gabim gjatë përditësimit!').css('color', 'red');
-        }
-    });
-}
+        $.ajax({
+            url: 'logic/membershipsLogic.php',
+            method: 'POST',
+            data: {
+                ajax_edit: 'ajax_edit',
+                id: id,
+                name: name,
+                price: price
+            },
+            success: function(data) {
+                $('#update-message').text(data).css('color', data.includes('sukses') ? 'green' : 'red');
+                $('#name-' + id + ', #price-' + id).prop('readonly', true).removeClass('highlight');
+                $('#save-btn-' + id).hide();
+            },
+            error: function() {
+                $('#update-message').text('Gabim gjatë përditësimit!').css('color', 'red');
+            }
+        });
+    }
+});
+</script>
+
+
 </script>
 </body>
 </html>

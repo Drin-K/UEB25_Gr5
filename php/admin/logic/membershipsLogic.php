@@ -20,20 +20,22 @@ function handleDbError($msg, $stmt = null) {
 
 if (isset($_POST['ajax_edit'])) {
     $id = $_POST['id'];
-    $name = trim($_POST['name']);
+    $name = $_POST['name'];
     $price = $_POST['price'];
 
-    if (!empty($name) && is_numeric($price) && $price > 0 && is_numeric($id)) {
+    if ($name && $price > 0 && $id > 0) {
         $stmt = $conn->prepare("UPDATE memberships SET name=?, price=? WHERE id=?");
-        if (!$stmt || !$stmt->bind_param("sdi", $name, $price, $id) || !$stmt->execute()) {
-            respondJson(false, "Gabim gjatë përditësimit: " . $stmt->error);
+        if ($stmt && $stmt->bind_param("sdi", $name, $price, $id) && $stmt->execute()) {
+            $stmt->close();
+            echo "Përditësuar me sukses.";
+        } else {
+            echo "Gabim gjatë përditësimit.";
         }
-        $stmt->close();
-        respondJson(true, "Përditësuar me sukses.");
     } else {
-        respondJson(false, "Të dhënat janë të pavlefshme.");
+        echo "Të dhënat janë të pavlefshme.";
     }
 }
+    
 
 if (isset($_POST['add'])) {
     try {
