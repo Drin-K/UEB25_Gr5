@@ -4,16 +4,31 @@ require_once("../db.php");
 
 class Stats {
     private $conn;
-    public function __construct($conn) { $this->conn = $conn; }
-    private function getCount($table, $where = '') {
-        $sql = "SELECT COUNT(*) AS total FROM $table" . ($where ? " WHERE $where" : "");
-        $res = $this->conn->query($sql);
-        return ($res && $row = $res->fetch_assoc()) ? (int)$row['total'] : 0;
+    public function __construct($conn) {
+        $this->conn = $conn;
     }
-    public function countClients()       { return $this->getCount('users', "role='client'"); }
-    public function countNutritionPlans(){ return $this->getCount('nutrition_plans'); }
-    public function countMemberships()   { return $this->getCount('memberships'); }
+    private function getCount($table, $where = '') {
+        $sql = "SELECT COUNT(*) AS total FROM $table";
+        if ($where) {
+            $sql .= " WHERE $where";
+        }
+        $res = $this->conn->query($sql);
+        if ($res && $row = $res->fetch_assoc()) {
+            return (int)$row['total'];
+        }
+        return 0;
+    }
+    public function countClients() {
+        return $this->getCount('users', "role='client'");
+    }
+    public function countNutritionPlans() {
+        return $this->getCount('nutrition_plans');
+    }
+    public function countMemberships() {
+        return $this->getCount('memberships');
+    }
 }
+
 
 $stats = new Stats($conn);
 ?>
