@@ -2,7 +2,6 @@
 require_once "../db.php";
 
 function &getReports(mysqli &$conn): array {
-    global $conn;
     $reports = [];
 
     $query = "
