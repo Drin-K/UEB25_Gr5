@@ -16,12 +16,11 @@ function handleDbError($msg, $stmt = null) {
 
 if (isset($_POST['ajax_edit'])) {
     $id = $_POST['id'];
-    $name = $_POST['name'];
     $price = $_POST['price'];
 
-    if ($name && $price > 0 && $id > 0) {
-        $stmt = $conn->prepare("UPDATE memberships SET name=?, price=? WHERE id=?");
-        if ($stmt && $stmt->bind_param("sdi", $name, $price, $id) && $stmt->execute()) {
+    if ($price > 0 && $id > 0) {
+        $stmt = $conn->prepare("UPDATE memberships SET price=? WHERE id=?");
+        if ($stmt && $stmt->bind_param("di", $price, $id) && $stmt->execute()) {
             $stmt->close();
             echo "Përditësuar me sukses.";
         } else {

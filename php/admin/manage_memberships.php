@@ -61,12 +61,11 @@ include("../general/sidebar.php");
 <script>
 $(document).ready(function() {
     window.edit = function edit(id) {
-        $('#name-' + id + ', #price-' + id).prop('readonly', false).addClass('highlight');
+        $('#price-' + id).prop('readonly', false).addClass('highlight');
         $('#save-btn-' + id).show();
     }
 
     window.save = function(id) {
-        const name = $('#name-' + id).val();
         const price = $('#price-' + id).val();
 
         $.ajax({
@@ -75,12 +74,11 @@ $(document).ready(function() {
             data: {
                 ajax_edit: 'ajax_edit',
                 id: id,
-                name: name,
                 price: price
             },
             success: function(data) {
                 $('#update-message').text(data).css('color', data.includes('sukses') ? 'green' : 'red');
-                $('#name-' + id + ', #price-' + id).prop('readonly', true).removeClass('highlight');
+                $('#price-' + id).prop('readonly', true).removeClass('highlight');
                 $('#save-btn-' + id).hide();
             },
             error: function() {
