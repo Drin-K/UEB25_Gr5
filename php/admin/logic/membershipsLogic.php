@@ -1,4 +1,7 @@
-<?php   
+<?php
+
+
+
 require_once(__DIR__ . "/../../db.php");
 require_once(__DIR__ . "/../../general/error_handler.php");
 
@@ -29,7 +32,6 @@ if (isset($_POST['ajax_edit'])) {
     }
 }
     
-
 if (isset($_POST['add'])) {
     try {
         $name = trim($_POST['name']);
@@ -41,15 +43,18 @@ if (isset($_POST['add'])) {
 
         $stmt = $conn->prepare("INSERT INTO memberships (name, price) VALUES (?, ?)");
         if (!$stmt) {
-            throw new Exception("Gabim gjatë përgatitjes për insert.");
+            handleDbError("Gabim gjatë përgatitjes për insert.", $stmt);
+            return;
         }
 
         if (!$stmt->bind_param("sd", $name, $price)) {
-            throw new Exception("Gabim gjatë lidhjes së parametrave.");
+            handleDbError("Gabim gjatë lidhjes së parametrave.", $stmt);
+            return;
         }
 
         if (!$stmt->execute()) {
-            throw new Exception("Gabim gjatë shtimit të membership-it: " . $stmt->error);
+            handleDbError("Gabim gjatë shtimit të membership-it", $stmt);
+            return;
         }
 
         $stmt->close();
@@ -57,9 +62,10 @@ if (isset($_POST['add'])) {
         exit();
     } catch (Exception $e) {
         $addMessage = $e->getMessage();
-        trigger_error($addMessage, E_USER_WARNING);
+        handleDbError($addMessage);
     }
 }
+
 
 
 if (isset($_GET['delete'])) {
