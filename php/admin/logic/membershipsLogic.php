@@ -1,17 +1,10 @@
-<?php
-
-
+<?php   
 require_once(__DIR__ . "/../../db.php");
 require_once(__DIR__ . "/../../general/error_handler.php");
 
 $addMessage = "";
 $editMessage = "";
 $deleteMessage = "";
-
-function respondJson($success, $message) {
-    echo json_encode(['success' => $success, 'message' => $message]);
-    exit();
-}
 
 function handleDbError($msg, $stmt = null) {
     $details = $stmt ? $stmt->error : '';
