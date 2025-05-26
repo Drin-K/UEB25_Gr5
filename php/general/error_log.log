@@ -11,3 +11,5 @@
 [2025-05-25 22:53:54] Paralajmërim: Perdoruesi nuk i ka plotesu te gjitha fushat në file: C:\xampp\htdocs\UEB25_Gr5\php\login.php, linja: 36
 [2025-05-25 22:55:23] Paralajmërim: Formulari i dërguar nga përdoruesi përmban fusha të paplotësuara. në file: C:\xampp\htdocs\UEB25_Gr5\php\login.php, linja: 36
 [2025-05-25 22:55:34] Paralajmërim: Kyçje e pasuksesshme nga albena.veseli@gmail.com në file: C:\xampp\htdocs\UEB25_Gr5\php\login.php, linja: 65
+[2025-05-26 15:11:54] Njoftim i sistemit: session_start(): Ignoring session_start() because a session is already active në file: C:\xampp\htdocs\WEB\UEB25_Gr5\php\general\header.php, linja: 2
+[2025-05-26 15:13:05] Njoftim i sistemit: session_start(): Ignoring session_start() because a session is already active në file: C:\xampp\htdocs\WEB\UEB25_Gr5\php\general\header.php, linja: 2
