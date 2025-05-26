@@ -2,7 +2,6 @@
 require 'headers.php';
 require '../db.php'; 
 
-define("SLASH_NAME", "FruitsVeggies");
 
 function getNutritionPlans($conn, $category) {
     $stmt = $conn->prepare("SELECT title, description, calories, protein, carbs, fats FROM nutrition_plans WHERE category = ?");

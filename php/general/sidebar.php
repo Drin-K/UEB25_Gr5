@@ -1,5 +1,5 @@
 <?php 
-$role = $_SESSION['role'] ?? 'admin';
+$role = $_SESSION['role'];
 ?>
 
 <html>
