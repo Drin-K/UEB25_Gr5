@@ -19,8 +19,6 @@ $menu_items = [
 ];
 
 
-$GLOBALS['site_title'] =& $home;  
-
 function &getActiveClass(string $link, string $activePage): string {
     $active = ($link === $activePage)
         ? 'style="color:aquamarine; border-bottom: 3px solid var(--main-color);"'
